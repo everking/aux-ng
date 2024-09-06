@@ -7,6 +7,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,  // This makes the component standalone
   imports: [CommonModule, RouterModule],
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent { }
