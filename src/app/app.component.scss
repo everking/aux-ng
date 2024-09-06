@@ -1,11 +1,24 @@
 .app {
   display: flex;
   flex-direction: column;
+  &-header {
+
+  }
   &-outlet-container {
     display: flex;
     justify-content: center;
   }
   &-outlet {
     text-align: center;
+  }
+  &-footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #e9ecef;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   }
 }
