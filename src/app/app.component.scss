@@ -1,0 +1,11 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  &-outlet-container {
+    display: flex;
+    justify-content: center;
+  }
+  &-outlet {
+    text-align: center;
+  }
+}
