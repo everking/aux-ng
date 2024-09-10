@@ -1,16 +1,4 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  &-header {
-
-  }
-  &-outlet-container {
-    display: flex;
-    justify-content: center;
-  }
-  &-outlet {
-    text-align: center;
-  }
   &-footer {
     background-color: #f8f9fa;
     padding: 20px;

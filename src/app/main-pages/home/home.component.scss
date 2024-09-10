@@ -1,19 +1,5 @@
 .home {
-  display: flex;
-  height: 75vh;
-  width: 75vw;
-  margin-top: 25px;
-  gap: 20px;
-  &-section-left {
-    flex: 0 0 40%;
-    border: 5px solid black;
-    border-radius: 10px;
-    padding: 25px;
-  }
-  &-section-main {
-    flex: 0 0 60%;
-    border: 5px solid blue;
-    border-radius: 10px;
-    padding: 25px;
+  .mat-grid-tile {
+    border: 1px solid #000000;
   }
 }
