@@ -16,14 +16,13 @@
     display: flex;
     justify-content: center;
 
-    a {
+    button {
       transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
       color: black;
       text-decoration: none;
-      margin: 0 15px;
+      margin: 0 10px;
       border: 1px solid #016aa3;
-      border-radius: 5px;
-      padding: 0 10px;
+      border-radius: 10px;
 
       &:hover {
         opacity: 0.8;
