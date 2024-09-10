@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng build --configuration production --base-href=/aux-ng/ && npx angular-cli-ghpages --dir=dist/aux-ng --no-silent"
   },
   "private": true,
   "dependencies": {

@@ -11,5 +11,7 @@ export const routes: Routes = [
   { path: 'school', component: SchoolComponent },
   { path: 'excellence', component: ExcellenceComponent },
   { path: 'ask', component: AskComponent },
+  { path: 'article/:topic', component: ArticleComponent },
+  { path: 'edit-article/:topic', component: EditArticleComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
