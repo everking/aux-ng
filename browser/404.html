@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+  <!-- Add your CSS and other meta tags here if needed -->
+</head>
+<body>
+  <!-- Add your 404 content here -->
+  <h2>Reloading...</h2>  
+  <!-- Add a script to redirect to index.html -->
+  <script>
+    window.onload = function() {
+      const basePath = '/aux-ng';
+      let currentPath = window.location.pathname;
+      let relativePath = currentPath.replace(basePath, '');
+      if (!relativePath.startsWith('/')) {
+        relativePath = '/' + relativePath;
+      }
+      document.getElementById('redirect-message').innerText = `Redirecting to /mystic?ref=${relativePath}`;
+      window.location.href = `${basePath}?ref=${relativePath}`;
+    };
+  </script>
+</body>
+</html>
