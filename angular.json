@@ -40,6 +40,7 @@
           "configurations": {
             "production": {
               "outputPath": "dist/aux-ng",
+              "deleteOutputPath": true,
               "budgets": [
                 {
                   "type": "initial",

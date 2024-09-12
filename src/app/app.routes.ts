@@ -1,11 +1,11 @@
-import {Routes} from '@angular/router';
-import {HomeComponent} from "./main-pages/home/home.component";
-import {FamilyComponent} from "./main-pages/family/family.component";
-import {SchoolComponent} from "./main-pages/school/school.component";
-import {ExcellenceComponent} from "./main-pages/excellence/excellence.component";
-import {AskComponent} from "./main-pages/ask/ask.component";
-import {ArticleComponent} from "./article/article.component";
-import {EditArticleComponent} from "./edit-article/edit-article.component";
+import { Routes } from '@angular/router';
+import { HomeComponent } from "./main-pages/home/home.component";
+import { FamilyComponent } from "./main-pages/family/family.component";
+import { SchoolComponent } from "./main-pages/school/school.component";
+import { ExcellenceComponent } from "./main-pages/excellence/excellence.component";
+import { AskComponent } from "./main-pages/ask/ask.component";
+import { ArticleComponent } from "./article/article.component";
+import { EditArticleComponent } from "./edit-article/edit-article.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
