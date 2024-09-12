@@ -6,6 +6,7 @@ import { ExcellenceComponent } from "./main-pages/excellence/excellence.componen
 import { AskComponent } from "./main-pages/ask/ask.component";
 import { ArticleComponent } from "./article/article.component";
 import { EditArticleComponent } from "./edit-article/edit-article.component";
+import { ParameterComponent } from "./main-pages/parameter/parameter.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,5 +16,5 @@ export const routes: Routes = [
   { path: 'ask', component: AskComponent },
   { path: 'article/:topic', component: ArticleComponent },
   { path: 'edit-article/:topic', component: EditArticleComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: '', component: ParameterComponent }
 ];

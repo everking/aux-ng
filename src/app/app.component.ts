@@ -17,23 +17,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-//    this.router.navigate(['/home'], { relativeTo: this.route });
-    this.route.queryParams.subscribe(params => {
-      console.log(`params: ${JSON.stringify(params, null, 2)}`);
-      const refUrl = params['ref'];  // Get the 'ref' query param
 
-      console.log(`refUrl: ${refUrl}`);
-
-      if (refUrl) {
-        // Use the URL object to extract the path from the ref parameter
-        const url = new URL(refUrl);
-        const routePath = url.pathname; // Extracts the path like '/home'
-
-        console.log(`Extracted route path: ${routePath}`);
-
-        // Route to the extracted path if valid (assuming the route exists in your app)
-        this.router.navigate([routePath]);
-      }
-    });
   }
 }
