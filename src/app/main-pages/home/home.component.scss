@@ -2,4 +2,11 @@
   .mat-grid-tile {
     border: 1px solid #000000;
   }
+
+  &-preview-article-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
 }
