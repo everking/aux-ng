@@ -5,4 +5,5 @@ export interface Article {
   imageLocation: string;
   headerText: string;
   descriptionText: string;
+  articleId: string;
 }
