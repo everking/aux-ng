@@ -18,6 +18,12 @@
     flex: 0 1 60%;
     overflow-x: auto;
 
+    &-no-articles {
+      flex: 0 1 60%;
+      display: flex;
+      justify-content: center;
+    }
+
     &::-webkit-scrollbar {
       display: none;
     }
