@@ -1,0 +1,10 @@
+/* Add some styling */
+.editor-container {
+  margin: 20px 0;
+}
+
+.preview {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
