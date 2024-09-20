@@ -1,0 +1,11 @@
+<div class="article-list">
+  <h4 class="article-list-left-side">
+    Our Latest Articles
+  </h4>
+  <div class="article-list-boarder"></div>
+  <div class="article-list-right-side">
+    <div *ngFor="let article of articles; let i = index; trackBy: trackByHeader">
+      <app-article-preview [article]="article"></app-article-preview>
+    </div>
+  </div>
+</div>
