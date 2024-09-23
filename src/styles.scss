@@ -1,7 +1,26 @@
+
 /* You can add global styles to this file, and also import other style files */
 * {
-  font-family: Verdana, sans-serif;
+  font-family: Montserrat, Nunito Sans, sans-serif;
   box-sizing: border-box;
+}
+
+.wiggle-item {
+  @keyframes wiggle {
+    0% {
+      transform: translateX(-2px);
+    }
+    50% {
+      transform: translateX(2px);
+    }
+    100% {
+      transform: translateX(-2px);
+    }
+  }
+
+  &:hover {
+    animation: wiggle 1s infinite;
+  }
 }
 
 body {

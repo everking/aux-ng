@@ -1,0 +1,19 @@
+<a class="article-preview-link" [routerLink]="['/article', article.articleId]">
+  <div class="article-preview wiggle-item">
+    <div class="article-preview-card-container">
+      <mat-card appearance="raised">
+        <img mat-card-image src="{{article.imageLocation}}" alt="Auxilium">
+        <div class="article-preview-headline-text">
+          {{ article.headerText | slice:0:40 }}
+        </div>
+        <mat-card-content>
+          <div class="article-preview-description">
+            {{ article.descriptionText }}
+          </div>
+        </mat-card-content>
+        <div class="article-preview-category-tag">{{ article.subCategory | uppercase }}</div>
+      </mat-card>
+    </div>
+  </div>
+</a>
+

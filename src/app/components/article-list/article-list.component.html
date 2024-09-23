@@ -1,0 +1,18 @@
+<div class="article-list">
+  <h4 class="article-list-left-side">
+    Our Latest Articles
+  </h4>
+  <div class="article-list-boarder"></div>
+  <ng-container *ngIf="articles?.length else noArticles">
+    <div class="article-list-right-side">
+      <div *ngFor="let article of articles; let i = index; trackBy: trackByHeader">
+        <app-article-preview [article]="article"></app-article-preview>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noArticles>
+    <div class="article-list-right-side-no-articles">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+</div>

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule, ActivatedRoute, Router } from '@angular/router';
-import { FooterComponent } from "./footer/footer.component";
-import { NavigationComponent } from "./header/navigation/navigation.component";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {FooterComponent} from "./footer/footer.component";
+import {NavigationComponent} from "./header/navigation/navigation.component";
 
 @Component({
   selector: 'app-root',
