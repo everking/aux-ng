@@ -1,1 +1,18 @@
-<p>article works!</p>
+<div class="article">
+
+  <div class="article-header-image">
+    <img src={{article.imageLocation}} alt="Invalid Image">
+  </div>
+
+  <div class="article-header-image-text">
+    <h1>{{ article.headerText }}</h1>
+  </div>
+
+  <div class="article-body">
+    <p>{{ article.descriptionText }}</p>
+  </div>
+
+  <div class="article-category-text">
+    <h3>{{ article.subCategory | uppercase }}</h3>
+  </div>
+</div>

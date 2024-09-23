@@ -76,8 +76,14 @@ export class ArticleService {
     )
   }
 
-  readOne() {
-
+  readOne(articleId: string): Observable<Article> {
+    return of(this.simulatedArticles.find((article: Article) => article.articleId === articleId) || {
+      headerText: 'invalid-article',
+      descriptionText: 'invalid-article',
+      imageLocation: 'none',
+      subCategory: 'Article',
+      articleId: 'invalid-article'
+    });
   }
 
   update() {
