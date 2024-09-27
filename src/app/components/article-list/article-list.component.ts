@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Article} from "../../interfaces/article";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {ArticlePreviewComponent} from "../article-preview/article-preview.component";
-import {ArticleService} from "../../services/article.service";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import { Component, Input, OnInit } from '@angular/core';
+import { Article } from "../../interfaces/article";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { ArticlePreviewComponent } from "../article-preview/article-preview.component";
+import { ArticleService } from "../../services/article.service";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-article-list',

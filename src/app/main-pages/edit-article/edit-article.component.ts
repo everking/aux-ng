@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleService } from '../services/article.service';
+import { ArticleService } from '../../services/article.service';
 import { FormsModule } from '@angular/forms';
 import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http'; 
@@ -14,9 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 })
 
 export class EditArticleComponent implements OnInit {
-  topic: string = '';
-  articleTitle: string = '';
-  articleBody: string = '';
+  topic = '';
+  articleTitle = '';
+  articleBody = '';
 
   constructor(private route: ActivatedRoute, private articleService: ArticleService) {}
   editorConfig: AngularEditorConfig = {
