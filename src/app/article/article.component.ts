@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ArticleService} from "../services/article.service";
-import {Article} from "../interfaces/article";
-import {JsonPipe, UpperCasePipe} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ArticleService } from "../services/article.service";
+import { Article } from "../interfaces/article";
+import { JsonPipe, UpperCasePipe } from "@angular/common";
 
 @Component({
   selector: 'app-article',

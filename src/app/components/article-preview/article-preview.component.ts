@@ -1,8 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {MatCardModule} from "@angular/material/card";
-import {SlicePipe, UpperCasePipe} from "@angular/common";
-import {Article} from "../../interfaces/article";
-import {RouterLink} from "@angular/router";
+import { Component, Input } from '@angular/core';
+import { MatCardModule } from "@angular/material/card";
+import { SlicePipe, UpperCasePipe } from "@angular/common";
+import { Article } from "../../interfaces/article";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-article-preview',

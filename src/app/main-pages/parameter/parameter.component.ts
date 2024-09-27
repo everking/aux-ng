@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import e from 'cors';
 
 @Component({
   selector: 'app-parameter',
@@ -9,7 +8,7 @@ import e from 'cors';
   templateUrl: './parameter.component.html',
   styleUrl: './parameter.component.scss'
 })
-export class ParameterComponent {
+export class ParameterComponent implements OnInit {
   refParam: string | null = null;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
