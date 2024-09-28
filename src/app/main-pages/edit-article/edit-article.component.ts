@@ -15,8 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 export class EditArticleComponent implements OnInit {
   topic = '';
-  articleTitle = '';
-  articleBody = '';
+  articleTitle?: string = '';
+  articleBody?: string = '';
 
   constructor(private route: ActivatedRoute, private articleService: ArticleService) {}
   editorConfig: AngularEditorConfig = {
@@ -37,7 +37,7 @@ export class EditArticleComponent implements OnInit {
     this.articleService.getArticle(this.topic).then((article) => {
       console.log(article);
       this.articleBody = article?.body;
-      this.articleTitle = article?.title;
+      this.articleTitle = article?.header;
     });
   }
 }

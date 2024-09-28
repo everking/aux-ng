@@ -1,90 +1,127 @@
 import { Injectable } from '@angular/core';
 import { Article } from "../interfaces/article";
 import { HttpClient } from "@angular/common/http";
-import { delay, Observable, of, tap } from "rxjs";
+import { delay, switchMap, from, Observable, of, tap } from "rxjs";
+import { getHardcodedArticles, getHardcodedArticle } from './hardcoded.article';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  private articles: Article[] = [];
-
-  private simulatedArticles: Article[] = [
-    {
-      imageLocation: 'https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg',
-      headerText: 'Church Construction Complete!',
-      descriptionText: 'Just completed the large 20,000 sqft Cathedral is bound to draw many people!',
-      subCategory: 'Spiritual',
-      articleId: "church-construction-complete"
-    },
-    {
-      imageLocation: 'https://png.pngtree.com/background/20230611/original/pngtree-church-with-lit-candles-inside-picture-image_3148244.jpg',
-      headerText: 'Is Peter \'Rock?\'',
-      descriptionText: 'Jesus started the Catholic Church with Peter, or Petras, which is translated into Greek as Rock.',
-      subCategory: 'Article',
-      articleId: "is-peter-rock"
-    },
-    {
-      imageLocation: 'https://i0.wp.com/holyspiritfremont.org/wp-content/uploads/2018/04/IMG_1937-e1523918613197.jpg?w=3840',
-      headerText: 'Why are you not Catholic?',
-      descriptionText: 'In a world with so many choices in religion. Why Catholicism? Holy Spirit Church of Fremont.',
-      subCategory: 'Politics',
-      articleId: "why-not-catholic"
-    },
-    {
-      imageLocation: 'https://png.pngtree.com/background/20230611/original/pngtree-church-with-lit-candles-inside-picture-image_3148244.jpg',
-      headerText: 'Is Peter \'Rock?\'',
-      descriptionText: 'Jesus started the Catholic Church with Peter, or Petras, which is translated into Greek as Rock.',
-      subCategory: 'Article',
-      articleId: "is-peter-rock"
-    },
-    {
-      imageLocation: 'https://i0.wp.com/holyspiritfremont.org/wp-content/uploads/2018/04/IMG_1937-e1523918613197.jpg?w=3840',
-      headerText: 'Why are you not Catholic?',
-      descriptionText: 'In a world with so many choices in religion. Why Catholicism? Holy Spirit Church of Fremont.',
-      subCategory: 'Politics',
-      articleId: "why-not-catholic"
-    },
-    {
-      imageLocation: 'https://png.pngtree.com/background/20230611/original/pngtree-church-with-lit-candles-inside-picture-image_3148244.jpg',
-      headerText: 'Is Peter \'Rock?\'',
-      descriptionText: 'Jesus started the Catholic Church with Peter, or Petras, which is translated into Greek as Rock.',
-      subCategory: 'Article',
-      articleId: "is-peter-rock"
-    },
-    {
-      imageLocation: 'https://i0.wp.com/holyspiritfremont.org/wp-content/uploads/2018/04/IMG_1937-e1523918613197.jpg?w=3840',
-      headerText: 'Why are you not Catholic?',
-      descriptionText: 'In a world with so many choices in religion. Why Catholicism? Holy Spirit Church of Fremont.',
-      subCategory: 'Politics',
-      articleId: "why-not-catholic"
-    },
+  private articles: Article[] | null = [];
+  private featuredArticles: string[] = [
+    "stories", 
+    "church-construction-complete", 
+    "is-peter-rock", 
+    "why-not-catholic"
   ];
-
+  private defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
   constructor(private http: HttpClient) {
-
   }
 
-  read(): Observable<Article[]> {
-    if (this.articles.length) {
-      return of(this.articles);
+  loadArticles = async () => {
+    try {
+      const fetchedArticles = await Promise.all(
+        this.featuredArticles.map(async (articleId) => {
+          try {
+            const fetchedArticle = await this.getArticle(articleId);
+            return fetchedArticle ?? getHardcodedArticle(articleId);
+          } catch (error) {
+            console.error(`Failed to fetch article with ID: ${articleId}`, error);
+            return null; // Return null if there's an error
+          }
+        })
+      );
+  
+      // Filter out any null values
+      this.articles = fetchedArticles.filter((article): article is Article => article !== null);
+  
+      console.log('Articles loaded:', this.articles);
+    } catch (error) {
+      console.error("Error loading articles", error);
     }
-
-    return of(this.simulatedArticles).pipe(
-      delay(1500),
-      tap((articles: Article[]) => this.articles = articles),
-    )
+  };
+  
+  // Call the function to load articles  
+  
+  getArticleList(): Observable<Article[]> {
+    // Use 'from' to convert the Promise returned by loadArticles to an Observable
+    return from(this.loadArticles()).pipe(
+      // Switch to returning this.articles if it's available after loading
+      switchMap(() => {
+        if (this.articles?.length) {
+          return of(this.articles); // Return the articles if already loaded
+        }
+  
+        // Fallback to hardcoded articles after delay if this.articles is empty
+        return of(getHardcodedArticles()).pipe(
+          delay(1500), // Simulate delay (e.g., loading time)
+          tap((articles: Article[]) => this.articles = articles) // Update this.articles
+        );
+      })
+    );
   }
-
   readOne(articleId: string): Observable<Article> {
-    return of(this.simulatedArticles.find((article: Article) => article.articleId === articleId) || {
-      headerText: 'invalid-article',
-      descriptionText: 'invalid-article',
-      imageLocation: 'none',
+    return of(getHardcodedArticles().find((article: Article) => article.articleId === articleId) || {
+      header: 'invalid-article',
+      body: 'invalid-article',
+      imageURI: 'none',
       subCategory: 'Article',
       articleId: 'invalid-article'
     });
   }
+
+  saveArticleBody = async (article:Article) => {
+    console.log(`GET articleId: ${article.articleId}`);
+    try {
+      const documentId = article.meta?.documentId;
+      const { body, header, imageURI, meta } = article;
+      const documentName = article.meta?.name;
+      const category = meta?.category;
+      const subCategory = meta?.subCategory;
+
+      const response = await fetch(`https://firestore.googleapis.com/v1/${documentName}?updateMask.fieldPaths=body&updateMask.fieldPaths=title`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "fields": {
+            "body": {
+              "stringValue": body
+            },
+            "header": {
+              "stringValue": header
+            },
+            "imageURI": {
+              "stringValue": imageURI
+            },
+            "meta": {
+              "mapValue": {
+                "fields": {
+                  "category": {
+                    "stringValue": category
+                  },
+                  "subCategory": {
+                    "stringValue": subCategory
+                  }
+                }
+              }
+            }
+          }
+        }
+      )
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      await response.json();
+
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+    }
+  }  
 
   getArticle = async (articleId: string) => {
     try {
@@ -115,18 +152,23 @@ export class ArticleService {
         const name = documents[0].document.name;
         const pattern = /[^/]+$/;
         const match = name.match(pattern);
-        let documentId = '';
+        let documentId: string = '';
         if (match) {
           documentId = match[0];
         }
-        const articleData = {
-          title: fields.title.stringValue,
-          body: fields.body.stringValue,
-          name: documents[0].document.name,
-          documentId,
+        const article: Article = {
+          header: fields.title.stringValue.toString(),
+          body: fields.body.stringValue.toString(),
+          imageURI: fields.imageURI ? fields.imageURI.stringValue : this.defaultImageURI,
+          meta: {
+            name: documents[0].document.name.toString(),
+            documentId,
+            category: fields.meta.mapValue.fields.category.stringValue,
+            subCategory: fields.meta.mapValue.fields.subCategory.stringValue,
+          },
           articleId
         };
-        return articleData;
+        return article;
       }
     } catch (error) {
       console.error('Error fetching articles:', error);

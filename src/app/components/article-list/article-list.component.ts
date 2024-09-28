@@ -26,14 +26,14 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit() {
     if (!this.articles?.length) {
-      this.articleService.read()
+      this.articleService.getArticleList()
         .subscribe((articles: Article[]) => {
           this.articles = articles;
         })
     }
   }
 
-  trackByHeader(index: number, article: Article): string {
-    return article.headerText;
+  trackByHeader(index: number, article: Article): string|undefined {
+    return article.header;
   }
 }
