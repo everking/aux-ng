@@ -1,18 +1,18 @@
 <div class="article">
 
   <div class="article-header-image">
-    <img src={{article.imageLocation}} alt="Invalid Image">
+    <img src={{article.imageURI}} alt="Invalid Image">
   </div>
 
   <div class="article-header-image-text">
-    <h1>{{ article.headerText }}</h1>
+    <h1>{{ article.header }}</h1>
   </div>
 
   <div class="article-body">
-    <p>{{ article.descriptionText }}</p>
+    <p>{{ article.body }}</p>
   </div>
 
   <div class="article-category-text">
-    <h3>{{ article.subCategory | uppercase }}</h3>
+    <h3>{{ article.meta?.subCategory| uppercase }}</h3>
   </div>
 </div>

@@ -1,9 +1,17 @@
-export type SubCategory = 'Politics' | 'Spiritual' | 'Article';
+export interface ArticleMeta {
+  documentId?: string;
+  name?: string;
+  category?: string;
+  subCategory?: string;
+  tags?: string [];
+  created?: Date;
+  modified?: Date;
+}
 
 export interface Article {
-  subCategory: SubCategory;
-  imageLocation: string;
-  headerText: string;
-  descriptionText: string;
   articleId: string;
+  imageURI?: string;
+  header?: string;
+  body?: string;
+  meta?: ArticleMeta
 }

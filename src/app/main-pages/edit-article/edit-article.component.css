@@ -8,3 +8,24 @@
   border: 1px solid #ccc;
   padding: 10px;
 }
+
+code {
+  background-color: #f5f5f5; /* Light background */
+  color: #c7254e; /* Dark red color for code text */
+  padding: 2px 4px; /* Padding around the code */
+  border-radius: 4px; /* Rounded corners */
+  font-family: "Courier New", Courier, monospace; /* Monospaced font */
+  font-size: 0.95em; /* Slightly smaller font size */
+  white-space: pre-wrap; /* Wraps code to fit within container */
+}
+
+pre {
+  background-color: #f5f5f5; /* Light background */
+  border: 1px solid #ddd; /* Light border */
+  padding: 10px; /* Padding inside the pre block */
+  border-radius: 4px; /* Rounded corners */
+  font-family: "Courier New", Courier, monospace; /* Monospaced font */
+  font-size: 0.95em; /* Slightly smaller font size */
+  overflow-x: auto; /* Horizontal scrolling for long code */
+  white-space: pre; /* Preserve formatting and spacing */
+}

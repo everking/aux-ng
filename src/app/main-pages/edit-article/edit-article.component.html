@@ -1,2 +1,9 @@
-<h1>{{ articleTitle }}</h1>
-<angular-editor [(ngModel)]="articleBody" [config]="editorConfig"></angular-editor>
+<div style="padding: 10px;">
+  <h1>{{ articleTitle }}</h1>
+  <div style="width: 800px;">
+    <angular-editor [(ngModel)]="articleBody" [config]="editorConfig"></angular-editor>
+    <code>
+      {{ articleBody }}
+    </code>
+  </div>  
+</div>
