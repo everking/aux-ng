@@ -40,9 +40,13 @@ export class ArticleService {
     } catch (error) {
       console.error("Error loading articles", error);
     }
-  };
-  
+  };  
   // Call the function to load articles  
+  stripHtml(html: string): string {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div.textContent || div.innerText || '';
+  }
   
   getArticleList(): Observable<Article[]> {
     // Use 'from' to convert the Promise returned by loadArticles to an Observable
