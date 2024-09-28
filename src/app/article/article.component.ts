@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from "../services/article.service";
 import { Article } from "../interfaces/article";
 import { JsonPipe, UpperCasePipe } from "@angular/common";
+import { getHardcodedArticle } from '../services/hardcoded.article';
 
 @Component({
   selector: 'app-article',
@@ -16,19 +17,19 @@ import { JsonPipe, UpperCasePipe } from "@angular/common";
 })
 export class ArticleComponent implements OnInit {
   articleId!: string;
-  article!: Article;
+  article!: Article | null | undefined;
 
   constructor(private route: ActivatedRoute, private articleService: ArticleService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const articleId: string | null = this.route.snapshot.paramMap.get('articleId');
     if (articleId) {
       this.articleId = articleId;
-      this.articleService.readOne(articleId)
-        .subscribe((article: Article) => {
-          this.article = article;
-        });
+      this.article = await this.articleService.getArticle(articleId);
+      if (this.article == null) {
+        this.article = getHardcodedArticle(articleId);
+      }
     }
   }
 }
