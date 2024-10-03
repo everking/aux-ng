@@ -10,8 +10,8 @@ export interface ArticleMeta {
 
 export interface Article {
   articleId: string;
-  imageURI?: string;
-  header?: string;
-  body?: string;
+  imageURI: string;
+  header: string;
+  body: string;
   meta?: ArticleMeta
 }

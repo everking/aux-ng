@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ArticleService } from '../../services/article.service';
-import { FormsModule } from '@angular/forms';
-import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
-import { HttpClientModule } from '@angular/common/http'; 
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ArticleService} from '../../services/article.service';
+import {FormsModule} from '@angular/forms';
+import {AngularEditorConfig, AngularEditorModule} from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-edit-article',
   standalone: true,
-  imports: [ FormsModule, AngularEditorModule, HttpClientModule ],
+  imports: [FormsModule, AngularEditorModule],
   templateUrl: './edit-article.component.html',
   styleUrl: './edit-article.component.css'
 })
 
 export class EditArticleComponent implements OnInit {
-  topic = '';
+  topic!: string;
   articleTitle?: string = '';
   articleBody?: string = '';
 
@@ -34,10 +33,10 @@ export class EditArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.topic = this.route.snapshot.paramMap.get('topic') || '';
-    this.articleService.getArticle(this.topic).then((article) => {
+    this.articleService.readOne(this.topic).subscribe((article) => {
       console.log(article);
-      this.articleBody = article?.body;
-      this.articleTitle = article?.header;
+      this.articleBody = article.body;
+      this.articleTitle = article.header;
     });
   }
 }
