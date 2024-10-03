@@ -93,13 +93,12 @@ export class ArticleService {
         return null;
       }
       const documents = await response.json();
-      let returnedDocument: any = null;
       // If documents does not contain the document element, return null
       if (!documents || !documents[0].document) {
         return null;
-      } else {
-        returnedDocument = documents[0].document;
       }
+      const returnedDocument = documents[0].document;
+      
       const fields = returnedDocument?.fields;
       const name = returnedDocument?.name;
       const pattern = /[^/]+$/;
