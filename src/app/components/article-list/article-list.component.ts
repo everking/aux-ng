@@ -26,7 +26,7 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit() {
     if (!this.articles?.length) {
-      this.articleService.getArticleList()
+      this.articleService.getAllArticles()
         .subscribe((articles: Article[]) => {
           this.articles = articles;
         })
