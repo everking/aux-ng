@@ -1,4 +1,8 @@
 export interface ArticleMeta {
+  /*
+    documentId and name are firestore 
+    implementation specific
+  */
   documentId?: string;
   name?: string;
   category?: string;
@@ -9,9 +13,9 @@ export interface ArticleMeta {
 }
 
 export interface Article {
-  articleId: string;
-  imageURI: string;
-  header: string;
-  body: string;
+  articleId: string; /* article route key */
+  imageURI: string; /* image base64 or URL */
+  header: string; /* title */
+  body: string; /* HTML body */
   meta?: ArticleMeta
 }

@@ -14,7 +14,7 @@ export class ArticleService {
     "is-peter-rock",
     "why-not-catholic"
   ];
-  private defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
+  public defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
 
   constructor() {
   }
@@ -67,7 +67,7 @@ export class ArticleService {
     return this.articles;
   };
 
-  private async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
+  public async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
     try {
       const response = await fetch('https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery', {
         method: 'POST',
@@ -108,14 +108,14 @@ export class ArticleService {
         documentId = match[0];
       }
       return {
-        header: fields.title.stringValue.toString(),
-        body: fields.body.stringValue.toString(),
+        header: fields.header?.stringValue.toString() || '',
+        body: fields.body?.stringValue.toString() || '',
         imageURI: fields?.imageURI ? fields?.imageURI?.stringValue : this.defaultImageURI,
         meta: {
           name: returnedDocument.name.toString(),
           documentId,
-          category: fields.meta.mapValue.fields.category.stringValue,
-          subCategory: fields.meta.mapValue.fields.subCategory.stringValue,
+          category: fields.meta?.mapValue.fields.category?.stringValue || '',
+          subCategory: fields.meta?.mapValue.fields.subCategory?.stringValue || '',
         },
         articleId: articleId,
       };
@@ -129,12 +129,15 @@ export class ArticleService {
     console.log(`GET articleId: ${article.articleId}`);
     try {
       const documentId = article.meta?.documentId;
-      const {body, header, imageURI, meta} = article;
+      const { body, header, imageURI, meta } = article;
       const documentName = article.meta?.name;
       const category = meta?.category;
       const subCategory = meta?.subCategory;
 
-      const response = await fetch(`https://firestore.googleapis.com/v1/${documentName}?updateMask.fieldPaths=body&updateMask.fieldPaths=title`, {
+      const fieldPaths = ['body', 'header', 'imageURI', 'meta'];
+      const updateMask = fieldPaths.map(field => `updateMask.fieldPaths=${field}`).join('&');
+
+      const response = await fetch(`https://firestore.googleapis.com/v1/${documentName}?${updateMask}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
