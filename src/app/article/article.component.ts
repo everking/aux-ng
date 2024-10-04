@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ArticleService} from "../services/article.service";
-import {Article} from "../interfaces/article";
-import {JsonPipe, NgIf, UpperCasePipe} from "@angular/common";
-import {take} from "rxjs";
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ArticleService } from "../services/article.service";
+import { Article } from "../interfaces/article";
+import { JsonPipe, NgIf, UpperCasePipe } from "@angular/common";
+import { take } from "rxjs";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-article',

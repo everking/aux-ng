@@ -125,4 +125,55 @@ export class ArticleService {
     }
   };
 
+  saveArticleBody = async (article: Article) => {
+    console.log(`GET articleId: ${article.articleId}`);
+    try {
+      const documentId = article.meta?.documentId;
+      const {body, header, imageURI, meta} = article;
+      const documentName = article.meta?.name;
+      const category = meta?.category;
+      const subCategory = meta?.subCategory;
+
+      const response = await fetch(`https://firestore.googleapis.com/v1/${documentName}?updateMask.fieldPaths=body&updateMask.fieldPaths=title`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "fields": {
+              "body": {
+                "stringValue": body
+              },
+              "header": {
+                "stringValue": header
+              },
+              "imageURI": {
+                "stringValue": imageURI
+              },
+              "meta": {
+                "mapValue": {
+                  "fields": {
+                    "category": {
+                      "stringValue": category
+                    },
+                    "subCategory": {
+                      "stringValue": subCategory
+                    }
+                  }
+                }
+              }
+            }
+          }
+        )
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      await response.json();
+
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+    }
+  };
 }
