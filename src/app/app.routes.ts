@@ -17,6 +17,6 @@ export const routes: Routes = [
   { path: 'image-drop', component: ImageDropComponent },
   { path: 'ask', component: AskComponent },
   { path: 'article/:articleId', component: ArticleComponent },
-  { path: 'edit-article/:topic', component: EditArticleComponent },
+  { path: 'edit-article/:articleId', component: EditArticleComponent },
   { path: '', component: ParameterComponent }
 ];
