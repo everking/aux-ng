@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Article} from "../interfaces/article";
-import {from, Observable, of, switchMap, take} from "rxjs";
-import {getHardcodedArticle} from './hardcoded.article';
+import { Injectable } from '@angular/core';
+import { Article } from "../interfaces/article";
+import { from, Observable, of, switchMap, take } from "rxjs";
+import { getHardcodedArticle } from './hardcoded.article';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class ArticleService {
   constructor() {
   }
 
-  public readOne(articleId: string | null): Observable<Article> {
-    return this.readAll().pipe(take(1),
+  public getSingleArticle(articleId: string | null): Observable<Article> {
+    return this.getAllArticles().pipe(take(1),
       switchMap(() => {
         const article = this.articles.find(article => article.articleId === articleId);
         return of(article || {
@@ -33,23 +33,23 @@ export class ArticleService {
       }));
   }
 
-  public readAll(): Observable<Article[]> {
+  public getAllArticles(): Observable<Article[]> {
     if (this.articles?.length) {
       return of(this.articles);
     } else {
-      // Obtain articles from firestore
-      return from(this.loadArticles()).pipe(
+      // Obtain featured articles from firestore
+      return from(this.getFeaturedArticles()).pipe(
         switchMap(() => of(this.articles))
       );
     }
   }
 
-  private async loadArticles(): Promise<Article[]> {
+  private async getFeaturedArticles(): Promise<Article[]> {
     try {
       const fetchedArticles = await Promise.all(
         this.featuredArticles.map(async (articleId) => {
           try {
-            const fetchedArticle = await this.getArticle(articleId);
+            const fetchedArticle = await this.fetchArticleFromFirestore(articleId);
             return fetchedArticle ?? getHardcodedArticle(articleId);
           } catch (error) {
             console.error(`Failed to fetch article with ID: ${articleId}`, error);
@@ -67,7 +67,7 @@ export class ArticleService {
     return this.articles;
   };
 
-  private async getArticle(articleId: string): Promise<Article | null> {
+  private async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
     try {
       const response = await fetch('https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery', {
         method: 'POST',
@@ -98,7 +98,7 @@ export class ArticleService {
         return null;
       }
       const returnedDocument = documents[0].document;
-      
+
       const fields = returnedDocument?.fields;
       const name = returnedDocument?.name;
       const pattern = /[^/]+$/;

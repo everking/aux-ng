@@ -33,7 +33,7 @@ export class EditArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.topic = this.route.snapshot.paramMap.get('topic') || '';
-    this.articleService.readOne(this.topic).subscribe((article) => {
+    this.articleService.getSingleArticle(this.topic).subscribe((article) => {
       console.log(article);
       this.articleBody = article.body;
       this.articleTitle = article.header;

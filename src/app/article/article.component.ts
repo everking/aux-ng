@@ -26,7 +26,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
     const articleId: string | null = this.route.snapshot.paramMap.get('articleId');
-    this.articleService.readOne(articleId).pipe(take(1)).subscribe((article: Article) => {
+    this.articleService.getSingleArticle(articleId).pipe(take(1)).subscribe((article: Article) => {
       this.article = article;
     });
   }
