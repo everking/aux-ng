@@ -8,6 +8,7 @@ import { getHardcodedArticle } from './hardcoded.article';
 })
 export class ArticleService {
   private articles: Article[] = [];
+  private articleMap: Map<string, Article> = new Map();
   private featuredArticles: string[] = [
     "stories",
     "church-construction-complete",
@@ -18,21 +19,26 @@ export class ArticleService {
   public NEW_LABEL:string = "[ new ]";
   public BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
-  constructor() {
-  }
-
   public getSingleArticle(articleId: string | null): Observable<Article> {
-    return this.getAllArticles().pipe(take(1),
+    return this.getAllArticles().pipe(
+      take(1),
       switchMap(() => {
-        const article = this.articles.find(article => article.articleId === articleId);
-        return of(article || {
-          header: 'invalid-article',
-          body: 'invalid-article',
-          imageURI: 'none',
-          subCategory: 'Article',
-          articleId: 'invalid-article'
-        });
-      }));
+        // Convert the Promise (if returned) to an Observable using 'from'
+        const firestoreArticle$ = from(this.fetchArticleFromFirestore(articleId!));
+        return firestoreArticle$.pipe(
+          switchMap(article => {
+            const localArticle = article ?? this.articles.find(article => article.articleId === articleId);
+            return of(localArticle || {
+              header: 'invalid-article',
+              body: 'invalid-article',
+              imageURI: 'none',
+              subCategory: 'Article',
+              articleId: 'invalid-article'
+            });
+          })
+        );
+      })
+    );
   }
 
   public getAllArticles(): Observable<Article[]> {
@@ -51,7 +57,8 @@ export class ArticleService {
       const fetchedArticles = await Promise.all(
         this.featuredArticles.map(async (articleId) => {
           try {
-            const fetchedArticle = await this.fetchArticleFromFirestore(articleId);
+            const cachedArticle = this.articleMap.get(articleId);
+            const fetchedArticle = cachedArticle ?? await this.fetchArticleFromFirestore(articleId);
             return fetchedArticle ?? getHardcodedArticle(articleId);
           } catch (error) {
             console.error(`Failed to fetch article with ID: ${articleId}`, error);
@@ -71,6 +78,9 @@ export class ArticleService {
 
   public async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
     try {
+      if (this.articleMap.get(articleId)) {
+        return this.articleMap.get(articleId)!;
+      }
       const response = await fetch(`${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`, {
         method: 'POST',
         headers: {
@@ -109,7 +119,8 @@ export class ArticleService {
       if (match) {
         documentId = match[0];
       }
-      return {
+
+      this.articleMap.set(articleId, {
         header: fields.header?.stringValue.toString() || '',
         body: fields.body?.stringValue.toString() || '',
         imageURI: fields?.imageURI ? fields?.imageURI?.stringValue : this.defaultImageURI,
@@ -120,7 +131,8 @@ export class ArticleService {
           subCategory: fields.meta?.mapValue.fields.subCategory?.stringValue || '',
         },
         articleId: articleId,
-      };
+      });
+      return this.articleMap.get(articleId)!;
     } catch (error) {
       console.error('Error fetching articles:', error);
       return null;
