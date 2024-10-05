@@ -1,3 +1,6 @@
+<img width="1113" alt="image" src="https://github.com/user-attachments/assets/ce64aa54-1ac7-4a11-ae0c-c69f251c850f">
+
+
 # AuxNg
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.2.
