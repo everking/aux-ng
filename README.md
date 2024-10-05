@@ -1,4 +1,4 @@
-<img width="1113" alt="image" src="https://github.com/user-attachments/assets/ce64aa54-1ac7-4a11-ae0c-c69f251c850f">
+<img width="1113" alt="image" src="https://github.com/user-attachments/assets/a8ff6187-ffb8-4f04-95c2-c48438557580">
 
 
 # AuxNg
