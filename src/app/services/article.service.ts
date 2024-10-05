@@ -15,6 +15,8 @@ export class ArticleService {
     "why-not-catholic"
   ];
   public defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
+  public NEW_LABEL:string = "[ new ]";
+  public BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
   constructor() {
   }
@@ -69,7 +71,7 @@ export class ArticleService {
 
   public async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
     try {
-      const response = await fetch('https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery', {
+      const response = await fetch(`${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -125,7 +127,7 @@ export class ArticleService {
     }
   };
 
-  saveArticleBody = async (article: Article) => {
+  saveArticle = async (article: Article) => {
     console.log(`GET articleId: ${article.articleId}`);
     try {
       const documentId = article.meta?.documentId;
@@ -136,31 +138,36 @@ export class ArticleService {
 
       const fieldPaths = ['body', 'header', 'imageURI', 'meta'];
       const updateMask = fieldPaths.map(field => `updateMask.fieldPaths=${field}`).join('&');
-
-      const response = await fetch(`https://firestore.googleapis.com/v1/${documentName}?${updateMask}`, {
-        method: 'PATCH',
+      const NEW_ARTICLE_URL = `${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents/articles`;
+      const firestorePath = documentId === this.NEW_LABEL ? NEW_ARTICLE_URL: `${this.BASE_FIRESTORE}/${documentName}?${updateMask}`;
+      const method = documentId === this.NEW_LABEL ? "POST" : "PATCH";
+      const response = await fetch(firestorePath, {
+        method,
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             "fields": {
+              "articleId": {
+                "stringValue": article.articleId
+              },
               "body": {
-                "stringValue": body
+                "stringValue": body || ''
               },
               "header": {
-                "stringValue": header
+                "stringValue": header || ''
               },
               "imageURI": {
-                "stringValue": imageURI
+                "stringValue": imageURI || ''
               },
               "meta": {
                 "mapValue": {
                   "fields": {
                     "category": {
-                      "stringValue": category
+                      "stringValue": category || ''
                     },
                     "subCategory": {
-                      "stringValue": subCategory
+                      "stringValue": subCategory || ''
                     }
                   }
                 }

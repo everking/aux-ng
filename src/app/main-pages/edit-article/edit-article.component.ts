@@ -54,7 +54,7 @@ export class EditArticleComponent implements OnInit {
         subCategory: this.subCategory
       }
     };
-    this.articleService.saveArticleBody(article);
+    this.articleService.saveArticle(article);
   }
 
   ngOnInit(): void {
@@ -63,20 +63,11 @@ export class EditArticleComponent implements OnInit {
       console.log("fetchy");
       this.body = article?.body;
       this.header = article?.header;
-      this.imageURI = article?.imageURI || this.articleService.defaultImageURI;
-      this.documentId = article?.meta?.documentId;
+      this.imageURI = article?.imageURI || '';
+      this.documentId = article?.meta?.documentId || this.articleService.NEW_LABEL;
       this.category = article?.meta?.category;
       this.subCategory = article?.meta?.subCategory;
-      this.name = article?.meta?.name;
+      this.name = article?.meta?.name || this.articleService.NEW_LABEL;
     })
-    /*
-    this.articleService.getSingleArticle(this.articleId).subscribe((article) => {
-      console.log(JSON.stringify(article, null, 2));
-      this.body = article.body;
-      this.header = article.header;
-      this.documentId = article.meta?.documentId;
-      this.name = article.meta?.name;
-    });
-    */
   }
 }
