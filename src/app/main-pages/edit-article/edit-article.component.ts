@@ -4,11 +4,11 @@ import {ArticleService} from '../../services/article.service';
 import {FormsModule} from '@angular/forms';
 import {AngularEditorConfig, AngularEditorModule} from '@kolkov/angular-editor';
 import { Article } from '../../interfaces/article';
-
+import { ImageDropComponent } from '../image-drop/image-drop.component';
 @Component({
   selector: 'app-edit-article',
   standalone: true,
-  imports: [FormsModule, AngularEditorModule],
+  imports: [FormsModule, AngularEditorModule, ImageDropComponent],
   templateUrl: './edit-article.component.html',
   styleUrl: './edit-article.component.css'
 })
@@ -37,6 +37,10 @@ export class EditArticleComponent implements OnInit {
     ]
   };
 
+  onImageDropped(image: string) {
+    this.imageURI = image;
+  }
+
   onSaveClick(): void {
     const article: Article = {
       articleId: this.articleId,
@@ -56,6 +60,7 @@ export class EditArticleComponent implements OnInit {
   ngOnInit(): void {
     this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
     this.articleService.fetchArticleFromFirestore(this.articleId).then((article)=> {
+      console.log("fetchy");
       this.body = article?.body;
       this.header = article?.header;
       this.imageURI = article?.imageURI || this.articleService.defaultImageURI;

@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule, NgClass, NgForOf, NgIf } from "@angular/common";
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-image-drop',
@@ -9,15 +10,28 @@ import { CommonModule, NgClass, NgForOf, NgIf } from "@angular/common";
   imports: [ NgIf ]
 })
 
+export class ImageDropComponent implements OnChanges {
+  public base64Image: string | null = null;
+  
+  constructor(private articleService: ArticleService) {
 
-
-
-export class ImageDropComponent {
-  base64Image: string | null = null;
+  }
+  @Input() imageURI?: string = '';
+  @Output() imageDropped: EventEmitter<string> = new EventEmitter<string>();
 
   @HostListener('dragover', ['$event'])
   onDragOver(event: DragEvent) {
     event.preventDefault();
+  }
+
+  async getFileFromImageUrl(imageUrl: string): Promise<File> {
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+  
+    // Convert Blob to File
+    const file = new File([blob], 'image.jpg', { type: blob.type });
+  
+    return file;
   }
 
   @HostListener('drop', ['$event'])
@@ -30,6 +44,13 @@ export class ImageDropComponent {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    // Detect if imageURI has changed
+    if (changes['imageURI'] && changes['imageURI'].currentValue) {
+      this.base64Image = changes['imageURI'].currentValue;
+    }
+  }
+  
   async resizeAndCropImage(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -39,28 +60,39 @@ export class ImageDropComponent {
         img.src = e.target.result;
         img.onload = () => {
           const MAX_WIDTH = 1080;
-          const scaleFactor = MAX_WIDTH / img.width;
+          const MAX_HEIGHT = 200;
           const width = Math.min(img.width, MAX_WIDTH);
           const height = (img.height / img.width) * width
 
+          console.log(`Original: width: ${img.width}, height: ${img.height}`);
+          console.log(`New: width: ${width}, height: ${height}`);
+
           const canvas = document.createElement('canvas');
-          canvas.width = width;
-          canvas.height = 200;
+          canvas.width = MAX_WIDTH;
+          canvas.height = MAX_HEIGHT;
           const ctx = canvas.getContext('2d')!;
 
-          if (height >= canvas.height) {
-            const cropStartY = (height - canvas.height) / 2;
-            ctx.drawImage(img, 0, cropStartY, width, 600, 0, 0, width, 600);
-          } else {
-            // If height < 600, center the image vertically and add padding
-            const padding = (canvas.height - height) / 2;
-            ctx.fillStyle = '#ffffff'; // White background
-            ctx.fillRect(0, 0, width, canvas.height);
-            ctx.drawImage(img, 0, 0, width, height, 0, padding, width, height);
+          // If height < 600, center the image vertically and add padding
+          ctx.fillStyle = '#000000'; // White background
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          let sx = 0; // left
+          let sy = 0; // top
+          if (width < MAX_WIDTH) {
+            sx = (MAX_WIDTH - width)/2; // center
           }
+          if (height < MAX_HEIGHT) {
+            sy = (MAX_HEIGHT - height)/2; // center
+          }
+          ctx.drawImage(
+            img, 
+            sx, sy,
+            width, height // sw, sh
+          );
 
           if (ctx) {
             const resizedImage = canvas.toDataURL('image/svg+xml');
+            this.base64Image = resizedImage;
+            this.imageDropped.emit(resizedImage);
             resolve(resizedImage);
           } else {
             reject(new Error('Canvas rendering context not available'));
@@ -69,6 +101,15 @@ export class ImageDropComponent {
       };
       reader.readAsDataURL(file);
     });
+  }
+  ngOnInit(): void {
+    this.base64Image = this.imageURI || this.articleService.defaultImageURI;
+    console.log(this.base64Image);
+    if (this.base64Image.startsWith("http")) {
+      this.getFileFromImageUrl(this.base64Image).then((file)=>{
+        this.resizeAndCropImage(file);
+      })
+    }
   }
 }
 

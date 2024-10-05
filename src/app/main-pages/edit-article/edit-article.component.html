@@ -5,8 +5,8 @@
   Header: <input type="text" [(ngModel)]="header" placeholder="Enter header text here">
   <br/>Category: <input type="text" [(ngModel)]="category" placeholder="Enter category text here">
   <br/>SubCategory: <input type="text" [(ngModel)]="subCategory" placeholder="Enter sub category text here">
-  <br/>ImageURI: <input type="text" [(ngModel)]="imageURI" placeholder="Enter sub imageURI text here">
   <br/>
+  <app-image-drop [imageURI]="imageURI" (imageDropped)="onImageDropped($event)"></app-image-drop>
   <div style="width: 800px;">
     <angular-editor [(ngModel)]="body" [config]="editorConfig"></angular-editor>
   </div>
