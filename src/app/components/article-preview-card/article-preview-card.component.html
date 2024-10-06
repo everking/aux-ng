@@ -1,5 +1,5 @@
-<a class="article-preview-link" [routerLink]="['/article', article.articleId]">
-  <div class="article-preview wiggle-item">
+<div class="article-preview wiggle-item">
+  <a [routerLink]="['/article', article.articleId]">
     <div class="article-preview-card-container">
       <mat-card appearance="raised">
         <img mat-card-image src="{{article.imageURI}}" alt="Auxilium">
@@ -14,6 +14,6 @@
         <div class="article-preview-category-tag">{{ article.meta?.subCategory| uppercase }}</div>
       </mat-card>
     </div>
-  </div>
-</a>
+  </a>
+</div>
 

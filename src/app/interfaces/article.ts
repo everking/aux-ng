@@ -1,6 +1,6 @@
 export interface ArticleMeta {
   /*
-    documentId and name are firestore 
+    documentId and name are firestore
     implementation specific
   */
   documentId?: string;
@@ -18,4 +18,11 @@ export interface Article {
   header: string; /* title */
   body: string; /* HTML body */
   meta?: ArticleMeta
+}
+
+export const INVALID_ARTICLE: Article = {
+  articleId: 'article-does-not-exist',
+  imageURI: 'article-does-not-exist',
+  header: 'article-does-not-exist',
+  body: 'article-does-not-exist'
 }

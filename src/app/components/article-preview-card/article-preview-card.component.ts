@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { SlicePipe, UpperCasePipe } from "@angular/common";
 import { Article } from "../../interfaces/article";
 import { RouterLink } from "@angular/router";
 import { stripHtml } from '../../utils';
+
 @Component({
-  selector: 'app-article-preview',
+  selector: 'app-article-preview-card',
   standalone: true,
   imports: [
     MatCardModule,
@@ -13,10 +14,10 @@ import { stripHtml } from '../../utils';
     SlicePipe,
     RouterLink,
   ],
-  templateUrl: './article-preview.component.html',
-  styleUrl: './article-preview.component.scss'
+  templateUrl: './article-preview-card.component.html',
+  styleUrl: './article-preview-card.component.scss'
 })
-export class ArticlePreviewComponent {
+export class ArticlePreviewCardComponent {
   @Input() article!: Article;
   public strippedBody: string = '';
   ngOnInit(): void {

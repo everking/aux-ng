@@ -1,31 +1,14 @@
 .article-list {
   display: flex;
-  max-width: 80%;
-  justify-content: center;
-  gap: 25px;
-  &-left-side {
+  flex-wrap: wrap;
+
+  &-article {
+    flex: 0 1 calc(100% / var(--maxArticlesPerRow));
+  }
+
+  &-no-articles {
+    flex: 1;
     display: flex;
-    flex: 0 1 40%;
-    opacity: 0.3;
     justify-content: center;
-    margin-top: 100px;
-  }
-  &-boarder {
-    border-right: 1px solid #000000;
-  }
-  &-right-side {
-    display: flex;
-    flex: 0 1 60%;
-    overflow-x: auto;
-
-    &-no-articles {
-      flex: 0 1 60%;
-      display: flex;
-      justify-content: center;
-    }
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 }

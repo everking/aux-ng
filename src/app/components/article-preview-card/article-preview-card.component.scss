@@ -1,12 +1,13 @@
 .article-preview {
+  $card-width: 250;
+  $image-header-height: 185;
 
-  max-width: 250px;
-  max-height: 380px;
+  width: #{$card-width}px;
   padding: 10px;
 
   img {
-    width: 230px;
-    height: 185px;
+    width: #{$card-width - 20}px;
+    height: #{$image-header-height}px;
     object-fit: fill;
   }
 
@@ -20,7 +21,7 @@
     font-weight: bolder;
     position: absolute;
     z-index: 1;
-    top: 120px;
+    top: #{$image-header-height - 65}px;
     padding: 5px;
     left: 10px;
 
