@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Article } from "../interfaces/article";
+import { Article, INVALID_ARTICLE } from "../interfaces/article";
 import { from, Observable, of, switchMap, take } from "rxjs";
 import { getHardcodedArticle } from './hardcoded.article';
 
@@ -13,11 +13,14 @@ export class ArticleService {
     "stories",
     "church-construction-complete",
     "is-peter-rock",
-    "why-not-catholic"
+    "why-not-catholic",
+    "church-construction-complete",
+    "is-peter-rock",
+    "why-not-catholic",
   ];
-  public defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
-  public NEW_LABEL:string = "[ new ]";
-  public BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
+  public readonly defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
+  public readonly NEW_LABEL: string = "[ new ]";
+  public readonly BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
   public getSingleArticle(articleId: string | null): Observable<Article> {
     return this.getAllArticles().pipe(
@@ -28,13 +31,7 @@ export class ArticleService {
         return firestoreArticle$.pipe(
           switchMap(article => {
             const localArticle = article ?? this.articles.find(article => article.articleId === articleId);
-            return of(localArticle || {
-              header: 'invalid-article',
-              body: 'invalid-article',
-              imageURI: 'none',
-              subCategory: 'Article',
-              articleId: 'invalid-article'
-            });
+            return of(localArticle || INVALID_ARTICLE);
           })
         );
       })
@@ -80,6 +77,13 @@ export class ArticleService {
     try {
       if (this.articleMap.get(articleId)) {
         return this.articleMap.get(articleId)!;
+      }
+      // Fix for not fetching hard coded items until not needed.
+      if (this.articles.length) {
+        const article = this.articles.find(article => article.articleId === articleId);
+        if (article) {
+          return article;
+        }
       }
       const response = await fetch(`${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`, {
         method: 'POST',

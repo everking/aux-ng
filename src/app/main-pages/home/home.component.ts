@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { ArticlePreviewComponent } from "../../components/article-preview/article-preview.component";
 import { MatGridList, MatGridTile } from "@angular/material/grid-list";
 import { ArticleListComponent } from "../../components/article-list/article-list.component";
+import { ArticlePreviewCardComponent } from "../../components/article-preview-card/article-preview-card.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    ArticlePreviewComponent,
+    ArticlePreviewCardComponent,
     MatGridList,
     MatGridTile,
     ArticleListComponent
