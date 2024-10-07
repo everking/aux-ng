@@ -1,1 +1,22 @@
-<p>article works!</p>
+<ng-container *ngIf="article else loadingArticle">
+  <div class="article">
+    <div class="article-header-image">
+      <img src={{article.imageURI}} alt="Invalid Image">
+    </div>
+
+    <div class="article-header-image-text">
+      <h1>{{ article.header }}</h1>
+    </div>
+
+    <div class="article-body" [innerHTML]="article.body"></div>
+
+    <div class="article-category-text">
+      <h3>{{ article.meta?.subCategory| uppercase }}</h3>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loadingArticle>
+  <div class="article-body-loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

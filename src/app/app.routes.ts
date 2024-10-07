@@ -4,7 +4,7 @@ import { FamilyComponent } from "./main-pages/family/family.component";
 import { SchoolComponent } from "./main-pages/school/school.component";
 import { ExcellenceComponent } from "./main-pages/excellence/excellence.component";
 import { AskComponent } from "./main-pages/ask/ask.component";
-import { ArticleComponent } from "./article/article.component";
+import { ArticleComponent } from "./components/article/article.component";
 import { EditArticleComponent } from "./main-pages/edit-article/edit-article.component";
 import { ParameterComponent } from "./main-pages/parameter/parameter.component";
 import { ImageDropComponent } from './main-pages/image-drop/image-drop.component';
