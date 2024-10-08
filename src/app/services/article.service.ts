@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Article, INVALID_ARTICLE } from "../interfaces/article";
-import { from, Observable, of, switchMap, take } from "rxjs";
+import { from, map, Observable, of, switchMap, take } from "rxjs";
 import { getHardcodedArticle } from './hardcoded.article';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,13 @@ export class ArticleService {
   public readonly NEW_LABEL: string = "[ new ]";
   public readonly BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
+  constructor(private http: HttpClient) {
+  }
+
   public getSingleArticle(articleId: string | null): Observable<Article> {
+    if (this.articleMap.get(articleId!)) {
+      return of(this.articleMap.get(articleId!)!);
+    }
     return this.getAllArticles().pipe(
       take(1),
       switchMap(() => {
@@ -43,12 +50,11 @@ export class ArticleService {
       return of(this.articles);
     } else {
       // Obtain featured articles from firestore
-      return from(this.getFeaturedArticles()).pipe(
-        switchMap(() => of(this.articles))
-      );
+      return this.fetchAllArticlesFromFirestore();
     }
   }
 
+  // unused for now.
   private async getFeaturedArticles(): Promise<Article[]> {
     try {
       const fetchedArticles = await Promise.all(
@@ -72,6 +78,51 @@ export class ArticleService {
     }
     return this.articles;
   };
+
+  public fetchAllArticlesFromFirestore(): Observable<Article[]> {
+    const url = `${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`;
+    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    const body = {
+      structuredQuery: {
+        from: [{collectionId: 'articles'}],
+      }
+    };
+
+    return this.http.post(url, body, {headers}).pipe(
+      map((documents: any): Article[] => {
+
+        const fetchedArticles: Article[] = [];
+        documents.forEach((document: any) => {
+          const fields = document.document.fields;
+          let documentId: string = '';
+
+          /* Todo: This is bad. We need our database to adhere to the contract of data blobs that we expect.
+              There is not a single article in the firestore that contains all requirements of the Article interface.
+          */
+          const article: Article = {
+            header: fields?.header?.stringValue?.toString() || INVALID_ARTICLE.header,
+            body: fields?.body?.stringValue?.toString() || INVALID_ARTICLE.body,
+            imageURI: fields?.imageURI ? fields.imageURI.stringValue : this.defaultImageURI,
+            meta: {
+              name: document?.name?.toString(),
+              documentId,
+              category: fields?.meta?.mapValue?.fields?.category?.stringValue || INVALID_ARTICLE.meta?.category,
+              subCategory: fields?.meta?.mapValue?.fields?.subCategory?.stringValue || INVALID_ARTICLE.meta?.subCategory,
+            },
+            articleId: fields?.articleId?.stringValue ?? crypto.randomUUID(),
+          };
+
+          fetchedArticles.push(article);
+          this.articleMap.set(article.articleId, article);
+        });
+        // Cache the fetched articles
+        this.articles = fetchedArticles;
+        // return them
+        return fetchedArticles;
+      }),
+    );
+  }
+
 
   public async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
     try {

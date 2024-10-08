@@ -21,8 +21,14 @@ export interface Article {
 }
 
 export const INVALID_ARTICLE: Article = {
-  articleId: 'article-does-not-exist',
-  imageURI: 'article-does-not-exist',
-  header: 'article-does-not-exist',
-  body: 'article-does-not-exist'
+  articleId: 'INVALID_ARTICLE',
+  imageURI: 'INVALID_ARTICLE',
+  header: 'INVALID_ARTICLE',
+  body: 'INVALID_ARTICLE',
+  meta: {
+    documentId: 'INVALID_ARTICLE',
+    name: 'INVALID_ARTICLE',
+    category: 'INVALID_ARTICLE',
+    subCategory: 'INVALID_ARTICLE'
+  }
 }
