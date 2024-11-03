@@ -68,4 +68,22 @@
 
 }
 
+.wiggle-item:hover {
+  animation: wiggle 1s ease-in-out infinite;
+}
 
+@keyframes wiggle {
+  0%, 100% {
+    transform: translateX(0); /* Center position */
+  }
+  25% {
+    transform: translateX(1px); /* Slight right */
+  }
+  75% {
+    transform: translateX(-1px); /* Slight left */
+  }
+}
+
+.article-preview-category-tag {
+  display: none;
+}
