@@ -5,8 +5,14 @@
     </div>
 
     <div class="article-header-image-text">
-      <h1>{{ article.header }}</h1>
+      <h2>{{ article.header }}</h2>
     </div>
+
+    <span *ngIf="isLoggedIn">
+      [ <a [routerLink]="[editLink]">Edit Article</a> ]
+      <br/>
+      <br/>
+    </span>
 
     <div class="article-body" [innerHTML]="article.body"></div>
 

@@ -20,6 +20,7 @@ export interface FireBaseLoginResponse {
   
 export class LoginService {
   public idToken: string = '';
+  public isLoggedIn: boolean = false;
 
   public async login (email: string, password: string) : Promise<FireBaseLoginResponse>{
     const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`, {
@@ -35,6 +36,7 @@ export class LoginService {
     });
     const loginResponse:FireBaseLoginResponse = await response.json();
     this.idToken = loginResponse.idToken;
+    this.isLoggedIn = (this.idToken != null && this.idToken.length > 100);
     return loginResponse;
   }
 
