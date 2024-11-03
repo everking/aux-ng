@@ -1,6 +1,6 @@
 .article-list {
   max-width: 755px;
-  min-width: 755px;
+  min-width: 360px;
 }
 .home {
   display: flex;
