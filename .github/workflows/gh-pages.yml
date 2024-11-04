@@ -22,8 +22,7 @@ jobs:
         run: npm install
 
       - name: Build the Angular app
-        env:
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        env: FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         run: source init.sh && npm run build -- --configuration production --base-href=/ --project=aux-ng
 
       - name: Create CNAME file based on repository
@@ -46,4 +45,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/browser
+          publish_dir: ./dist/aux-ng/browser
