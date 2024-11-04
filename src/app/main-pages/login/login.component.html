@@ -1,0 +1,26 @@
+<div class="login-main">
+  <div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Enter your email">
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Enter your password">
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">{{ isSignup ? 'Sign Up' : 'Login' }}</button>
+      <span *ngIf="!isSignup">&nbsp; New to Auxilium? <a  [routerLink]="['/signup']">Sign up now</a></span>
+      <span *ngIf="isSignup">&nbsp; Has login to Auxilium? <a [routerLink]="['/login']">Login</a></span>
+      <span class="login-message">{{loginMessage}}</span>
+    </form>
+  </div>
+</div>
+

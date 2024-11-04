@@ -1,5 +1,22 @@
 .home {
+  display: flex;
+  justify-content: center;
   .mat-grid-tile {
     border: 1px solid #000000;
   }
+}
+.content {
+  max-width: 755px;
+  min-width: 500px;
+  padding:20px;
+}
+.content-details {
+  padding: 10px;
+}
+
+.banner-image {
+  border-radius: 8px;
+  margin-top: 20px;
+  max-width: 755px;
+  width:100%;
 }

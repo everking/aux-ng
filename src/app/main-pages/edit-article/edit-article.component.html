@@ -10,5 +10,5 @@
   <div style="width: 800px;">
     <angular-editor [(ngModel)]="body" [config]="editorConfig"></angular-editor>
   </div>
-  <button (click)="onSaveClick()">Save</button>
+  <button (click)="onSaveClick()">Save</button> <span>{{saveMessage}}</span>
 </div>

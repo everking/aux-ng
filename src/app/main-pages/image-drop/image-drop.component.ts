@@ -64,9 +64,6 @@ export class ImageDropComponent implements OnChanges {
           const width = Math.min(img.width, MAX_WIDTH);
           const height = (img.height / img.width) * width
 
-          console.log(`Original: width: ${img.width}, height: ${img.height}`);
-          console.log(`New: width: ${width}, height: ${height}`);
-
           const canvas = document.createElement('canvas');
           canvas.width = MAX_WIDTH;
           canvas.height = MAX_HEIGHT;
@@ -104,7 +101,6 @@ export class ImageDropComponent implements OnChanges {
   }
   ngOnInit(): void {
     this.base64Image = this.imageURI || this.articleService.defaultImageURI;
-    console.log(this.base64Image);
     if (this.base64Image.startsWith("http")) {
       this.getFileFromImageUrl(this.base64Image).then((file)=>{
         this.resizeAndCropImage(file);

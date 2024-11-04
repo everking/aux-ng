@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ArticleService} from '../../services/article.service';
 import {FormsModule} from '@angular/forms';
 import {AngularEditorConfig, AngularEditorModule} from '@kolkov/angular-editor';
 import { Article } from '../../interfaces/article';
 import { ImageDropComponent } from '../image-drop/image-drop.component';
+import { LoginService } from '../../services/login.service';
+
 @Component({
   selector: 'app-edit-article',
   standalone: true,
@@ -22,8 +24,13 @@ export class EditArticleComponent implements OnInit {
   category?: string = '';
   subCategory?: string = '';
   imageURI?: string = '';
+  saveMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private articleService: ArticleService) {}
+  constructor(private route: ActivatedRoute, 
+    private articleService: ArticleService,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -41,7 +48,7 @@ export class EditArticleComponent implements OnInit {
     this.imageURI = image;
   }
 
-  onSaveClick(): void {
+  async onSaveClick() {
     const article: Article = {
       articleId: this.articleId,
       header: this.header || '',
@@ -54,13 +61,23 @@ export class EditArticleComponent implements OnInit {
         subCategory: this.subCategory
       }
     };
-    this.articleService.saveArticle(article);
+    const isSaved:boolean = await this.articleService.saveArticle(article);
+    if (isSaved) {
+      this.saveMessage = "Saved!";
+      console.log("Saved!");
+    } else {
+      this.saveMessage = "Sorry. Not saved!";
+      console.log("Sorry. Not saved!");
+    }
+
   }
 
   ngOnInit(): void {
     this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
+    if (!this.loginService.idToken) {
+      this.router.navigate(['/login'], { queryParams: { redirect: `/edit-article/${this.articleId}` }});
+    }
     this.articleService.fetchArticleFromFirestore(this.articleId).then((article)=> {
-      console.log("fetchy");
       this.body = article?.body;
       this.header = article?.header;
       this.imageURI = article?.imageURI || '';

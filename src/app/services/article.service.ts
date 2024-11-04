@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Article, INVALID_ARTICLE } from "../interfaces/article";
 import { from, map, Observable, of, switchMap, take } from "rxjs";
 import { getHardcodedArticle } from './hardcoded.article';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { LoginService } from './login.service';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ArticleService {
   private articles: Article[] = [];
   private articleMap: Map<string, Article> = new Map();
+  private baseHref: string;
   private featuredArticles: string[] = [
     "stories",
     "church-construction-complete",
@@ -19,11 +23,34 @@ export class ArticleService {
     "is-peter-rock",
     "why-not-catholic",
   ];
+
+  public subCategoryDetails: Record<string, string> = {
+    "default": "",
+    "activities": "Activities",
+    "spiritual": "Spiritual",
+    "virtues": "Virtues",
+    "whole-child": "Whole Child",
+  };
+  public categoryDetails: Record<string, string> = {
+    "high-school": "High School",
+    "excellence": "Excellence"
+  };
+
+  public getSubCategory(subCategory: string, category: string = '') {
+    if (category && subCategory === "default") {
+      return this.categoryDetails[category];
+    } else {
+      return this.subCategoryDetails[subCategory];
+    }
+  }
+
   public readonly defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
   public readonly NEW_LABEL: string = "[ new ]";
   public readonly BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
-  constructor(private http: HttpClient) {
+  constructor(@Inject(DOCUMENT) private document: Document, private http: HttpClient, private loginService: LoginService) {
+    const baseElement = this.document.querySelector('base');
+    this.baseHref = (baseElement ? baseElement.getAttribute('href') : '/')!;
   }
 
   public getSingleArticle(articleId: string | null): Observable<Article> {
@@ -50,7 +77,7 @@ export class ArticleService {
       return of(this.articles);
     } else {
       // Obtain featured articles from firestore
-      return this.fetchAllArticlesFromFirestore();
+      return this.fetchAllArticlesFromFirestore(true);
     }
   }
 
@@ -79,16 +106,16 @@ export class ArticleService {
     return this.articles;
   };
 
-  public fetchAllArticlesFromFirestore(): Observable<Article[]> {
-    const url = `${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`;
-    const headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  public fetchAllArticlesFromFirestore(useLocal:boolean = false): Observable<Article[]> {
+    const url = useLocal ? `${this.baseHref}assets/data/all-articles.json` : `${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`;
+    const headers: HttpHeaders = new HttpHeaders(this.getHeaders());
     const body = {
       structuredQuery: {
         from: [{collectionId: 'articles'}],
       }
     };
 
-    return this.http.post(url, body, {headers}).pipe(
+    return (useLocal ? this.http.get(url) : this.http.post(url, body, {headers})).pipe(
       map((documents: any): Article[] => {
 
         const fetchedArticles: Article[] = [];
@@ -100,14 +127,14 @@ export class ArticleService {
               There is not a single article in the firestore that contains all requirements of the Article interface.
           */
           const article: Article = {
-            header: fields?.header?.stringValue?.toString() || INVALID_ARTICLE.header,
-            body: fields?.body?.stringValue?.toString() || INVALID_ARTICLE.body,
+            header: fields?.header?.stringValue?.toString() || '',
+            body: fields?.body?.stringValue?.toString() || '',
             imageURI: fields?.imageURI ? fields.imageURI.stringValue : this.defaultImageURI,
             meta: {
               name: document?.name?.toString(),
               documentId,
-              category: fields?.meta?.mapValue?.fields?.category?.stringValue || INVALID_ARTICLE.meta?.category,
-              subCategory: fields?.meta?.mapValue?.fields?.subCategory?.stringValue || INVALID_ARTICLE.meta?.subCategory,
+              category: fields?.meta?.mapValue?.fields?.category?.stringValue || '',
+              subCategory: fields?.meta?.mapValue?.fields?.subCategory?.stringValue || 'default',
             },
             articleId: fields?.articleId?.stringValue ?? crypto.randomUUID(),
           };
@@ -123,6 +150,15 @@ export class ArticleService {
     );
   }
 
+  private getHeaders() {
+    const header:any =  {
+      'Content-Type': 'application/json'
+    }
+    if (this.loginService.idToken) {
+      header['Authorization'] = `Bearer ${this.loginService.idToken}`;
+    }
+    return header
+  }
 
   public async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
     try {
@@ -138,9 +174,7 @@ export class ArticleService {
       }
       const response = await fetch(`${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: this.getHeaders(),
         body: JSON.stringify({
           structuredQuery: {
             from: [{ collectionId: 'articles' }],
@@ -210,9 +244,7 @@ export class ArticleService {
       const method = documentId === this.NEW_LABEL ? "POST" : "PATCH";
       const response = await fetch(firestorePath, {
         method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: this.getHeaders(),
         body: JSON.stringify({
             "fields": {
               "articleId": {
@@ -244,13 +276,11 @@ export class ArticleService {
         )
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      await response.json();
+      return response.ok;
 
     } catch (error) {
       console.error('Error fetching articles:', error);
+      return false;
     }
   };
 }
