@@ -15,17 +15,13 @@
   <!-- Add a script to redirect to index.html -->
   <script>
     window.onload = function() {
-      const basePath = '/';
+      const basePath = '/aux-ng';
       let currentPath = window.location.pathname;
-      let relativePath = currentPath;
-      if (basePath !== '/') {
-        const patternPath = `^${basePath}`
-        relativePath = currentPath.replace(patternPath, '');
-      }
+      let relativePath = currentPath.replace(basePath, '');
       if (!relativePath.startsWith('/')) {
         relativePath = '/' + relativePath;
       }
-      document.getElementById('redirect-message').innerText = `Redirecting to ${basePath}?ref=${relativePath}`;
+      document.getElementById('redirect-message').innerText = `Redirecting to /mystic?ref=${relativePath}`;
       window.location.href = `${basePath}?ref=${relativePath}`;
     };
   </script>
