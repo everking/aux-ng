@@ -1,12 +1,15 @@
-<div class="article-list" [style.--maxArticlesPerRow]="maxArticlesPerRow">
-  <ng-container *ngIf="articles?.length else noArticles">
-    <div class="article-list-article" *ngFor="let article of articles; let i = index; trackBy: trackByHeader">
-      <app-article-preview-card [article]="article"></app-article-preview-card>
-    </div>
-  </ng-container>
-  <ng-template #noArticles>
-    <div class="article-list-no-articles">
-      <mat-spinner></mat-spinner>
-    </div>
-  </ng-template>
+<div class="article-list-holder" *ngFor="let subCategory of subCategoryMap | keyvalue">
+  <h2 class="category">{{ articleService.getSubCategory(subCategory.key, category) }}</h2>
+  <div class="article-list" [style.--maxArticlesPerRow]="maxArticlesPerRow">
+    <ng-container *ngIf="subCategory?.value?.articles?.length; else noArticles">
+      <div class="article-list-article" *ngFor="let articleId of subCategory.value.articles; let i = index;">
+        <app-article-preview-card [articleId]="articleId"></app-article-preview-card>
+      </div>
+    </ng-container>
+    <ng-template #noArticles>
+      <div class="article-list-no-articles">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+  </div>    
 </div>

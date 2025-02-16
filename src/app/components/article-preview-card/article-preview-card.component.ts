@@ -4,6 +4,7 @@ import { SlicePipe, UpperCasePipe } from "@angular/common";
 import { Article } from "../../interfaces/article";
 import { RouterLink } from "@angular/router";
 import { stripHtml } from '../../utils';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-article-preview-card',
@@ -18,9 +19,15 @@ import { stripHtml } from '../../utils';
   styleUrl: './article-preview-card.component.scss'
 })
 export class ArticlePreviewCardComponent {
-  @Input() article!: Article;
+  @Input() articleId!: string;
+  article:Article|null = null;
+
+  constructor(private articleService: ArticleService) {
+
+  }
   public strippedBody: string = '';
-  ngOnInit(): void {
-    this.strippedBody = stripHtml(this.article.body);
+  async ngOnInit() {
+    this.article = await this.articleService.fetchLocalArticle(this.articleId);
+    this.strippedBody = stripHtml(this.article?.body);
   }
 }

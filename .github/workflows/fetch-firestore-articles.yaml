@@ -1,0 +1,36 @@
+name: Fetch Firestore Articles
+
+on:
+  workflow_dispatch: # Allows manually triggering the workflow
+  #schedule:
+  #  - cron: '0 0 * * *' # Runs daily at midnight (adjust as needed)
+
+jobs:
+  fetch_firestore_data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20' # Specify the Node.js version you're using
+
+    - name: Install node-fetch dependency
+      run: npm install node-fetch # Use native fetch with node-fetch package
+
+    - name: Fetch data from Firestore
+      run: |
+        # Use fetch to query Firestore
+        node .github/workflows/scripts/fetch-firestore-articles.js
+    - name: Commit and push changes
+      run: |
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        git add src/assets/data/
+        git commit -m "Update Firestore articles"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}g

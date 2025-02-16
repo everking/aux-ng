@@ -1,0 +1,49 @@
+{
+  "document": {
+    "name": "projects/auxilium-420904/databases/aux-db/documents/articles/crrBcHToXwWXRAMeqRBj",
+    "fields": {
+      "date": {
+        "stringValue": "2023-10-26"
+      },
+      "coverHeight": {
+        "integerValue": "6"
+      },
+      "coverImage": {
+        "stringValue": "/images/zacchaeus.png"
+      },
+      "articleId": {
+        "stringValue": "sports-group"
+      },
+      "coverWidth": {
+        "integerValue": "16"
+      },
+      "categories": {
+        "arrayValue": {
+          "values": [
+            {
+              "stringValue": "general"
+            },
+            {
+              "stringValue": "family"
+            }
+          ]
+        }
+      },
+      "excerpt": {
+        "stringValue": "This is an excerpt"
+      },
+      "body": {
+        "stringValue": "<h3>Sub title</h3>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor \nincididunt ut labore et dolore magna aliqua. Lectus vestibulum mattis \nullamcorper velit sed ullamcorper morbi tincidunt.</p>\n"
+      },
+      "title": {
+        "stringValue": "Sports Group"
+      },
+      "updated": {
+        "stringValue": "2023-10-26"
+      }
+    },
+    "createTime": "2024-06-04T07:18:09.679466Z",
+    "updateTime": "2024-06-04T07:18:09.679466Z"
+  },
+  "readTime": "2024-11-03T01:17:48.400980Z"
+}

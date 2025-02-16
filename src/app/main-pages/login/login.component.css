@@ -1,0 +1,27 @@
+.login-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding-top: 100px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.login-message {
+  padding: 10px;
+}
+
+.login-button {
+  width: 150px;
+  height: 50px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  color: red;
+}
