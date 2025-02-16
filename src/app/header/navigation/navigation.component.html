@@ -3,11 +3,36 @@
     <img src="assets/images/auxilium-new.png" alt="Auxilium"/>
   </div>
   <div class="navigation-header-links">
-    <button mat-stroked-button  routerLink="/home" routerLinkActive="active-link">Home</button>
-    <button mat-stroked-button routerLink="/family" routerLinkActive="active-link">Family</button>
-    <button mat-stroked-button routerLink="/school" routerLinkActive="active-link">School</button>
-    <button mat-stroked-button routerLink="/excellence" routerLinkActive="active-link">Excellence</button>
-    <button mat-stroked-button routerLink="/ask" routerLinkActive="active-link">Help</button>
+    <button mat-stroked-button  routerLink="/home" 
+      routerLinkActive="active-link" 
+    >
+      Home
+    </button>
+    <button mat-stroked-button routerLink="/family" 
+      [ngClass]="{'active-link': isCategoryActive('family')}" 
+    >
+      Family
+    </button>
+    <button mat-stroked-button routerLink="/school" 
+      [ngClass]="{'active-link': isCategoryActive('high-school')}"
+    >
+      School
+    </button>
+    <button mat-stroked-button routerLink="/excellence" 
+      [ngClass]="{'active-link': isCategoryActive('excellence')}"
+    >
+      Excellence
+    </button>
+    <button mat-stroked-button routerLink="/ask" 
+      routerLinkActive="active-link"
+    >
+      Help
+    </button>
+    <button mat-stroked-button routerLink="/login" 
+      routerLinkActive="active-link"
+    >
+      Login
+    </button>
   </div>
 </div>
 

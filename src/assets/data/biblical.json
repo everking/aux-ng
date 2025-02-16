@@ -1,0 +1,67 @@
+{
+  "document": {
+    "name": "projects/auxilium-420904/databases/aux-db/documents/articles/MVjylW3IsNoh3OnFYS3T",
+    "fields": {
+      "date": {
+        "stringValue": "2023-10-26"
+      },
+      "coverHeight": {
+        "integerValue": "6"
+      },
+      "coverImage": {
+        "stringValue": "/images/zacchaeus.png"
+      },
+      "articleId": {
+        "stringValue": "biblical"
+      },
+      "coverWidth": {
+        "integerValue": "16"
+      },
+      "categories": {
+        "arrayValue": {
+          "values": [
+            {
+              "stringValue": "general"
+            },
+            {
+              "stringValue": "family"
+            }
+          ]
+        }
+      },
+      "title": {
+        "stringValue": "Bible"
+      },
+      "body": {
+        "stringValue": "<h3>Access the Gospel of the day and St. Josemaria&#39;s published works</h3>\n<ul>\n<li><a href=\"https://escrivalite.com/\">https://escrivalite.com/</a></li>\n</ul>\n<h3>Life-Changing Video Bible Studies</h3>\n<ul>\n<li><a href=\"https://stpaulcenter.com/bible-studies/\">https://stpaulcenter.com/bible-studies/</a></li>\n</ul>\n"
+      },
+      "excerpt": {
+        "stringValue": "This is an excerpt"
+      },
+      "updated": {
+        "stringValue": "2023-10-26"
+      },
+      "imageURI": {
+        "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "meta": {
+        "mapValue": {
+          "fields": {
+            "category": {
+              "stringValue": "family"
+            },
+            "subCategory": {
+              "stringValue": "spiritual"
+            }
+          }
+        }
+      },
+      "header": {
+        "stringValue": "Biblical"
+      }
+    },
+    "createTime": "2024-06-04T07:18:03.188426Z",
+    "updateTime": "2024-10-07T08:04:33.290198Z"
+  },
+  "readTime": "2024-11-03T01:17:48.400980Z"
+}

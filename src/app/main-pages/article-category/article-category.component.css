@@ -1,0 +1,11 @@
+.article-list {
+  max-width: 755px;
+  min-width: 360px;
+}
+.home {
+  display: flex;
+  justify-content: center;
+  .mat-grid-tile {
+    border: 1px solid #000000;
+  }
+}

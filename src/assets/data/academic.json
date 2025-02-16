@@ -1,0 +1,70 @@
+{
+  "document": {
+    "name": "projects/auxilium-420904/databases/aux-db/documents/articles/8DCYGJ7NREzZe57H5ADb",
+    "fields": {
+      "coverHeight": {
+        "integerValue": "0"
+      },
+      "date": {
+        "stringValue": ""
+      },
+      "coverImage": {
+        "stringValue": "/images/academic.png"
+      },
+      "articleId": {
+        "stringValue": "academic"
+      },
+      "coverWidth": {
+        "integerValue": "16"
+      },
+      "categories": {
+        "arrayValue": {
+          "values": [
+            {
+              "stringValue": "whole-child"
+            },
+            {
+              "stringValue": "family"
+            },
+            {
+              "stringValue": "academic"
+            }
+          ]
+        }
+      },
+      "excerpt": {
+        "stringValue": ""
+      },
+      "title": {
+        "stringValue": "Academic"
+      },
+      "updated": {
+        "stringValue": ""
+      },
+      "body": {
+        "stringValue": "<h3>The Importance of Being a Good Student, According To St. Josemaria</h3>\n<ul>\n<li><a href=\"https://www.fairestloveshrine.org/the-importance-of-being-a-good-student-according-to-st-josemaria/\">https://www.fairestloveshrine.org/the-importance-of-being-a-good-student-according-to-st-josemaria/</a></li>\n</ul>\n<h3>Disciple of Christ, Education in Virtue</h3>\n<ul>\n<li><a href=\"https://openlightmedia.com/education-in-virtue/\">https://openlightmedia.com/education-in-virtue/</a></li>\n</ul>\n"
+      },
+      "imageURI": {
+        "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "meta": {
+        "mapValue": {
+          "fields": {
+            "category": {
+              "stringValue": "family"
+            },
+            "subCategory": {
+              "stringValue": "whole-child"
+            }
+          }
+        }
+      },
+      "header": {
+        "stringValue": "Academic"
+      }
+    },
+    "createTime": "2024-06-04T07:18:00.692718Z",
+    "updateTime": "2024-10-07T08:04:33.225012Z"
+  },
+  "readTime": "2024-11-03T01:17:48.400980Z"
+}

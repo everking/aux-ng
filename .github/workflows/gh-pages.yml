@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -11,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -22,10 +23,20 @@ jobs:
         run: npm install
 
       - name: Build the Angular app
-        run: npm run build -- --configuration production --base-href=/aux-ng/ --project=aux-ng
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        run: source init.sh && npm run build -- --configuration production --base-href=/ --project=aux-ng
 
+      - name: Create CNAME file based on repository
+        run: |
+          if [[ "${{ github.repository }}" == "everking/aux-ng-dev" ]]; then
+            echo "dev.auxilium.guide" > ./dist/browser/CNAME
+          else
+            echo "auxilium.guide" > ./dist/browser/CNAME
+          fi
+          
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/aux-ng/browser
+          publish_dir: ./dist/browser

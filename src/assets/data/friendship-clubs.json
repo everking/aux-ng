@@ -1,0 +1,49 @@
+{
+  "document": {
+    "name": "projects/auxilium-420904/databases/aux-db/documents/articles/6HnJrWvBBBrYqv4zOjQS",
+    "fields": {
+      "date": {
+        "stringValue": "2023-10-26"
+      },
+      "coverHeight": {
+        "integerValue": "6"
+      },
+      "coverImage": {
+        "stringValue": "/images/zacchaeus.png"
+      },
+      "coverWidth": {
+        "integerValue": "16"
+      },
+      "categories": {
+        "arrayValue": {
+          "values": [
+            {
+              "stringValue": "general"
+            },
+            {
+              "stringValue": "family"
+            }
+          ]
+        }
+      },
+      "title": {
+        "stringValue": "Friendship Clubs"
+      },
+      "excerpt": {
+        "stringValue": "Friendship Clubs"
+      },
+      "updated": {
+        "stringValue": "2023-10-26"
+      },
+      "articleId": {
+        "stringValue": "friendship-clubs"
+      },
+      "body": {
+        "stringValue": "<h3>Friendship Clubs</h3>\n"
+      }
+    },
+    "createTime": "2024-06-04T07:18:05.287840Z",
+    "updateTime": "2024-06-09T23:52:23.493659Z"
+  },
+  "readTime": "2024-11-03T01:17:48.400980Z"
+}

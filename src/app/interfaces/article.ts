@@ -17,18 +17,5 @@ export interface Article {
   imageURI: string; /* image base64 or URL */
   header: string; /* title */
   body: string; /* HTML body */
-  meta?: ArticleMeta
-}
-
-export const INVALID_ARTICLE: Article = {
-  articleId: 'INVALID_ARTICLE',
-  imageURI: 'INVALID_ARTICLE',
-  header: 'INVALID_ARTICLE',
-  body: 'INVALID_ARTICLE',
-  meta: {
-    documentId: 'INVALID_ARTICLE',
-    name: 'INVALID_ARTICLE',
-    category: 'INVALID_ARTICLE',
-    subCategory: 'INVALID_ARTICLE'
-  }
+  meta: ArticleMeta
 }

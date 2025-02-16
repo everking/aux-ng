@@ -1,19 +1,18 @@
 <div class="article-preview wiggle-item">
-  <a [routerLink]="['/article', article.articleId]">
+  <a [routerLink]="['/article', article?.articleId]">
     <div class="article-preview-card-container">
       <mat-card appearance="raised">
-        <img mat-card-image src="{{article.imageURI}}" alt="Auxilium">
+        <img mat-card-image src="{{article?.imageURI}}" alt="Auxilium">
         <div class="article-preview-headline-text">
-          {{ article.header | slice:0:40 }}
+          {{ article?.header | slice:0:40 }}
         </div>
         <mat-card-content>
           <div class="article-preview-description">
             {{ strippedBody }}
           </div>
         </mat-card-content>
-        <div class="article-preview-category-tag">{{ article.meta?.subCategory| uppercase }}</div>
+        <div class="article-preview-category-tag">{{ article?.meta?.subCategory| uppercase }}</div>
       </mat-card>
     </div>
   </a>
 </div>
-

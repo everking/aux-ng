@@ -1,0 +1,67 @@
+{
+  "document": {
+    "name": "projects/auxilium-420904/databases/aux-db/documents/articles/c7blKIBUPP9hlFe9ipB4",
+    "fields": {
+      "coverHeight": {
+        "integerValue": "6"
+      },
+      "date": {
+        "stringValue": "2023-10-26"
+      },
+      "coverImage": {
+        "stringValue": "/images/zacchaeus.png"
+      },
+      "articleId": {
+        "stringValue": "coaching"
+      },
+      "coverWidth": {
+        "integerValue": "16"
+      },
+      "categories": {
+        "arrayValue": {
+          "values": [
+            {
+              "stringValue": "general"
+            },
+            {
+              "stringValue": "family"
+            }
+          ]
+        }
+      },
+      "title": {
+        "stringValue": "Coaching"
+      },
+      "excerpt": {
+        "stringValue": "Coaching"
+      },
+      "updated": {
+        "stringValue": "2023-10-26"
+      },
+      "body": {
+        "stringValue": "<h3>Coaching</h3>\n<ul>\n<li>A teachable heart can be formed into what God wants it to be.</li>\n<ul>\n<li><a href=\"https://auxilium.guide/pdf/being-teacheable.pdf\" target=\"_blank\"><span style=\"color: var(--tw-prose-links);background-color: rgb(255,255,255);font-size: 16px;\"><ins>Being Teachable (PDF)</ins></span></a></li>\n</ul>\n<li>Track Growth in Monthly Virtues&nbsp;&nbsp;</li>\n<ul>\n<li><a href=\"https://auxilium.guide/pdf/monthly-goal-action.pdf\" target=\"_blank\">Monthly Goal Action (PDF) </a>&nbsp;&nbsp;&nbsp;</li>\n</ul>\n</ul>\n"
+      },
+      "imageURI": {
+        "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "meta": {
+        "mapValue": {
+          "fields": {
+            "category": {
+              "stringValue": "family"
+            },
+            "subCategory": {
+              "stringValue": "virtues"
+            }
+          }
+        }
+      },
+      "header": {
+        "stringValue": "Coaching"
+      }
+    },
+    "createTime": "2024-06-04T07:18:03.649699Z",
+    "updateTime": "2024-10-07T08:04:33.323736Z"
+  },
+  "readTime": "2024-11-03T01:17:48.400980Z"
+}

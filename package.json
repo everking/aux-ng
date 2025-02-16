@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "source init.sh && ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --configuration production --base-href=/aux-ng/ && npx angular-cli-ghpages --dir=dist/aux-ng --no-silent",
+    "deploy": "source init.sh && ng build --configuration production --base-href=/ && npx angular-cli-ghpages --dir=dist --no-silent",
     "lint": "ng lint"
   },
   "private": true,
@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@kolkov/angular-editor": "^3.0.0-beta.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "font-awesome": "^4.7.0",
     "rxjs": "~7.8.0",
