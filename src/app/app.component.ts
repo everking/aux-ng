@@ -7,17 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { LoginService } from './services/login.service';
 @Component({
-  selector: 'app-root',
-  standalone: true,  // Standalone component
-  imports: [ NavigationComponent, 
-    RouterModule, 
-    FooterComponent, 
-    FormsModule, 
-    AngularEditorModule
-  ],
-  providers: [ ArticleService ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root', // Standalone component
+    imports: [NavigationComponent,
+        RouterModule,
+        FooterComponent,
+        FormsModule,
+        AngularEditorModule
+    ],
+    providers: [ArticleService],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent implements OnInit  {

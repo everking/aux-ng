@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JsonPipe, NgIf, UpperCasePipe } from "@angular/common";
-import { take } from "rxjs";
+import { NgIf } from "@angular/common";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { Article } from "../../interfaces/article";
 import { ArticleService } from "../../services/article.service";
@@ -9,10 +8,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-article',
-  standalone: true,
   imports: [
-    JsonPipe,
-    UpperCasePipe,
     NgIf,
     MatProgressSpinner,
     RouterModule
@@ -26,8 +22,8 @@ export class ArticleComponent implements OnInit {
   editLink: string = '';
 
   constructor(
-    private route: ActivatedRoute, 
-    private loginService: LoginService, 
+    private route: ActivatedRoute,
+    private loginService: LoginService,
     private articleService: ArticleService) {
   }
 

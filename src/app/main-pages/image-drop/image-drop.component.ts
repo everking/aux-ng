@@ -1,18 +1,17 @@
-import { Component, HostListener, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CommonModule, NgClass, NgForOf, NgIf } from "@angular/common";
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { NgIf } from "@angular/common";
 import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-image-drop',
-  standalone: true,
   templateUrl: './image-drop.component.html',
   styleUrls: ['./image-drop.component.css'],
-  imports: [ NgIf ]
+  imports: [NgIf]
 })
 
 export class ImageDropComponent implements OnChanges {
   public base64Image: string | null = null;
-  
+
   constructor(private articleService: ArticleService) {
 
   }
@@ -27,10 +26,10 @@ export class ImageDropComponent implements OnChanges {
   async getFileFromImageUrl(imageUrl: string): Promise<File> {
     const response = await fetch(imageUrl);
     const blob = await response.blob();
-  
+
     // Convert Blob to File
     const file = new File([blob], 'image.jpg', { type: blob.type });
-  
+
     return file;
   }
 
@@ -50,7 +49,7 @@ export class ImageDropComponent implements OnChanges {
       this.base64Image = changes['imageURI'].currentValue;
     }
   }
-  
+
   async resizeAndCropImage(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -81,7 +80,7 @@ export class ImageDropComponent implements OnChanges {
             sy = (MAX_HEIGHT - height)/2; // center
           }
           ctx.drawImage(
-            img, 
+            img,
             sx, sy,
             width, height // sw, sh
           );
