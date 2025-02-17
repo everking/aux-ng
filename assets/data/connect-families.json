@@ -2,47 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/PdBSvOpbUuPmPIb6sNAh",
     "fields": {
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "connect-families"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
-      },
-      "title": {
-        "stringValue": "Connect with families"
-      },
-      "excerpt": {
-        "stringValue": "Connect with families"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
       },
       "body": {
         "stringValue": "<h3>Sub title</h3>\n<p>- to do -</p>\n"
       },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Connect families"
       },
       "meta": {
         "mapValue": {
@@ -52,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": ""
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.675Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Connect families"
       }
     },
     "createTime": "2024-06-04T07:18:04.176699Z",
-    "updateTime": "2024-10-07T08:16:46.768380Z"
+    "updateTime": "2025-02-17T01:33:56.066359Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }

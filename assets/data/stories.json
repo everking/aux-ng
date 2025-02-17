@@ -2,38 +2,8 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/17auQXYhn9agczwc7PoF",
     "fields": {
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "stories"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
-      },
-      "excerpt": {
-        "stringValue": "Stories"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
       },
       "header": {
         "stringValue": "Stories"
@@ -54,14 +24,14 @@
               "stringValue": "virtues"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-07T09:00:00.519Z"
+              "timestampValue": "2025-02-17T01:33:55.700Z"
             }
           }
         }
       }
     },
     "createTime": "2024-06-04T07:18:10.166399Z",
-    "updateTime": "2025-02-08T04:44:52.448261Z"
+    "updateTime": "2025-02-17T01:33:56.084628Z"
   },
-  "readTime": "2025-02-16T09:59:46.155761Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }

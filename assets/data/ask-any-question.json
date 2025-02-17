@@ -2,47 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/8JSzkBGMWf6yqOPMvU3l",
     "fields": {
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "ask-any-question"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
       },
       "body": {
         "stringValue": "<h3>Ask</h3>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor \nincididunt ut labore et dolore magna aliqua. Lectus vestibulum mattis \nullamcorper velit sed ullamcorper morbi tincidunt.</p>\n"
       },
-      "title": {
-        "stringValue": "Ask any question"
-      },
-      "excerpt": {
-        "stringValue": "Ask"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
-      },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Ask any questions"
       },
       "meta": {
         "mapValue": {
@@ -52,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": ""
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.661Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Ask any questions"
       }
     },
     "createTime": "2024-06-04T07:18:02.747435Z",
-    "updateTime": "2024-10-07T08:16:46.759190Z"
+    "updateTime": "2025-02-17T01:33:56.093734Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }
