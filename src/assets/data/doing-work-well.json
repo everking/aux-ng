@@ -2,50 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/uKQsRtCB3mGACUoOjdsz",
     "fields": {
-      "coverHeight": {
-        "integerValue": "0"
-      },
-      "date": {
-        "stringValue": ""
-      },
-      "coverImage": {
-        "stringValue": "/images/academic.png"
-      },
       "articleId": {
         "stringValue": "doing-work-well"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "whole-child"
-            },
-            {
-              "stringValue": "family"
-            },
-            {
-              "stringValue": "academic"
-            }
-          ]
-        }
-      },
-      "excerpt": {
-        "stringValue": ""
-      },
-      "title": {
-        "stringValue": "Doing Work Well"
-      },
-      "updated": {
-        "stringValue": ""
       },
       "body": {
         "stringValue": "<h3>\"Knowing the 'why' of each job changes how we work\"&nbsp;&nbsp;</h3>\n<ul>\n<li><a href=\"https://opusdei.org/en/article/congress-work-prelate-university-holy-cross/\" target=\"_blank\">https://opusdei.org/.../congress-work-prelate-university-holy-cross/</a>&nbsp;</li>\n</ul>\n<h3>Sanctifying our Work</h3>\n<ul>\n<li><a href=\"https://opusdei.org/en/article/sanctifying-with-our-work/\" target=\"_blank\">https://opusdei.org/en/article/sanctifying-with-our-work/</a></li>\n</ul>\n<p></p>\n"
       },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Doing Work Well"
       },
       "meta": {
         "mapValue": {
@@ -55,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": ""
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.678Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Doing Work Well"
       }
     },
     "createTime": "2024-06-10T04:37:36.827819Z",
-    "updateTime": "2024-10-07T08:16:46.765837Z"
+    "updateTime": "2025-02-17T01:33:56.121841Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }

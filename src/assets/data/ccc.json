@@ -2,47 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/lDH9nWr75gYOkwRQ4kSB",
     "fields": {
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "ccc"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
-      },
-      "title": {
-        "stringValue": "Catechism of the Catholic Church"
-      },
-      "excerpt": {
-        "stringValue": "Catechism of the Catholic Church"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
       },
       "body": {
         "stringValue": "<h3>Discover the Catechism</h3>\n<ul>\n<li><a href=\"https://www.realtrue.org/\" target=\"_self\">https://www.realtrue.org/</a></li>\n<li><a href=\"https://www.usccb.org/sites/default/files/flipbooks/catechism/\" target=\"_self\">https://www.usccb.org/sites/default/files/flipbooks/catechism/</a></li>\n</ul>\n<p>Keep growing in faith with a daily 5-minute dose of the Holy Gospel from the Y-Bible and a YOUCAT or DOCAT question.&nbsp;&nbsp;</p>\n<ul>\n<li><a href=\"https://youcat.org/youcat-digital/\" target=\"_blank\">https://youcat.org/youcat-digital/</a>&nbsp;</li>\n</ul>\n"
       },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Catechism"
       },
       "meta": {
         "mapValue": {
@@ -52,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": "spiritual"
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.672Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Catechism"
       }
     },
     "createTime": "2024-06-04T07:18:03.406673Z",
-    "updateTime": "2024-10-07T08:04:33.309190Z"
+    "updateTime": "2025-02-17T01:33:56.097028Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }
