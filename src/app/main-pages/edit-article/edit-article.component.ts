@@ -1,15 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ArticleService} from '../../services/article.service';
-import {FormsModule} from '@angular/forms';
-import {AngularEditorConfig, AngularEditorModule} from '@kolkov/angular-editor';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticleService } from '../../services/article.service';
+import { FormsModule } from '@angular/forms';
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { Article } from '../../interfaces/article';
 import { ImageDropComponent } from '../image-drop/image-drop.component';
 import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-edit-article',
-  standalone: true,
   imports: [FormsModule, AngularEditorModule, ImageDropComponent],
   templateUrl: './edit-article.component.html',
   styleUrl: './edit-article.component.css'
@@ -26,7 +25,7 @@ export class EditArticleComponent implements OnInit {
   imageURI?: string = '';
   saveMessage: string = '';
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private articleService: ArticleService,
     private loginService: LoginService,
     private router: Router

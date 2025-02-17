@@ -4,11 +4,10 @@ import { RouterModule } from '@angular/router';
 import { MatButton } from "@angular/material/button";
 import { ArticleService } from '../../services/article.service';
 @Component({
-  selector: 'app-navigation',
-  standalone: true,  // This makes the component standalone
-  imports: [CommonModule, RouterModule, MatButton],
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'app-navigation', // This makes the component standalone
+    imports: [CommonModule, RouterModule, MatButton],
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent { 
   constructor (private articleService: ArticleService) {

@@ -7,16 +7,15 @@ import { stripHtml } from '../../utils';
 import { ArticleService } from '../../services/article.service';
 
 @Component({
-  selector: 'app-article-preview-card',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    UpperCasePipe,
-    SlicePipe,
-    RouterLink,
-  ],
-  templateUrl: './article-preview-card.component.html',
-  styleUrl: './article-preview-card.component.scss'
+    selector: 'app-article-preview-card',
+    imports: [
+        MatCardModule,
+        UpperCasePipe,
+        SlicePipe,
+        RouterLink,
+    ],
+    templateUrl: './article-preview-card.component.html',
+    styleUrl: './article-preview-card.component.scss'
 })
 export class ArticlePreviewCardComponent {
   @Input() articleId!: string;

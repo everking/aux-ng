@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-parameter',
-  standalone: true,
-  imports: [],
-  templateUrl: './parameter.component.html',
-  styleUrl: './parameter.component.scss'
+    selector: 'app-parameter',
+    imports: [],
+    templateUrl: './parameter.component.html',
+    styleUrl: './parameter.component.scss'
 })
 export class ParameterComponent implements OnInit {
   refParam: string | null = null;

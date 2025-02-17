@@ -4,13 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ArticleService } from '../../services/article.service';
 @Component({
-  selector: 'app-family',
-  standalone: true,
-  imports: [
-    ArticleListComponent
-  ],
-  templateUrl: './article-category.component.html',
-  styleUrl: './article-category.component.css'
+    selector: 'app-family',
+    imports: [
+        ArticleListComponent
+    ],
+    templateUrl: './article-category.component.html',
+    styleUrl: './article-category.component.css'
 })
 export class ArticleCategoryComponent {
   public pageId: string = '';
