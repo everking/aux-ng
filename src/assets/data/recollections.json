@@ -2,47 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/20jJtsh2qf9gLgjgWfBH",
     "fields": {
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "recollections"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
-      },
-      "title": {
-        "stringValue": "Recollections"
-      },
-      "excerpt": {
-        "stringValue": "This is an excerpt"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
       },
       "body": {
         "stringValue": "<p>The monthly evening of recollection is a time for personal prayer and reflection on topics to do with Christian life. The evening includes meditations preached by a priest, time for examination of conscience, opportunity for Confession or spiritual direction, and a talk given by a layman. An atmosphere of silence is maintained until after Benediction, when all may enjoy a snack and time for socializing.</p>\n<h3>For Men</h3>\n<h4>Saint Joseph Catholic Church</h4>\n<p>582 Hope St, Mountain View</p>\n<ul>\n<li><a href=\"http://www.menlough.org/evenings-of-recollection.html\" target=\"_self\">http://www.menlough.org/evenings-of-recollection.html</a></li>\n</ul>\n<h4>Garber House</h4>\n<p>1827 Oxford Street, Berkeley, CA 94709<br>1st Monday of the Month<br>7:15 PM - 9:00 PM</p>\n<h3>For Women</h3>\n<h4>Charwick Study Center</h4>\n<ul>\n<li><a href=\"https://www.charwick.org/recollections\" target=\"_self\">https://www.charwick.org/recollections</a></li>\n</ul>\n"
       },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Recollections"
       },
       "meta": {
         "mapValue": {
@@ -52,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": "activities"
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.691Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Recollections"
       }
     },
     "createTime": "2024-06-04T07:18:08.249969Z",
-    "updateTime": "2024-10-07T08:04:33.328095Z"
+    "updateTime": "2025-02-17T01:33:56.139701Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }

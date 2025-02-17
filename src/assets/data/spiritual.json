@@ -2,50 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/Z38FrjhstNoT5UfxArJ4",
     "fields": {
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "spiritual"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "family"
-            },
-            {
-              "stringValue": "whole-child"
-            },
-            {
-              "stringValue": "spiritual"
-            }
-          ]
-        }
-      },
-      "title": {
-        "stringValue": "Spiritual"
       },
       "body": {
         "stringValue": "<h3>How To Keep Your Kids Catholic: Apologetics for Kids</h3>\n<ul>\n<li><a href=\"https://notsoformulaic.com/keep-kids-catholic-apologetics-kids\">https://notsoformulaic.com/keep-kids-catholic-apologetics-kids</a></li>\n</ul>\n<h3>Study &amp; Prayer</h3>\n<ul>\n<li><a href=\"https://stjosemaria.org/podcasts/podcast-study-prayer/\">https://stjosemaria.org/podcasts/podcast-study-prayer/</a></li>\n</ul>\n"
       },
-      "excerpt": {
-        "stringValue": "Spiritual"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
-      },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Spiritual"
       },
       "meta": {
         "mapValue": {
@@ -55,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": "whole-child"
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.695Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Spiritual"
       }
     },
     "createTime": "2024-06-04T07:18:09.416428Z",
-    "updateTime": "2024-10-07T08:04:33.304563Z"
+    "updateTime": "2025-02-17T01:33:56.129215Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }

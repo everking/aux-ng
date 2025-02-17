@@ -2,47 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/HGSmmzQcvtpohNKx46Yo",
     "fields": {
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "prayers"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
-      },
-      "title": {
-        "stringValue": "Prayers"
-      },
-      "excerpt": {
-        "stringValue": "Prayers"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
       },
       "body": {
         "stringValue": "<h3>At the School of Prayer with St. Josemaria</h3>\n<ul>\n<li><a href=\"https://stjosemaria.org/podcasts/at-the-school-of-prayer/\" target=\"_self\">https://stjosemaria.org/podcasts/at-the-school-of-prayer/</a></li>\n</ul>\n<p>When Josemaría was very little, his parents and grandparents taught him short, simple prayers to say during the day.  Saint Josemaria never forgot them. He went on saying them for the rest of his life.</p>\n<p><a href=\"https://auxilium.guide/pdf/escriva-chlidren-prayers.pdf\" target=\"_blank\">Escriva Children Prayers (PDF)</a>&nbsp;&nbsp;</p>\n<p>Start the Day with Morning Offering and End the Day with an Examination of Conscience&nbsp;</p>\n<p><a href=\"https://auxilium.guide/pdf/morning-offering-eoc.pdf\" target=\"_blank\">Morning Offering, Examination (PDF)</a>&nbsp;</p>\n<img src=\"/images/pdf.png\" alt=\"\" style=\"height: 40px;width: 35px\"/>\n"
       },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Prayers"
       },
       "meta": {
         "mapValue": {
@@ -52,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": "spiritual"
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.689Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Prayers"
       }
     },
     "createTime": "2024-06-04T07:18:07.506256Z",
-    "updateTime": "2024-10-07T08:04:33.305017Z"
+    "updateTime": "2025-02-17T01:33:56.066707Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }
