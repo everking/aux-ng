@@ -2,47 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/PAM7KuXipRwoyA939kFx",
     "fields": {
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "culture"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
-      },
-      "excerpt": {
-        "stringValue": "Culture"
-      },
-      "title": {
-        "stringValue": "Culture"
       },
       "body": {
         "stringValue": "<h3>The Music of Christendom</h3>\n<p><a href=\"https://ignatius.com/the-music-of-christendom-mocp/\">https://ignatius.com/the-music-of-christendom-mocp/</a></p>\n"
       },
-      "updated": {
-        "stringValue": "2023-10-26"
-      },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Culture"
       },
       "meta": {
         "mapValue": {
@@ -52,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": "whole-child"
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.677Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Culture"
       }
     },
     "createTime": "2024-06-04T07:18:04.823735Z",
-    "updateTime": "2024-10-07T08:04:33.321826Z"
+    "updateTime": "2025-02-17T01:33:56.134061Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }
