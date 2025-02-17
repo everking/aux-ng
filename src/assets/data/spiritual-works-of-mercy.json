@@ -2,47 +2,17 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/slSVQ7KJUFqtuGvrz1EM",
     "fields": {
-      "coverHeight": {
-        "integerValue": "6"
-      },
-      "date": {
-        "stringValue": "2023-10-26"
-      },
-      "coverImage": {
-        "stringValue": "/images/zacchaeus.png"
-      },
       "articleId": {
         "stringValue": "spiritual-works-of-mercy"
-      },
-      "coverWidth": {
-        "integerValue": "16"
-      },
-      "categories": {
-        "arrayValue": {
-          "values": [
-            {
-              "stringValue": "general"
-            },
-            {
-              "stringValue": "family"
-            }
-          ]
-        }
-      },
-      "excerpt": {
-        "stringValue": "This is an excerpt"
-      },
-      "title": {
-        "stringValue": "Spiritual Works of Mercy"
-      },
-      "updated": {
-        "stringValue": "2023-10-26"
       },
       "body": {
         "stringValue": "<h3>Seven Spiritual Works of Mercy&nbsp;&nbsp;</h3>\n<ul>\n<li><a href=\"https://media.ascensionpress.com/2020/04/29/serving-the-spirit-of-others-spiritual-works-of-mercy/\" target=\"_blank\">https://media.ascensionpress.com/2020/04/29/serving-the-spirit-of-others-spiritual-works-of-mercy/</a>&nbsp;&nbsp;</li>\n</ul>\n<h3>7 Ways to Practice the Spiritual Works of Mercy&nbsp;&nbsp;</h3>\n<ul>\n<li><a href=\"https://catholicexchange.com/7-ways-to-practice-the-spiritual-works-of-mercy/\" target=\"_blank\">https://catholicexchange.com/7-ways-to-practice-the-spiritual-works-of-mercy/</a>&nbsp;&nbsp;</li>\n</ul>\n"
       },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
+      },
+      "header": {
+        "stringValue": "Spiritual works of mercy"
       },
       "meta": {
         "mapValue": {
@@ -52,16 +22,16 @@
             },
             "subCategory": {
               "stringValue": "virtues"
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-02-17T01:33:55.694Z"
             }
           }
         }
-      },
-      "header": {
-        "stringValue": "Spiritual works of mercy"
       }
     },
     "createTime": "2024-06-04T07:18:09.159073Z",
-    "updateTime": "2024-10-07T08:04:33.304634Z"
+    "updateTime": "2025-02-17T01:33:56.139492Z"
   },
-  "readTime": "2024-11-03T01:17:48.400980Z"
+  "readTime": "2025-02-17T01:36:30.786425Z"
 }
