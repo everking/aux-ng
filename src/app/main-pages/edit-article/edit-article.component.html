@@ -1,14 +1,22 @@
-<div style="padding: 10px;">
+<div style="padding: 10px;max-width:755px">
   <h1>{{ header }}</h1>
   <p>DocumentId: {{documentId}}</p>
   <p>Name: {{name}}</p>
-  Header: <input type="text" [(ngModel)]="header" placeholder="Enter header text here">
-  <br/>Category: <input type="text" [(ngModel)]="category" placeholder="Enter category text here">
-  <br/>SubCategory: <input type="text" [(ngModel)]="subCategory" placeholder="Enter sub category text here">
-  <br/>
+  <div class="form-group">
+    <label for="header">Header</label>
+    <input id="header" type="text" [(ngModel)]="header" placeholder="Enter header text here">
+  </div>
+  <div class="form-group">
+    <label for="header">Category</label>
+    <input type="text" [(ngModel)]="category" placeholder="Enter category text here">
+  </div>
+  <div class="form-group">
+    <label for="header">SubCategory</label>
+    <input type="text" [(ngModel)]="subCategory" placeholder="Enter sub category text here">
+  </div>
   <app-image-drop [imageURI]="imageURI" (imageDropped)="onImageDropped($event)"></app-image-drop>
-  <div style="width: 800px;">
+  <div>
     <angular-editor [(ngModel)]="body" [config]="editorConfig"></angular-editor>
   </div>
-  <button (click)="onSaveClick()">Save</button> <span>{{saveMessage}}</span>
+  <button class="save-button" (click)="onSaveClick()">Save</button> <span>{{saveMessage}}</span>
 </div>

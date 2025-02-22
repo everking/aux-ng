@@ -60,7 +60,9 @@ export class LoginService {
   }
 
   public async refresh() : Promise<FireBaseRefreshResponse|null> {
-    this.getFirebaseLogin();
+    if (!this.getFirebaseLogin()) {
+      return null;
+    }
     const response = await fetch(`https://securetoken.googleapis.com/v1/token?key=${API_KEY}`, {
       method: 'POST',
       headers: {
