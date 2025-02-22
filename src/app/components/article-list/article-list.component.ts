@@ -32,26 +32,6 @@ export class ArticleListComponent implements OnChanges {
     if (!this.subCategoryMap) {
       this.subCategoryMap = this.articleService.getCategoryMap(this.category);
     }
-
-    /*
-    this.articleService.getAllArticles()
-      .subscribe((articles: Article[]) => {
-        this.articles = this.spliceArticles(articles);
-        if (this.category) {
-          this.articles = this.articles.filter(item => item.meta?.category === this.category);
-          this.subCategoryMap = this.articles.reduce((acc:Record<string, Article[]>, item) => {
-            const subCategory = item.meta?.subCategory;
-            if (subCategory) {
-              if(!acc[subCategory]) {
-                acc[subCategory] = [];
-              }
-              acc[subCategory].push(item);
-            }
-
-            return acc;
-          }, {} as Record<string, Article[]>);
-        }
-      })*/
   }
 
   trackByHeader(index: number, article: Article): string|undefined {
@@ -59,6 +39,6 @@ export class ArticleListComponent implements OnChanges {
   }
 
   private spliceArticles(articles: Article[]): Article[] {
-    return articles; // .slice(0, Math.min(this.maxArticles, articles.length));
+    return articles;
   }
 }

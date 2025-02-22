@@ -19,3 +19,4 @@ export interface Article {
   body: string; /* HTML body */
   meta: ArticleMeta
 }
+

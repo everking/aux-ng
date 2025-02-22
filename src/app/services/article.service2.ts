@@ -1,8 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Article } from "../interfaces/article";
-import { HttpClient } from "@angular/common/http";
 import { LoginService } from './login.service';
-import { DOCUMENT } from '@angular/common';
 
 interface Category {
   articles: string[];
@@ -16,7 +14,6 @@ interface Category {
 export class ArticleService {
   private articles: Article[] = [];
   private articleMap: Map<string, Article> = new Map();
-  private baseHref: string;
   private currentCategory: string = "";
   private categories: Record<string, Category> = {};
   private featuredArticles: string[] = [
@@ -38,7 +35,7 @@ export class ArticleService {
   }
 
   public async loadCategories() {
-    const url = `${this.baseHref}assets/data/categories.json`;
+    const url = ``;
     const response = await fetch(url, {
       method: 'GET',
     });
@@ -87,17 +84,12 @@ export class ArticleService {
   public readonly NEW_LABEL: string = "[ new ]";
   public readonly BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
-  constructor(@Inject(DOCUMENT) private document: Document, private http: HttpClient, private loginService: LoginService) {
-    const baseElement = this.document.querySelector('base');
-    this.baseHref = (baseElement ? baseElement.getAttribute('href') : '/')!;
+  constructor() {
   }
   
   private getHeaders() {
     const header:any =  {
       'Content-Type': 'application/json'
-    }
-    if (this.loginService.getIdToken()) {
-      header['Authorization'] = `Bearer ${this.loginService.getIdToken()}`;
     }
     return header
   }
@@ -137,7 +129,7 @@ export class ArticleService {
           return article;
         }
       }
-      const url = `${this.baseHref}assets/data/${articleId}.json`
+      const url = ``;
       const response = await fetch(url, {
         method: 'GET',
       });
@@ -209,9 +201,50 @@ export class ArticleService {
       return null;
     }
   };
-
-
   
+  deleteFieldsInArticle = async (articleId: string) => {
+    const lastUpdated = new Date().toISOString();
+    try {
+      const article:Article | null = await this.fetchLocalArticle(articleId);
+      if (article) {
+        const documentId = article.meta?.documentId;
+        const { body, header, imageURI, meta } = article;
+        const documentName = article.meta?.name;
+        const category = meta?.category;
+        const subCategory = meta?.subCategory;
+  
+        const fieldPaths = ['coverHeight', 'date', 'coverImage', 'coverWidth', 'categories', 'updatee'];
+        const updateMask = fieldPaths.map(field => `updateMask.fieldPaths=${field}`).join('&');
+        const NEW_ARTICLE_URL = `${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents/articles`;
+        const firestorePath = documentId === this.NEW_LABEL ? NEW_ARTICLE_URL: `${this.BASE_FIRESTORE}/${documentName}?${updateMask}`;
+        const method = "PATCH";
+        const lastUpdated: string = new Date().toISOString();
+        const response = await fetch(firestorePath, {
+          method,
+          headers: this.getHeaders(),
+          body: JSON.stringify({
+              "fields": {
+                "coverHeight": null,
+                "date": null,
+                "coverImage": null,
+                "coverWidth": null,
+                "categories": null,
+                "excerpt": null,
+                "updatee": null
+              }
+            }
+          )
+        });
+  
+        return false;
+      }
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      return false;
+    }
+    return true;
+  };
+
   saveArticle = async (article: Article) => {
     try {
       const documentId = article.meta?.documentId;
