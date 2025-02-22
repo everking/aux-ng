@@ -1,5 +1,5 @@
 <div class="article-list-holder" *ngFor="let subCategory of subCategoryMap | keyvalue">
-  <h2 class="category">{{ articleService.getSubCategory(subCategory.key, category) }}</h2>
+  <h1 class="category">{{ articleService.getSubCategory(subCategory.key, category) }}</h1>
   <div class="article-list" [style.--maxArticlesPerRow]="maxArticlesPerRow">
     <ng-container *ngIf="subCategory?.value?.articles?.length; else noArticles">
       <div class="article-list-article" *ngFor="let articleId of subCategory.value.articles; let i = index;">

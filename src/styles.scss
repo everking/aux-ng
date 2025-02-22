@@ -1,7 +1,6 @@
 
 /* You can add global styles to this file, and also import other style files */
 * {
-  font-family: Montserrat, Nunito Sans, sans-serif;
   box-sizing: border-box;
 }
 
@@ -25,15 +24,16 @@
 
 body {
   background: #ffffff;
-  color: #01a3a4;
+  color: #0e5757;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'EB Garamond', serif;
 }
 
 a {
-  color: #01a3a4;
+  color: #0e5757;
   text-decoration: none;
 }
 
@@ -42,4 +42,4 @@ p {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0 }

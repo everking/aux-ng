@@ -1,8 +1,9 @@
 <ng-container *ngIf="article else loadingArticle">
   <div class="article">
-    <div class="article-header-image">
-      <img src={{article.imageURI}} alt="Invalid Image">
+    <div class="image-container">
+      <img src="{{article.imageURI}}" alt="Auxilium">
     </div>
+
 
     <div class="article-header-image-text">
       <h2>{{ article.header }}</h2>

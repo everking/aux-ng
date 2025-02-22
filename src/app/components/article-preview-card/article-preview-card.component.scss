@@ -3,7 +3,7 @@
   $image-header-height: 185;
 
   width: #{$card-width}px;
-  padding: 10px;
+  padding: 30px 10px;
 
   img {
     width: #{$card-width - 20}px;
@@ -86,4 +86,20 @@
 
 .article-preview-category-tag {
   display: none;
+}
+
+.image-container {
+  width: 230px; /* Fixed width */
+  height: 230px; /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white; /* Filler background */
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.image-container img {
+  height: 230px; /* Ensure the image takes the full height */
+  width: auto; /* Maintain aspect ratio */
 }
