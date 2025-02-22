@@ -1,5 +1,7 @@
 {
   "family": {
+    "name": "Family",
+    "summary": "",
     "subCategories": {
       "whole-child": {
         "articles": [
@@ -11,6 +13,8 @@
         ]
       },
       "activities": {
+        "name": "Activities",
+        "summary": "This page offers a variety of faith-centered activities and resources to deepen one’s spiritual life through Bible study, personal reflection, and formation.",
         "articles": [
           "bible-study",
           "recollections",
@@ -18,6 +22,8 @@
         ]
       },
       "spiritual": {
+        "name": "Spiritual",
+        "summary": "",    
         "articles": [
           "biblical",
           "ccc",
@@ -28,6 +34,8 @@
         ]
       },
       "virtues": {
+        "name": "Virtues",
+        "summary": "",    
         "articles": [
           "coaching",
           "corporal-works-of-mercy",
@@ -41,6 +49,8 @@
     }
   },
   "high-school": {
+    "name": "High School",
+    "summary": "",    
     "articles": [
       "apologetics",
       "beatitudes",
@@ -51,6 +61,8 @@
     ]
   },
   "excellence": {
+    "name": "Excellence",
+    "summary": "",    
     "articles": [
       "apostolate",
       "being-fruitful",
@@ -61,6 +73,8 @@
     ]
   },
   "help": {
+    "name": "Help",
+    "summary": "",    
     "articles": [
       "ask-any-question",
       "connect-families"
