@@ -2,7 +2,7 @@
   class="dropzone"
   (drop)="onDrop($event)"
   (dragover)="onDragOver($event)"
-  style="border: 2px dashed #ccc; width: 1080px; height: 200px; display: flex; justify-content: center; align-items: center;">
+>
   <span *ngIf="!base64Image">Drop your image here</span>
   <img *ngIf="base64Image" [src]="base64Image" alt="Resized Image" />
 </div>

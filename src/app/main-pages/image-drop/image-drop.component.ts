@@ -58,8 +58,8 @@ export class ImageDropComponent implements OnChanges {
       reader.onload = (e: any) => {
         img.src = e.target.result;
         img.onload = () => {
-          const MAX_WIDTH = 1080;
-          const MAX_HEIGHT = 200;
+          const MAX_WIDTH = 712;
+          const MAX_HEIGHT = 406;
           const width = Math.min(img.width, MAX_WIDTH);
           const height = (img.height / img.width) * width
 

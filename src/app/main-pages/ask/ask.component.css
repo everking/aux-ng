@@ -1,0 +1,19 @@
+.home {
+  display: flex;
+  justify-content: center;
+}
+.content {
+  max-width: 755px;
+  min-width: 500px;
+  padding:20px;
+}
+.content-details {
+  padding: 20px 40px;
+}
+
+.banner-image {
+  border-radius: 20px;
+  margin-top: 20px;
+  max-width: 755px;
+  width:100%;
+}
