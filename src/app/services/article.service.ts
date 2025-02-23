@@ -74,7 +74,7 @@ export class ArticleService {
     }
   }
 
-  public readonly defaultImageURI = "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg";
+  public readonly defaultImageURI = "/assets/images/default-image.jpg";
   public readonly NEW_LABEL: string = "[ new ]";
   public readonly BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
