@@ -1,20 +1,7 @@
-.app {
+.app-outlet-container {
   display: flex;
-  flex-direction: column;
-
-  &-footer {
-    background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    border-top: 1px solid #e9ecef;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    z-index: 100;
-  }
-
-  &-outlet-container {
-    padding-bottom: 80px;
+  justify-content: center;
+  .mat-grid-tile {
+    border: 1px solid #000000;
   }
 }

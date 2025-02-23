@@ -19,15 +19,6 @@ export class ArticleService {
   private baseHref: string;
   private currentCategory: string = "";
   private categories: Record<string, Category> = {};
-  private featuredArticles: string[] = [
-    "stories",
-    "church-construction-complete",
-    "is-peter-rock",
-    "why-not-catholic",
-    "church-construction-complete",
-    "is-peter-rock",
-    "why-not-catholic",
-  ];
 
   public getCurrentCategory():string {
     return this.currentCategory;
@@ -38,7 +29,7 @@ export class ArticleService {
   }
 
   public async loadCategories() {
-    const url = `${this.baseHref}assets/data/categories.json`;
+    const url = `${this.baseHref}assets/categories.json`;
     const response = await fetch(url, {
       method: 'GET',
     });
@@ -105,6 +96,7 @@ export class ArticleService {
   public getArticleFromFirebase(document: any):Article {
     const fields = document?.fields;
     const name = document?.name;
+    console.log(`name: ${name}`);
     const pattern = /[^/]+$/;
     const match = name?.match(pattern);
     let documentId: string = '';
@@ -120,13 +112,17 @@ export class ArticleService {
         name: document?.name?.toString(),
         category: fields?.meta?.mapValue?.fields?.category?.stringValue || '',
         subCategory: fields?.meta?.mapValue?.fields?.subCategory?.stringValue || 'default',
+        documentId
       },
       articleId: fields?.articleId?.stringValue ?? crypto.randomUUID(),
     };
   }
 
-  public async  fetchLocalArticle(articleId: string): Promise<Article | null> {
+  public async fetchArticle(articleId: string, isPreview: boolean = false): Promise<Article | null> {
     try {
+      if (isPreview) {
+        return await this.fetchArticleFromFirestore(articleId, isPreview);
+      }
       if (this.articleMap.get(articleId)) {
         return this.articleMap.get(articleId)!;
       }
@@ -161,16 +157,18 @@ export class ArticleService {
     }
   };
 
-  public async fetchArticleFromFirestore(articleId: string): Promise<Article | null> {
+  public async fetchArticleFromFirestore(articleId: string, forceUpdate: boolean = false): Promise<Article | null> {
     try {
-      if (this.articleMap.get(articleId)) {
-        return this.articleMap.get(articleId)!;
-      }
-      // Fix for not fetching hard coded items until not needed.
-      if (this.articles.length) {
-        const article = this.articles.find(article => article.articleId === articleId);
-        if (article) {
-          return article;
+      if (!forceUpdate) {
+        if (this.articleMap.get(articleId)) {
+          return this.articleMap.get(articleId)!;
+        }
+        // Fix for not fetching hard coded items until not needed.
+        if (this.articles.length) {
+          const article = this.articles.find(article => article.articleId === articleId);
+          if (article) {
+            return article;
+          }
         }
       }
       
@@ -225,6 +223,8 @@ export class ArticleService {
       const NEW_ARTICLE_URL = `${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents/articles`;
       const firestorePath = documentId === this.NEW_LABEL ? NEW_ARTICLE_URL: `${this.BASE_FIRESTORE}/${documentName}?${updateMask}`;
       const method = documentId === this.NEW_LABEL ? "POST" : "PATCH";
+
+
       const lastUpdated: string = new Date().toISOString();
       const response = await fetch(firestorePath, {
         method,

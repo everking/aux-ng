@@ -3,8 +3,7 @@
   justify-content: center;
 }
 .content {
-  max-width: 755px;
-  min-width: 500px;
+  max-width: 480px;
   padding:20px;
 }
 .content-details {
@@ -14,7 +13,7 @@
 .banner-image {
   border-radius: 20px;
   margin-top: 20px;
-  max-width: 755px;
+  max-width: 600px;
   width:100%;
 }
 

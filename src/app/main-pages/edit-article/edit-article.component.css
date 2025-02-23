@@ -67,8 +67,8 @@ pre {
   background-color: #0056b3;
 }
 
-.save-button {
-  margin-top: 20px;
+.preview-button, .save-button {
+  margin: 10px 10px;
   background-color: #637d98; /* Modern blue */
   color: white;
   font-size: 16px;
@@ -81,4 +81,14 @@ pre {
   display: inline-block;
   min-width: 120px; /* Ensures a good width */
   text-align: center;
+}
+
+.preview-button {
+  background-color: #9ebfe1; /* Modern blue */
+}
+
+.disabled-button {
+  background-color: grey;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
