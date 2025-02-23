@@ -1,15 +1,10 @@
 .navigation {
-  background-color: #a8dae5;
+  background-color: #fffeea;
   padding: 1rem;
 
   &-header-image {
     display: flex;
     justify-content: center;
-
-    img {
-      width: 300px;
-      margin-bottom: 10px;
-    }
   }
 
   &-header-links {

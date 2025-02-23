@@ -17,6 +17,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
   { path: 'article/:articleId', component: ArticleComponent },
+  { path: 'preview/:articleId', component: ArticleComponent, data: { preview: true } },
   { path: 'edit-article/:articleId', component: EditArticleComponent },
   { path: ':pageId', component: ArticleCategoryComponent },
   { path: '', component: ParameterComponent }

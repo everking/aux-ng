@@ -1,10 +1,10 @@
 <ng-container *ngIf="article else loadingArticle">
   <div class="article">
-    <div class="image-container">
-      <img src="{{article.imageURI}}" alt="Auxilium">
+    <div class="image-box">
+      <div class="clip-box">
+        <img class="banner-image" src="{{article.imageURI}}" alt="Auxilium">
+      </div>
     </div>
-
-
     <div class="article-header-image-text">
       <h2>{{ article.header }}</h2>
     </div>

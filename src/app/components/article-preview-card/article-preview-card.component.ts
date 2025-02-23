@@ -26,7 +26,7 @@ export class ArticlePreviewCardComponent {
   }
   public strippedBody: string = '';
   async ngOnInit() {
-    this.article = await this.articleService.fetchLocalArticle(this.articleId);
+    this.article = await this.articleService.fetchArticle(this.articleId);
     this.strippedBody = stripHtml(this.article?.body);
   }
 }

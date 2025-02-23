@@ -22,6 +22,7 @@ export class ArticleComponent implements OnInit {
   isLoggedIn: boolean = false;
   editLink: string = '';
   externalLinkCheck: boolean = false;
+  isPreview: boolean = false;
   private observer!: MutationObserver; 
 
   ngAfterViewChecked() {
@@ -32,22 +33,16 @@ export class ArticleComponent implements OnInit {
     if (this.externalLinkCheck) {
       return;
     }
-    console.log(document.body.innerHTML)
     const container: HTMLElement = this.elRef.nativeElement.querySelector('.article');
     if (container) {
-      console.log("Container!");
       this.externalLinkCheck = true;
       const links: NodeListOf<HTMLAnchorElement> = container.querySelectorAll("a[href^='http']");
       links.forEach(link => {
-        console.log("link.href " + link.href);
         if (!link.href.includes(location.hostname)) { // Ensure it's an external link
           this.renderer.setAttribute(link, "target", "_blank");
           this.renderer.setAttribute(link, "rel", "noopener noreferrer");
         }
       });
-    } else {
-      console.log("NOT Container!");
-
     }
   }
 
@@ -62,7 +57,17 @@ export class ArticleComponent implements OnInit {
   async ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
     const articleId: string = this.route.snapshot.paramMap.get('articleId') || '';
+    this.isPreview = this.route.snapshot.data['preview'] || false;
     this.editLink = `/edit-article/${articleId}`;
-    this.article = await this.articleService.fetchLocalArticle(articleId);
+    this.article = await this.articleService.fetchArticle(articleId, this.isPreview);
+    this.route.params.subscribe(params => {
+      const articleId = params['articleId'];
+      this.initPreview(articleId);
+    });
+  }
+
+  async initPreview(articleId: string) {
+    console.log("initPreview")
+    this.article = await this.articleService.fetchArticle(articleId, this.isPreview);    
   }
 }

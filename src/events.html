@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { max-width: 500px; margin: auto; }
+        label, input, textarea { display: block; width: 100%; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <form>
+        <h2>Event Details</h2>
+        
+        <label>Recurring Event:</label>
+        <select name="recurring">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label>Description:</label>
+        <textarea name="description"></textarea>
+
+        <label>Start Date:</label>
+        <input type="date" name="start_date" value="2025-02-25">
+
+        <label>End Date:</label>
+        <input type="text" name="end_date" placeholder="NO_END">
+
+        <h3>Location</h3>
+        <label>Address 1:</label>
+        <input type="text" name="address1">
+
+        <label>Address 2:</label>
+        <input type="text" name="address2">
+
+        <label>City:</label>
+        <input type="text" name="city">
+
+        <label>State:</label>
+        <input type="text" name="state">
+
+        <label>Longitude:</label>
+        <input type="text" name="longitude">
+
+        <label>Latitude:</label>
+        <input type="text" name="latitude">
+
+        <h3>Target Age Range</h3>
+        <label>Age Range:</label>
+        <input type="text" name="age_range" placeholder="e.g. 18-25">
+
+        <h3>Banner Image</h3>
+        <label>Image URL:</label>
+        <input type="text" name="banner_image">
+
+        <h3>Contact Information</h3>
+        <label>Public Contact:</label>
+        <input type="checkbox" name="public_contact" checked>
+
+        <label>Name:</label>
+        <input type="text" name="contact_name" value="John Smith">
+
+        <label>Email:</label>
+        <input type="email" name="contact_email" value="john@john.com">
+
+        <label>Phone:</label>
+        <input type="tel" name="contact_phone" value="888-888-8080">
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
