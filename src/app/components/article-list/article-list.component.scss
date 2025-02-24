@@ -1,6 +1,7 @@
 .article-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
   &-article {
     flex: 0 1 calc(100% / var(--maxArticlesPerRow));
@@ -12,6 +13,7 @@
     justify-content: center;
   }
 }
+
 .category {
   padding-left: 10px;
   padding-top: 10px;
