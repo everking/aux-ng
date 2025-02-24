@@ -1,7 +1,6 @@
 .article-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 
   &-article {
     flex: 0 1 calc(100% / var(--maxArticlesPerRow));
