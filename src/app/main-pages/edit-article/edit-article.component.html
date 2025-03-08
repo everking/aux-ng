@@ -1,19 +1,30 @@
 <div style="padding: 10px;max-width:640px">
-  <h1>{{ header }}</h1>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <h1>{{ header }}</h1>
+    <button (click)="toggleEditMode()" style="border: none; background: none; cursor: pointer;">
+      <i class="material-icons">{{ isEditing ? 'visibility_off' : 'edit' }}</i>
+    </button>
+  </div>
+
+  <!--
   <p>DocumentId: {{documentId}}</p>
   <p>Name: {{name}}</p>
-  <div class="form-group">
-    <label for="header">Header</label>
-    <input id="header" [(ngModel)]="header" type="text" (ngModelChange)="onFieldChange()" placeholder="Enter header text here">
+  -->
+  <div *ngIf="isEditing">
+    <div class="form-group">
+      <label for="header">Header</label>
+      <input id="header" [(ngModel)]="header" type="text" (ngModelChange)="onFieldChange()" placeholder="Enter header text here">
+    </div>
+    <div class="form-group">
+      <label for="header">Category</label>
+      <input type="text" [(ngModel)]="category" (ngModelChange)="onFieldChange()" placeholder="Enter category text here">
+    </div>
+    <div class="form-group">
+      <label for="header">Sub category</label>
+      <input type="text" [(ngModel)]="subCategory" placeholder="Enter sub category text here" (ngModelChange)="onFieldChange()">
+    </div>
   </div>
-  <div class="form-group">
-    <label for="header">Category</label>
-    <input type="text" [(ngModel)]="category" (ngModelChange)="onFieldChange()" placeholder="Enter category text here">
-  </div>
-  <div class="form-group">
-    <label for="header">SubCategory</label>
-    <input type="text" [(ngModel)]="subCategory" placeholder="Enter sub category text here" (ngModelChange)="onFieldChange()">
-  </div>
+
   <app-image-drop [imageURI]="imageURI" (imageDropped)="onImageDropped($event)"></app-image-drop>
   <div>
     <angular-editor [(ngModel)]="body" [config]="editorConfig" (ngModelChange)="onArticleChange($event)"></angular-editor>
