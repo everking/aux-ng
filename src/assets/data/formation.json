@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "formation"
       },
-      "body": {
-        "stringValue": "<h3>The One Thing You Need</h3>\n<ul>\n<li><a href=\"https://edify.us/video/the-one-thing-you-need/\" target=\"_self\">https://edify.us/video/the-one-thing-you-need/</a></li>\n</ul>\n"
-      },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
       },
@@ -24,14 +21,17 @@
               "stringValue": "spiritual"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-17T01:33:55.682Z"
+              "timestampValue": "2025-03-08T05:02:39.513Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>Have you noticed that even the best professional athletes need a coach?&#160; And all athletes need to exercise regularly in order to keep their body in top shape for competition?</span></p><p><span>So does our mind and soul need intellectual and spiritual conditioning.&#160; Christian formation is about growing in faith, developing Christ-like character, and living out our calling as followers of Jesus. It is vital for nurturing spiritual maturity and fulfilling our purpose as believers.</span></p><h3>The One Thing You Need</h3>&#10;<ul>&#10;<li><a href=\"https://edify.us/video/the-one-thing-you-need/\" target=\"_self\">https://edify.us/video/the-one-thing-you-need/</a></li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:05.530505Z",
-    "updateTime": "2025-02-17T01:33:56.114449Z"
+    "updateTime": "2025-03-08T05:02:39.867536Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

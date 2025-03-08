@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "ccc"
       },
-      "body": {
-        "stringValue": "<h3>Discover the Catechism</h3>\n<ul>\n<li><a href=\"https://www.realtrue.org/\" target=\"_self\">https://www.realtrue.org/</a></li>\n<li><a href=\"https://www.usccb.org/sites/default/files/flipbooks/catechism/\" target=\"_self\">https://www.usccb.org/sites/default/files/flipbooks/catechism/</a></li>\n</ul>\n<p>Keep growing in faith with a daily 5-minute dose of the Holy Gospel from the Y-Bible and a YOUCAT or DOCAT question.&nbsp;&nbsp;</p>\n<ul>\n<li><a href=\"https://youcat.org/youcat-digital/\" target=\"_blank\">https://youcat.org/youcat-digital/</a>&nbsp;</li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Catechism"
       },
@@ -24,14 +21,17 @@
               "stringValue": "spiritual"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:39:56.510Z"
+              "timestampValue": "2025-03-08T05:04:34.572Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>The Catechism provides answers to questions about God and our relationship with him, including questions that Catholics might not know to ask.&#160; The Catechism synthesizes two millennia of Church teaching, drawing from the Sacred Scriptures, the Fathers of the Church, the liturgy, and the Church's teaching office.</span></p><p><span>By reading it, Catholics and Christian gain access to the key truths of the Catholic Faith, the essentials of Catholic belief, all in one place. Understanding what we believe and why has the power to transform our lives as we no longer go through the motions but discover how to live out God's plan of sheer goodness for our lives.</span></p><h3>Discover the Catechism</h3>&#10;<ul>&#10;<li><a href=\"https://www.realtrue.org/\" target=\"_self\">https://www.realtrue.org/</a></li>&#10;<li><a href=\"https://www.usccb.org/sites/default/files/flipbooks/catechism/\" target=\"_self\">https://www.usccb.org/sites/default/files/flipbooks/catechism/</a></li>&#10;</ul>&#10;<p>Keep growing in faith with a daily 5-minute dose of the Holy Gospel from the Y-Bible and a YOUCAT or DOCAT question.&#160;&#160;</p>&#10;<ul>&#10;<li><a href=\"https://youcat.org/youcat-digital/\" target=\"_blank\">https://youcat.org/youcat-digital/</a>&#160;</li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:03.406673Z",
-    "updateTime": "2025-02-23T08:39:56.851805Z"
+    "updateTime": "2025-03-08T05:04:34.908597Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

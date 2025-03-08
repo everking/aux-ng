@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "study-weekend"
       },
-      "body": {
-        "stringValue": "<h3>High School Study Weekend</h3>\n<p>Prepare for tests and finish papers with a weekend of serious study (and fun). The schedule includes several sessions of silent study time (totaling 9 hours), plenty of sports in the afternoon, and enjoyable seminars in the evening.&nbsp;</p>\n<ul>\n<li><a href=\"http://www.menlough.org/study-weekends.html\" target=\"_blank\">http://www.menlough.org/study-weekends.html</a>&nbsp;</li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Study weekend"
       },
@@ -24,14 +21,17 @@
               "stringValue": "activities"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:39:04.390Z"
+              "timestampValue": "2025-02-27T05:19:58.617Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<h3>High School Study Weekend</h3>&#10;<p>Prepare for tests and finish papers with a weekend of serious study (and fun). The schedule includes several sessions of silent study time (totaling 9 hours), plenty of sports in the afternoon, and enjoyable seminars in the evening.&#160;</p>&#10;<ul>&#10;<li><a href=\"http://www.menlough.org/study-weekends.html\" target=\"_blank\">http://www.menlough.org/study-weekends.html</a>&#160;</li></ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:10.402084Z",
-    "updateTime": "2025-02-23T08:39:04.726685Z"
+    "updateTime": "2025-02-27T05:19:59.815010Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

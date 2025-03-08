@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "culture"
       },
-      "body": {
-        "stringValue": "<h3>The Music of Christendom</h3>\n<p><a href=\"https://ignatius.com/the-music-of-christendom-mocp/\">https://ignatius.com/the-music-of-christendom-mocp/</a></p>\n"
-      },
       "header": {
         "stringValue": "Culture"
       },
@@ -24,14 +21,17 @@
               "stringValue": "whole-child"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:47:02.122Z"
+              "timestampValue": "2025-03-08T04:55:51.343Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>Every ethnic group has its own tradition and practice.&#160; Most are harmless but some could be harmful.&#160; What are practices and way of living that transcends such human tradition or practice.&#160; There are lasting things that shapes our mind and way of living.&#160;</span></p><p><span>Philippians 4:8 says, &#34;Finally, brothers and sisters, whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely, whatever is admirable&#8212;if anything is excellent or praiseworthy&#8212;think about such things.&#8221;</span></p><h3>The Music of Christendom</h3>&#10;<p><a href=\"https://ignatius.com/the-music-of-christendom-mocp/\">https://ignatius.com/the-music-of-christendom-mocp/</a></p>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:04.823735Z",
-    "updateTime": "2025-02-23T08:47:02.520445Z"
+    "updateTime": "2025-03-08T04:55:51.948839Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

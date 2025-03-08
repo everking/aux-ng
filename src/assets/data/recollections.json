@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "recollections"
       },
-      "body": {
-        "stringValue": "<p>The monthly evening of recollection is a time for personal prayer and reflection on topics to do with Christian life. The evening includes meditations preached by a priest, time for examination of conscience, opportunity for Confession or spiritual direction, and a talk given by a layman. An atmosphere of silence is maintained until after Benediction, when all may enjoy a snack and time for socializing.</p>\n<h3>For Men</h3>\n<h4>Saint Joseph Catholic Church</h4>\n<p>582 Hope St, Mountain View</p>\n<ul>\n<li><a href=\"http://www.menlough.org/evenings-of-recollection.html\" target=\"_self\">http://www.menlough.org/evenings-of-recollection.html</a></li>\n</ul>\n<h4>Garber House</h4>\n<p>1827 Oxford Street, Berkeley, CA 94709<br>1st Monday of the Month<br>7:15 PM - 9:00 PM</p>\n<h3>For Women</h3>\n<h4>Charwick Study Center</h4>\n<ul>\n<li><a href=\"https://www.charwick.org/recollections\" target=\"_self\">https://www.charwick.org/recollections</a></li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Recollections"
       },
@@ -24,14 +21,17 @@
               "stringValue": "activities"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:38:38.338Z"
+              "timestampValue": "2025-03-08T05:52:36.503Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p>The monthly evening of recollection is a time for personal prayer and reflection on topics to do with Christian life. The evening includes meditations preached by a priest, time for examination of conscience, opportunity for Confession or spiritual direction, and a talk given by a layman. An atmosphere of silence is maintained until after Benediction, when all may enjoy a snack and time for socializing.</p>&#10;<h3>For Men</h3>&#10;<h4>Saint Joseph Catholic Church</h4>&#10;<p>582 Hope St, Mountain View</p>&#10;<ul>&#10;<li><a href=\"http://www.menlough.org/evenings-of-recollection.html\" target=\"_self\">http://www.menlough.org/evenings-of-recollection.html</a></li>&#10;</ul>&#10;<h4>Garber House</h4>&#10;<p>1827 Oxford Street, Berkeley, CA 94709<br>1st Monday of the Month<br>7:15 PM - 9:00 PM</p>&#10;<h3>For Women</h3>&#10;<h4>Charwick Study Center</h4>&#10;<ul>&#10;<li><a href=\"https://www.charwick.org/recollections\" target=\"_self\">https://www.charwick.org/recollections</a></li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:08.249969Z",
-    "updateTime": "2025-02-23T08:38:38.788775Z"
+    "updateTime": "2025-03-08T05:52:37.102394Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "mentoring"
       },
-      "body": {
-        "stringValue": "<h3>Preventive System of St. John Bosco (Don Bosco)</h3>\n<ul>\n<li><a href=\"http://www.donboscowest.org/pedagogy/preventive-system\">http://www.donboscowest.org/pedagogy/preventive-system</a></li>\n</ul>\n<h3>Parenting for Character</h3>\n<ul>\n<li><a href=\"https://scepterpublishers.org/products/parenting-for-character?variant=41525378056369\">https://scepterpublishers.org/products/parenting-for-character?variant=41525378056369</a></li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Mentoring"
       },
@@ -24,14 +21,17 @@
               "stringValue": "spiritual"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:40:17.985Z"
+              "timestampValue": "2025-03-08T05:09:46.838Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p>Christian mentoring is a relationship that helps people grow spiritually and practically in their faith. The goal is to develop spiritual maturity, which means learning to live in obedience to God in all aspects of life. In Christian mentoring, not only will the person being mentored grow in their faith, but the person doing the mentoring will grow as well. Proverbs 27:17 says, &#8220;As iron sharpens iron, so one person sharpens another.&#8221;</p>&#10;&#10;<h3>Preventive System of St. John Bosco (Don Bosco)</h3>&#10;<ul>&#10;<li><a href=\"http://www.donboscowest.org/pedagogy/preventive-system\">http://www.donboscowest.org/pedagogy/preventive-system</a></li>&#10;</ul>&#10;<h3>Parenting for Character</h3>&#10;<ul>&#10;<li><a href=\"https://scepterpublishers.org/products/parenting-for-character?variant=41525378056369\">https://scepterpublishers.org/products/parenting-for-character?variant=41525378056369</a></li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:06.485357Z",
-    "updateTime": "2025-02-23T08:40:18.299047Z"
+    "updateTime": "2025-03-08T05:10:04.302627Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

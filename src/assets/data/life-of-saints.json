@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "life-of-saints"
       },
-      "body": {
-        "stringValue": "<h3>A daily podcast bringing the Saints to life with award-winning actors, writers, and sound designers.</h3>\n<ul>\n<li><a href=\"https://www.themerrybeggars.com/shows/the-saints\" target=\"_blank\">https://www.themerrybeggars.com/shows/the-saints</a></li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Life of Saints"
       },
@@ -24,14 +21,17 @@
               "stringValue": "virtues"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:42:49.256Z"
+              "timestampValue": "2025-03-08T05:15:12.255Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>Saints are the heroes of the Catholic faith. They lived lives in holiness, dedicated to serving God and spreading His message of salvation. Indeed, many Catholic saints courageously met their deaths simply because of their faith. Today, the saints serve as examples for all Catholics, showing us how to lead a more satisfying, more spiritual life in communion with our Lord. They are reminders that this life will come to an end, and only what was done for Christ will have a lasting reward.</span></p><p><span>&#8220;Every saint has a past, and every sinner has a future.&#8221; (Oscar Wilde)&#160;</span></p><div><br></div><h3>A daily podcast bringing the Saints to life with award-winning actors, writers, and sound designers.</h3>&#10;<ul>&#10;<li><a href=\"https://www.themerrybeggars.com/shows/the-saints\" target=\"_blank\">https://www.themerrybeggars.com/shows/the-saints</a></li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:06.221255Z",
-    "updateTime": "2025-02-23T08:42:49.692011Z"
+    "updateTime": "2025-03-08T05:15:13.375715Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

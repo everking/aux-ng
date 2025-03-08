@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "health"
       },
-      "body": {
-        "stringValue": "<h3>Getting Fit in Mind, Body, And Soul</h3>\n<ul>\n<li><a target=\"_blank\" href=\"https://integratedcatholiclife.org/2024/04/hain-getting-fit-in-mind-body-and-soul-2/\">https://integratedcatholiclife.org/2024/04/hain-getting-fit-in-mind-body-and-soul-2/</a></li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Health"
       },
@@ -24,14 +21,17 @@
               "stringValue": "default"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T09:50:35.366Z"
+              "timestampValue": "2025-03-08T05:36:39.182Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>&#34;Do you not know that your bodies are temples of the Holy Spirit, who is in you, whom you have received from God?&#34; (1 Corinthians 6:19-20)</span></p><p><span>The idea that our bodies are temples of God means that we should treat our bodies with respect and care and use them to honor God. This could include eating healthy foods and exercising regularly.</span></p><div><br></div><h3>Getting Fit in Mind, Body, And Soul</h3>&#10;<ul>&#10;<li><a target=\"_blank\" href=\"https://integratedcatholiclife.org/2024/04/hain-getting-fit-in-mind-body-and-soul-2/\">https://integratedcatholiclife.org/2024/04/hain-getting-fit-in-mind-body-and-soul-2/</a></li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:05.998358Z",
-    "updateTime": "2025-02-23T09:50:36.084353Z"
+    "updateTime": "2025-03-08T05:36:39.751030Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

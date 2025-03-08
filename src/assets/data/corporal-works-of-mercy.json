@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "corporal-works-of-mercy"
       },
-      "body": {
-        "stringValue": "<h3>Dorothy’s Place&nbsp;&nbsp;</h3>\n<ul>\n<li><a href=\"https://www.dorothysplace.org/volunteer/\" target=\"_blank\">https://www.dorothysplace.org/volunteer/</a></li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Corporal works of mercy"
       },
@@ -24,14 +21,17 @@
               "stringValue": "virtues"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T16:09:46.424Z"
+              "timestampValue": "2025-03-08T05:17:01.755Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>The Corporal Works of Mercy are acts of kindness and compassion that we perform to take care of the physical and material needs of others. Jesus called His followers to love their neighbors as themselves and serve those in need.</span></p><p><span>Jesus directly emphasized serving others, especially those in need. In Matthew 25:31-46, He identifies Himself with the poor, hungry, and sick, saying that whatever is done for the least of these is done for Him. By performing the Corporal Works of Mercy, we follow Jesus' example and obey His call to love others in tangible ways.</span></p><p><span><br></span><span>The Seven Corporal Works of Mercy:<br></span></p><ol><li><span>Feed the hungry</span></li><li><span>Give drink to the thirsty</span></li><li><span>Clothe the naked</span></li><li><span>Shelter the homeless</span></li><li><span>Visit the sick</span></li><li><span>Visit the imprisoned</span></li><li><span>Bury the dead</span></li></ol><span>Performing the Corporal Works of Mercy helps us grow in holiness and make the world a more just and compassionate place.</span><p></p><div><br></div><h3>Dorothy&#8217;s Place&#160;&#160;</h3>&#10;<ul>&#10;<li><a href=\"https://www.dorothysplace.org/volunteer/\" target=\"_blank\">https://www.dorothysplace.org/volunteer/</a></li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:04.403852Z",
-    "updateTime": "2025-02-23T16:09:46.846830Z"
+    "updateTime": "2025-03-08T05:17:02.350652Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }
