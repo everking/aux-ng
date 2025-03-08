@@ -67,11 +67,11 @@
 
     if (articleCount === 0) {
       console.log("No new articles found.");
+    } else {
+      // Update the last updated timestamp
+      fs.writeFileSync(updateFilePath, JSON.stringify({ lastUpdated: currentTimestamp }, null, 2), 'utf8');
+      console.log(`Updated last fetch time in: ${updateFilePath}`);
     }
-
-    // Update the last updated timestamp
-    fs.writeFileSync(updateFilePath, JSON.stringify({ lastUpdated: currentTimestamp }, null, 2), 'utf8');
-    console.log(`Updated last fetch time in: ${updateFilePath}`);
 
   } catch (error) {
     console.error('Error:', error);
