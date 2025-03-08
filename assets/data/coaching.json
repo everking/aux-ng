@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "coaching"
       },
-      "body": {
-        "stringValue": "<h3>Coaching</h3>\n<ul>\n<li>A teachable heart can be formed into what God wants it to be.</li>\n<ul>\n<li><a href=\"https://auxilium.guide/pdf/being-teacheable.pdf\" target=\"_blank\"><span style=\"color: var(--tw-prose-links);background-color: rgb(255,255,255);font-size: 16px;\"><ins>Being Teachable (PDF)</ins></span></a></li>\n</ul>\n<li>Track Growth in Monthly Virtues&nbsp;&nbsp;</li>\n<ul>\n<li><a href=\"https://auxilium.guide/pdf/monthly-goal-action.pdf\" target=\"_blank\">Monthly Goal Action (PDF) </a>&nbsp;&nbsp;&nbsp;</li>\n</ul>\n</ul>\n"
-      },
       "imageURI": {
         "stringValue": "https://t4.ftcdn.net/jpg/02/97/78/03/360_F_297780357_pK8VCA7wctbTFusAGiCfcoxbJLRwC9Bs.jpg"
       },
@@ -24,14 +21,17 @@
               "stringValue": "virtues"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-17T01:33:55.673Z"
+              "timestampValue": "2025-03-08T05:18:09.688Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>Coaching focuses on short-term goals and tasks and is typically used to help people improve or grow in a specific area.&#160; How can we coach or help someone?&#160; Coaching helps someone to map out specific goals and timelines, and the coach's role is to help them be open and find solutions to achieve their short term goal.</span></p><h3>Coaching</h3>&#10;<ul>&#10;<li>A teachable heart can be formed into what God wants it to be.</li>&#10;<ul>&#10;<li><a href=\"https://auxilium.guide/pdf/being-teacheable.pdf\" target=\"_blank\"><span><ins>Being Teachable (PDF)</ins></span></a></li>&#10;</ul>&#10;<li>Track Growth in Monthly Virtues&#160;&#160;</li>&#10;<ul>&#10;<li><a href=\"https://auxilium.guide/pdf/monthly-goal-action.pdf\" target=\"_blank\">Monthly Goal Action (PDF) </a>&#160;&#160;&#160;</li>&#10;</ul>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:03.649699Z",
-    "updateTime": "2025-02-17T01:33:56.039666Z"
+    "updateTime": "2025-03-08T05:18:10.004791Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "biblical"
       },
-      "body": {
-        "stringValue": "<h3>Access the Gospel of the day and St. Josemaria&#39;s published works</h3>\n<ul>\n<li><a href=\"https://escrivalite.com/\">https://escrivalite.com/</a></li>\n</ul>\n<h3>Life-Changing Video Bible Studies</h3>\n<ul>\n<li><a href=\"https://stpaulcenter.com/bible-studies/\">https://stpaulcenter.com/bible-studies/</a></li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Biblical"
       },
@@ -24,14 +21,17 @@
               "stringValue": "spiritual"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:39:27.819Z"
+              "timestampValue": "2025-03-08T05:11:42.488Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>In the episode when Jesus was tempted by Satan in the desert, He quoted Matthew 4:4, &#34;But he answered and said, 'It is written, 'Man shall not live by bread alone, but by every word that proceeds out of the mouth of God'&#34; to defeat Satan.&#160;</span></p><p><span>&#8220;All Scripture is breathed out by God and profitable for teaching, for reproof, for correction, and for training in righteousness, that the man of God may be complete, equipped for every good work.&#8221; (2 Timothy 3:16-17)</span></p><h3>Access the Gospel of the day and St. Josemaria's published works</h3>&#10;<ul>&#10;<li><a href=\"https://escrivalite.com/\">https://escrivalite.com/</a></li>&#10;</ul>&#10;<h3>Life-Changing Video Bible Studies</h3>&#10;<ul>&#10;<li><a href=\"https://stpaulcenter.com/bible-studies/\">https://stpaulcenter.com/bible-studies/</a></li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:03.188426Z",
-    "updateTime": "2025-02-23T08:39:28.165653Z"
+    "updateTime": "2025-03-08T05:11:42.892158Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

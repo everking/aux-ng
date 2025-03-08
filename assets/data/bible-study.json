@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "bible-study"
       },
-      "body": {
-        "stringValue": "<h3>The Bible Timeline - The Story of Salvation&nbsp;&nbsp;</h3>\n<ul>\n<li><a href=\"https://ascensionpress.com/collections/the-bible-timeline-the-story-of-salvation\" target=\"_blank\">https://ascensionpress.com/collections/the-bible-timeline-the-story-of-salvation</a>&nbsp;&nbsp;</li>\n</ul>\n<h3>Fellowship of Catholic University Students (FOCUS) Bible Study&nbsp;</h3>\n<ul>\n<li><a href=\"https://focusequip.org/bible-study-resources/\" target=\"_blank\">https://focusequip.org/bible-study-resources/</a>&nbsp;&nbsp;</li>\n</ul>\n"
-      },
       "header": {
         "stringValue": "Bible study"
       },
@@ -24,14 +21,17 @@
               "stringValue": "activities"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T08:37:53.667Z"
+              "timestampValue": "2025-03-08T05:21:45.223Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>The Bible is central to Christianity, providing guidance, authority, and a means to grow spiritually. Christians believe the Bible is the word of God, and that it contains laws and advice for living a good life.&#160; One might say it is the most important play book in our life.</span></p><p><span>&#8220;All scripture is inspired by God and is useful for teaching, for reproof, for correction, and for training in righteousness, 17 so that everyone who belongs to God may be proficient, equipped for every good work.&#8221; (2 Timothy 3:16&#8211;17)&#160;&#160;</span></p><h3>The Bible Timeline - The Story of Salvation&#160;&#160;</h3>&#10;<ul>&#10;<li><a href=\"https://ascensionpress.com/collections/the-bible-timeline-the-story-of-salvation\" target=\"_blank\">https://ascensionpress.com/collections/the-bible-timeline-the-story-of-salvation</a>&#160;&#160;</li>&#10;</ul>&#10;<h3>Fellowship of Catholic University Students (FOCUS) Bible Study&#160;</h3>&#10;<ul>&#10;<li><a href=\"https://focusequip.org/bible-study-resources/\" target=\"_blank\">https://focusequip.org/bible-study-resources/</a>&#160;&#160;</li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:02.925139Z",
-    "updateTime": "2025-02-23T08:37:54.225524Z"
+    "updateTime": "2025-03-08T05:21:45.869798Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "counseling"
       },
-      "body": {
-        "stringValue": "<h3>Virtuous Leadership Institute&nbsp;&nbsp;</h3>\n<ul>\n<li><a href=\"https://hvli.org/\" target=\"_blank\">https://hvli.org/</a>&nbsp;</li>\n</ul>\n<p>&nbsp;</p>\n"
-      },
       "header": {
         "stringValue": "Counseling"
       },
@@ -24,14 +21,17 @@
               "stringValue": "default"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T09:14:07.427Z"
+              "timestampValue": "2025-03-08T05:33:21.250Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>Mental health is important, and seeking help is not a sign of weak faith&#8212;it&#8217;s part of taking care of the body and mind that God gave you.</span></p><p><span>It&#8217;s okay to seek both prayer and professional help - mental health struggles do not mean a lack of faith. God cares about your mind, body, and soul. Seeking healing is an act of trust in Him.</span></p><p><span>&#8220;I appeal to you therefore, brothers and sisters, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship. Do not be conformed to this world, but be transformed by the renewing of your minds, so that you may discern what is the will of God&#8212;what is good and acceptable and perfect.&#8221;&#160; (Romans 12:1&#8211;2)</span></p><h3>Virtuous Leadership Institute&#160;&#160;</h3>&#10;<ul>&#10;<li><a href=\"https://hvli.org/\" target=\"_blank\">https://hvli.org/</a>&#160;</li>&#10;</ul>&#10;<p>&#160;</p>&#10;"
       }
     },
     "createTime": "2024-06-04T07:18:04.579186Z",
-    "updateTime": "2025-02-23T09:14:07.861247Z"
+    "updateTime": "2025-03-08T05:33:21.772444Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }

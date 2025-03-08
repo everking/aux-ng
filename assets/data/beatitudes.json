@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "beatitudes"
       },
-      "body": {
-        "stringValue": "<h3>Volunteer at Food Banks</h3>&#10;<ul>&#10;<li><a href=\"https://www.foodbankccs.org/map-location/most-holy-rosary-catholic-church/?mpfy-pin=37761\" target=\"_blank\">https://www.foodbankccs.org/...</a>&#160;&#160;</li>&#10;</ul>&#10;<h3><br>Dorothy&#8217;s Place&#160;</h3>&#10;<ul>&#10;<li><a href=\"https://www.dorothysplace.org/\" target=\"_blank\">https://www.dorothysplace.org/</a>&#160;&#160;</li>&#10;</ul>&#10;"
-      },
       "header": {
         "stringValue": "Living the Beatitudes"
       },
@@ -24,14 +21,17 @@
               "stringValue": "default"
             },
             "lastUpdated": {
-              "timestampValue": "2025-02-23T09:07:04.961Z"
+              "timestampValue": "2025-03-08T05:31:52.757Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<p><span>The Beatitudes (Matthew 5:3-12) are Jesus&#8217; blueprint for a holy, joyful, and fulfilling life. They show us how to be truly blessed&#8212;not just in eternity, but in our daily lives.&#160; The Beatitudes are not just nice sayings&#8212;they are a radical way to live like Jesus! Living them out will bring you joy, peace, and closeness to God.</span></p><p><span>Being willing to practice Beatitudes is truly countercultural!&#160;</span></p><p><span>&#8220;Blessed are the poor in spirit, for theirs is the kingdom of heaven.&#160;<br></span><span>Blessed are those who mourn, for they will be comforted.&#160;<br></span><span>Blessed are the meek, for they will inherit the earth.&#160;<br></span><span>Blessed are those who hunger and thirst for righteousness, for they will be filled.&#160;<br></span><span>Blessed are the merciful, for they will receive mercy.&#160;<br></span><span>Blessed are the pure in heart, for they will see God.&#160;<br></span><span>Blessed are the peacemakers, for they will be called children of God.&#160;<br></span><span>Blessed are those who are persecuted for righteousness&#8217; sake, for theirs is the kingdom of heaven.&#160;<br></span><span>Blessed are you when people revile you and persecute you and utter all kinds of evil against you falsely on my account.&#160;</span></p><p><span>Rejoice and be glad, for your reward is great in heaven, for in the same way they persecuted the prophets who were before you.&#8221; (Matthew 5:3-12)</span></p><h3>Volunteer at Food Banks</h3>&#10;<ul>&#10;<li><a href=\"https://www.foodbankccs.org/map-location/most-holy-rosary-catholic-church/?mpfy-pin=37761\" target=\"_blank\">https://www.foodbankccs.org/...</a>&#160;&#160;</li>&#10;</ul>&#10;<h3><br>Dorothy&#8217;s Place&#160;</h3>&#10;<ul>&#10;<li><a href=\"https://www.dorothysplace.org/\" target=\"_blank\">https://www.dorothysplace.org/</a>&#160;&#160;</li>&#10;</ul>&#10;"
       }
     },
     "createTime": "2025-02-16T01:48:11.798145Z",
-    "updateTime": "2025-02-23T09:07:05.465579Z"
+    "updateTime": "2025-03-08T05:31:53.567288Z"
   },
-  "readTime": "2025-02-23T16:14:14.467039Z"
+  "readTime": "2025-03-08T05:57:46.255632Z"
 }
