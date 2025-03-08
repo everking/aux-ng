@@ -1,7 +1,7 @@
 <div class="article-list-holder" *ngFor="let subCategory of subCategoryMap | keyvalue">
   <h1 class="category">{{ articleService.getSubCategory(subCategory.key, category) }}</h1>
   <div style="padding: 0px 20px 20px 20px">
-    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </span>
+    <span class="summary" [innerHTML]="subCategory.value.summary"></span>
   </div>
   <div class="article-list" [style.--maxArticlesPerRow]="maxArticlesPerRow">
     <ng-container *ngIf="subCategory?.value?.articles?.length; else noArticles">
