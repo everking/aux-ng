@@ -78,10 +78,6 @@ export class EditArticleComponent implements OnInit {
     return this.changed;
   }
   
-  onPreview() {
-    this.router.navigate([`/preview/${this.articleId}`]);
-  }
-
   async onSaveClick() {
     const article: Article = {
       articleId: this.articleId,
@@ -100,6 +96,7 @@ export class EditArticleComponent implements OnInit {
       this.saveMessage = "Saved!";
       console.log("Saved!");
       this.changed = true;
+      this.router.navigate([`/preview/${this.articleId}`]);
     } else {
       this.saveMessage = "Sorry. Not saved!";
       console.log("Sorry. Not saved!");

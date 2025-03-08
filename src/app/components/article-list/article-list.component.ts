@@ -22,7 +22,7 @@ export class ArticleListComponent implements OnChanges {
   @Input() maxArticles: number = 5;
   @Input() maxArticlesPerRow: number = 2;
   @Input() category = "home";
-  subCategoryMap:Record<string, {articles: string[];}> = {} ;
+  subCategoryMap:Record<string, {summary: string , articles: string[];}> = {} ;
 
   constructor(public articleService: ArticleService) {
   }

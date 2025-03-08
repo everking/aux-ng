@@ -5,8 +5,9 @@ import { LoginService } from './login.service';
 import { DOCUMENT } from '@angular/common';
 
 interface Category {
+  summary: string,
   articles: string[];
-  subCategories: Record<string, { articles: string[] }>;
+  subCategories: Record<string, { summary:string, articles: string[] }>;
 }
 
 @Injectable({
@@ -18,6 +19,7 @@ export class ArticleService {
   private articleMap: Map<string, Article> = new Map();
   private baseHref: string;
   private currentCategory: string = "";
+  private forceFetch:boolean|null = null;
   private categories: Record<string, Category> = {};
 
   public getCurrentCategory():string {
@@ -41,13 +43,14 @@ export class ArticleService {
     this.categories = await response.json();
   }
 
-  public getSubCategoryMap(category: string):Record<string, {articles: string[];}> {
+  public getSubCategoryMap(category: string):Record<string, {summary: string, articles: string[];}> {
     return this.categories[category]?.subCategories;
   }
 
-  public getCategoryMap(category: string):Record<string, {articles: string[];}>{
+  public getCategoryMap(category: string):Record<string, {summary:string, articles: string[];}>{
     return {
       category: {
+        summary: this.categories[category]?.summary || '',
         articles: (this.categories[category]?.articles || [])
       }
     }

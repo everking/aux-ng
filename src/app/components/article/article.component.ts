@@ -19,6 +19,7 @@ import e from 'express';
 })
 export class ArticleComponent implements OnInit {
   article!: Article | null;
+  articleId: string = '';
   isLoggedIn: boolean = false;
   editLink: string = '';
   externalLinkCheck: boolean = false;
@@ -27,6 +28,12 @@ export class ArticleComponent implements OnInit {
 
   ngAfterViewChecked() {
     setTimeout(() => this.updateExternalLinks(), 0);
+  }
+
+  public getLatestArticle() {
+    this.articleService.fetchArticle(this.articleId, true).then((article: Article|null) => {
+      this.article = article;
+    });
   }
 
   private updateExternalLinks() {
@@ -56,13 +63,14 @@ export class ArticleComponent implements OnInit {
 
   async ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
-    const articleId: string = this.route.snapshot.paramMap.get('articleId') || '';
+    this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
     this.isPreview = this.route.snapshot.data['preview'] || false;
-    this.editLink = `/edit-article/${articleId}`;
-    this.article = await this.articleService.fetchArticle(articleId, this.isPreview);
+    this.editLink = `/edit-article/${this.articleId}`;
+    this.article = await this.articleService.fetchArticle(this.articleId, this.isPreview);
+    console.log(`body: ${this.article?.body}`);
     this.route.params.subscribe(params => {
-      const articleId = params['articleId'];
-      this.initPreview(articleId);
+      this.articleId = params['articleId'];
+      this.initPreview(this.articleId);
     });
   }
 

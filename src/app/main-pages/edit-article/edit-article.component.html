@@ -19,7 +19,6 @@
     <angular-editor [(ngModel)]="body" [config]="editorConfig" (ngModelChange)="onArticleChange($event)"></angular-editor>
   </div>
   <button class="save-button" (click)="onSaveClick()" [disabled]="!hasChanged()" [ngClass]="{'disabled-button': !hasChanged()}">Save</button>
-  <button *ngIf="changed" class="preview-button" (click)="onPreview()">Preview</button>
   <p><span>{{saveMessage}}</span></p>
 
 </div>

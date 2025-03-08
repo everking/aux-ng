@@ -10,7 +10,7 @@
     </div>
 
     <span *ngIf="isLoggedIn">
-      [ <a [routerLink]="[editLink]">Edit Article</a> ]
+      [ <a class="editLink" [routerLink]="[editLink]">Edit Article</a> | <a class="editLink" (click)="getLatestArticle()">Preview</a> ]
       <br/>
       <br/>
     </span>
