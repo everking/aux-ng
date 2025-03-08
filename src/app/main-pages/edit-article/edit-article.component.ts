@@ -55,7 +55,7 @@ export class EditArticleComponent implements OnInit {
     translate: 'no',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
-      ['bold', 'italic'],
+      ['fontName'],
     ]
   };
 
