@@ -38,7 +38,7 @@ pre {
 }
 
 .form-group label {
-  width: 120px;  /* Fixed width for labels */
+  width: 100px;  /* Fixed width for labels */
   font-weight: bold;
 }
 

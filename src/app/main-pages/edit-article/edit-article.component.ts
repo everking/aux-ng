@@ -32,6 +32,8 @@ export class EditArticleComponent implements OnInit {
   imageURI?: string = '';
   saveMessage: string = '';
   changed: boolean = false;
+  public isEditing = false;
+
   editForm = new FormGroup({
     header: new FormControl(''),
     category: new FormControl(''),
@@ -78,6 +80,10 @@ export class EditArticleComponent implements OnInit {
     return this.changed;
   }
   
+  toggleEditMode() {
+    this.isEditing = !this.isEditing;
+  }
+
   async onSaveClick() {
     const article: Article = {
       articleId: this.articleId,
