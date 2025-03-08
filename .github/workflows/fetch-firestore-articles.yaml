@@ -36,8 +36,5 @@ jobs:
         else
           echo "No changes to commit"
         fi
-        git add src/assets/
-        git commit -m "Update Firestore articles"
-        git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}g
