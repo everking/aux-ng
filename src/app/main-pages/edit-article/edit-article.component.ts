@@ -36,6 +36,10 @@ export class EditArticleComponent implements OnInit {
   saveMessage: string = '';
   changed: boolean = false;
   public isEditing = false;
+  embedImageProps = {
+    width: 384,
+    height: 216
+  }
 
   editForm = new FormGroup({
     header: new FormControl(''),
@@ -58,9 +62,8 @@ export class EditArticleComponent implements OnInit {
     translate: 'no',
     defaultFontName: 'Arial',
     upload: (file: File): Observable<HttpEvent<UploadResponse>> => {
-      console.log('upload started');
       return new Observable((observer: Observer<HttpEvent<UploadResponse>>) => {
-        this.resizeAndCropImage(file, 480, 270).then((base64Image) => {
+        this.resizeAndCropImage(file, this.embedImageProps.width,  this.embedImageProps.height).then((base64Image) => {
           observer.next(new HttpResponse({ body: { imageUrl: base64Image } }));
           observer.complete();
         }).catch((error) => {
@@ -143,15 +146,6 @@ export class EditArticleComponent implements OnInit {
     })
   }
 
-  async handleImageUpload(event: any) {
-    console.log('handleImageUpload');
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const resizedImage = await this.resizeAndCropImage(file, 480, 270);
-    this.insertImage(resizedImage);
-  }
-
   async resizeAndCropImage(file: File, width: number, height: number): Promise<string> {
     return new Promise((resolve) => {
       const reader = new FileReader();
@@ -162,13 +156,21 @@ export class EditArticleComponent implements OnInit {
           const aspectRatio = img.width / img.height;
           const newHeight = Math.round(width / aspectRatio);
 
+          console.log(`target height: ${height}`);
+          console.log(`Resizing image to ${width}x${newHeight}`);
+
           const canvas = document.createElement('canvas');
           canvas.width = width;
-          canvas.height = height;
           const ctx = canvas.getContext('2d')!;
 
           // Calculate cropping parameters
           const cropY = Math.max(0, (newHeight - height) / 2);
+          if (cropY === 0) {
+            canvas.height = newHeight;
+          } else {
+            canvas.height = height;
+          }
+          console.log(`cropY: ${cropY}`);
 
           // Draw image onto canvas
           ctx.drawImage(img, 0, -cropY, width, newHeight);

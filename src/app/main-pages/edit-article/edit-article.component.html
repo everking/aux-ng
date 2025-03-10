@@ -28,7 +28,6 @@
   <app-image-drop [imageURI]="imageURI" (imageDropped)="onImageDropped($event)"></app-image-drop>
   <div>
     <angular-editor [(ngModel)]="body" 
-      (imageUpload)="handleImageUpload($event)" 
       [config]="editorConfig" 
       (ngModelChange)="onArticleChange($event)">
     </angular-editor>
