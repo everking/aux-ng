@@ -2,11 +2,13 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
-import { FormsModule, FormGroup, FormControl } from '@angular/forms';
-import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AngularEditorConfig, AngularEditorModule, UploadResponse } from '@kolkov/angular-editor';
 import { Article } from '../../interfaces/article';
 import { ImageDropComponent } from '../image-drop/image-drop.component';
 import { LoginService } from '../../services/login.service';
+import {Observable, Observer} from 'rxjs';
+import {HttpEvent, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-article',
@@ -14,6 +16,7 @@ import { LoginService } from '../../services/login.service';
     FormsModule,
     AngularEditorModule, 
     ImageDropComponent,
+    ReactiveFormsModule,
     CommonModule
   ],
   templateUrl: './edit-article.component.html',
@@ -54,11 +57,23 @@ export class EditArticleComponent implements OnInit {
     placeholder: 'Enter text here...',
     translate: 'no',
     defaultFontName: 'Arial',
+    upload: (file: File): Observable<HttpEvent<UploadResponse>> => {
+      console.log('upload started');
+      return new Observable((observer: Observer<HttpEvent<UploadResponse>>) => {
+        this.resizeAndCropImage(file, 480, 270).then((base64Image) => {
+          observer.next(new HttpResponse({ body: { imageUrl: base64Image } }));
+          observer.complete();
+        }).catch((error) => {
+          console.error('Error processing image:', error);
+          observer.error(error);
+        });
+      });
+    },
     toolbarHiddenButtons: [
       ['fontName'],
     ]
   };
-
+  
   onArticleChange(content: string) {
     this.changed = true;
   }
@@ -126,5 +141,46 @@ export class EditArticleComponent implements OnInit {
       this.name = article?.meta?.name || this.articleService.NEW_LABEL;
       this.changed = false;
     })
+  }
+
+  async handleImageUpload(event: any) {
+    console.log('handleImageUpload');
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const resizedImage = await this.resizeAndCropImage(file, 480, 270);
+    this.insertImage(resizedImage);
+  }
+
+  async resizeAndCropImage(file: File, width: number, height: number): Promise<string> {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = () => {
+          const aspectRatio = img.width / img.height;
+          const newHeight = Math.round(width / aspectRatio);
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d')!;
+
+          // Calculate cropping parameters
+          const cropY = Math.max(0, (newHeight - height) / 2);
+
+          // Draw image onto canvas
+          ctx.drawImage(img, 0, -cropY, width, newHeight);
+
+          resolve(canvas.toDataURL('image/jpeg', 0.8));
+        };
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  insertImage(base64Image: string) {
+    document.execCommand('insertImage', false, base64Image);
   }
 }
