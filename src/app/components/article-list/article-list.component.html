@@ -1,7 +1,14 @@
 <div class="article-list-holder" *ngFor="let subCategory of subCategories">
   <h1 class="category">{{ subCategory.name }}</h1>
   <div style="padding: 0px 20px 20px 20px">
-    <span class="summary" [innerHTML]="subCategory.summary"></span>
+    <span class="summary" [innerHTML]="getDisplayedSummary(subCategory)"></span>
+    <span
+      *ngIf="isTruncatable(subCategory)"
+      class="read-more-toggle"
+      (click)="toggleExpanded(subCategory)"
+    >
+      {{ isExpanded(subCategory) ? 'Read less' : 'Read more' }}
+    </span>
   </div>
   <div class="article-list" [style.--maxArticlesPerRow]="maxArticlesPerRow">
     <ng-container *ngIf="subCategory?.articles?.length; else noArticles">
