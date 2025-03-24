@@ -129,6 +129,14 @@ export class EditArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const localEmbedImageProps = localStorage.getItem('embedImageProps');
+    if (localEmbedImageProps) {
+      this.embedImageProps = JSON.parse(localEmbedImageProps);
+    } else {
+      /* Save default embed image properties */
+      localStorage.setItem('embedImageProps', JSON.stringify(this.embedImageProps));
+    }
+
     this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
     if (!this.loginService.getIdToken()) {
       this.router.navigate(['/login'], { queryParams: { redirect: `/edit-article/${this.articleId}` }});
@@ -154,27 +162,26 @@ export class EditArticleComponent implements OnInit {
         img.src = e.target.result;
         img.onload = () => {
           const aspectRatio = img.width / img.height;
-          const newHeight = Math.round(width / aspectRatio);
-
-          console.log(`target height: ${height}`);
-          console.log(`Resizing image to ${width}x${newHeight}`);
-
+          const resizedHeight = Math.round(width / aspectRatio);
+  
+          const finalHeight = height === 0 ? resizedHeight : height;
           const canvas = document.createElement('canvas');
-          canvas.width = width;
           const ctx = canvas.getContext('2d')!;
-
-          // Calculate cropping parameters
-          const cropY = Math.max(0, (newHeight - height) / 2);
-          if (cropY === 0) {
-            canvas.height = newHeight;
+  
+          canvas.width = width;
+          canvas.height = finalHeight;
+  
+          if (height === 0) {
+            // No cropping needed, just draw the resized image
+            console.log(`Resizing to ${width}x${resizedHeight} (no crop)`);
+            ctx.drawImage(img, 0, 0, width, resizedHeight);
           } else {
-            canvas.height = height;
+            // Crop vertically to center
+            const cropY = Math.max(0, (resizedHeight - height) / 2);
+            console.log(`Resizing to ${width}x${resizedHeight}, then cropping to ${width}x${height} from y=${cropY}`);
+            ctx.drawImage(img, 0, -cropY, width, resizedHeight);
           }
-          console.log(`cropY: ${cropY}`);
-
-          // Draw image onto canvas
-          ctx.drawImage(img, 0, -cropY, width, newHeight);
-
+  
           resolve(canvas.toDataURL('image/jpeg', 0.8));
         };
       };
