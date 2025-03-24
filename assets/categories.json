@@ -1,85 +1,100 @@
 {
-  "family": {
-    "name": "Family",
-    "summary": "",
-    "subCategories": {
-      "whole-child": {
-        "summary": "",
-        "name": "Whole Child",
+  "categories": [
+    {
+      "key": "family",
+      "name": "",
+      "summary": "",
+      "subCategories": [
+        {
+          "key": "whole-child",
+          "name": "Whole Child",
+          "summary": "<p>Maria Montessori’s view of the \"whole child\" is based on the idea that education should support the physical, emotional, social, and cognitive development of a child - not just academics.</p><p>In essence, the growth of the whole child: mind, body, and spirit.  In short, education should prepare a child not just for school, but for life by helping them become a thoughtful, capable, virtuous and compassionate person.</p><p>\"Train up a child in the way he should go, and when he is old he will not depart from it\" (Proverbs 22:6).</p>",
+          "articles": [
+            "academic",
+            "culture",
+            "faith-reason",
+            "spiritual",
+            "sports"
+          ]
+        },
+        {
+          "key": "spiritual",
+          "name": "Spiritual",
+          "summary": "<p>Growing spiritually is a lifelong journey of deepening one’s relationship with God, strengthening one’s faith, and aligning one’s life with His will.  In summary, it is a process that involves deepening one’s prayer life, reading scripture which is God’s work, receive the sacraments, live out the beatitudes, growing in virtues, and spiritual reading.</p><p>Spiritual growth doesn’t happen overnight - it requires patience, persistence, and grace of God.  The more one seeks God, the more He reveals Himself. \"Draw near to God, and He will draw near to you.\" (James 4:8).  In essence, growth is a journey, not a destination.</p><p>\"All scripture is inspired by God and is useful for teaching, for reproof, for correction, and for training in righteousness, so that everyone who belongs to God may be proficient, equipped for every good work.” (2 Timothy 3:16–17)</p>",
+          "articles": [
+            "biblical",
+            "ccc",
+            "formation",
+            "mentoring",
+            "prayers",
+            "readings"
+          ]
+        },
+        {
+          "key": "virtues",
+          "name": "Virtues",
+          "summary": "<p>\"Once a person is striving to improve in the human virtues, his heart is already very close to Christ. If he is a Christian, he will realize that the theological virtues (faith, hope and charity) and all the other virtues which God's grace brings with it are an encouragement never to neglect the good qualities he shares with so many of his fellow men.</p><p>The human virtues are, I insist, the foundation for the supernatural ones. These in turn provide us with constant encouragement to behave as good human beings. In either case, it is not sufficient merely to want to have these virtues. We have to learn how to practise them. Discite benefacere, learn to do good. We need to make a habit of exercising each virtue, by actually being sincere, truthful, balanced, calm and patient\u2026 for love is proved by deeds and we cannot love God only by word, but 'with deeds and in truth'.)</p><p>('Human Virtues' in the book 'Friends of God' of Josemar\u00eda Escriv\u00e1. Link: <a href=\"https://escriva.org/en/amigos-de-dios/human-virtues/\">https://escriva.org/en/amigos-de-dios/human-virtues/</a>)</p>",
+          "articles": [
+            "coaching",
+            "corporal-works-of-mercy",
+            "life-of-saints",
+            "service-projects",
+            "spiritual-works-of-mercy",
+            "stories",
+            "virtues"
+          ]
+        },
+        {
+          "key": "activities",
+          "name": "Activities",
+          "summary": "<p>There are many activities available which provide opportunities for intellectual, educational and spiritual growth.  Some are available online while others are conducted in person in the Bay Area.<p><p>Do not be conformed to this world, but be transformed by the renewing of your minds, so that you may discern what is the will of God—what is good and acceptable and perfect.” (Romans 12:2)</p>",
+          "articles": [
+            "bible-study",
+            "recollections",
+            "study-weekend",
+            "eastwood"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "high-school",
+      "subCategories": [{
+        "name": "High School",
+        "summary": "<p>Real happiness comes when we live in accord with our God given dignity and nature.  Therefore, it follows that authentic education is a process of developing and learning to use our intellect, our will, and our imaginations, to the fullness of their potential.</p><p>Since grace builds on nature (St. Thomas Aquinas), a true educational formation should have major emphasis on both natural and supernatural areas of life. Pope Benedict XVI explained that “knowing the truth leads us to discover the good”. In the process of learning, a young person needs to learn how to order their emotions and be guided on what to love and what not to love.  A young person will learn what is good, true, and beautiful while, at the same time, they learn what is bad, false, and ugly. St. Augustine called this the ordering of the emotions or passions, ordo amoris. A young person should learn that they are loved and created good. The right formation will guide a young person on how to lead a life ordered towards God - a life ordered to true and everlasting happiness.</p><p>In a word, virtuous learning will lead to godliness.</><p>\"Finally, beloved, whatever is true, whatever is honorable, whatever is just, whatever is pure, whatever is pleasing, whatever is commendable, if there is any excellence and if there is anything worthy of praise, think about these things. Keep on doing the things that you have learned and received and heard and seen in me, and the God of peace will be with you.\" (Philippians 4:8–9)",
         "articles": [
-          "academic",
-          "culture",
-          "faith-reason",
-          "spiritual",
-          "sports"
-        ]
-      },
-      "activities": {
-        "name": "Activities",
-        "summary": "This page offers a variety of faith-centered activities and resources to deepen one’s spiritual life through Bible study, personal reflection, and formation.",
+          "apologetics",
+          "beatitudes",
+          "counseling",
+          "game-reviews",
+          "movie-club",
+          "reading-list"
+        ]  
+      }]
+    },
+    {
+      "key": "excellence",
+      "subCategories": [{
+        "name": "Striving for Excellence",
+        "summary": "<p>Striving for excellence means continuously working to improve your skills, character, and actions to fulfill your highest potential. It is not about perfectionism or competition but about becoming the best version of yourself—spiritually, professionally, and personally.</p><p>True excellence is not just about external success, but about being virtuous.  “Great holiness consists in carrying out the little duties of each moment.”   It is about striving to be honest, disciplined, responsible, and kind, even when no one is watching.</p><p>Excellence is not about self-glorification but about serving others—whether through work, family, or friendships.</p>",
         "articles": [
-          "bible-study",
-          "recollections",
-          "study-weekend"
+          "apostolate",
+          "being-fruitful",
+          "doing-work-well",
+          "finding-purpose",
+          "health",
+          "spiritual-reading"
         ]
-      },
-      "spiritual": {
-        "name": "Spiritual",
-        "summary": "",
-        "articles": [
-          "biblical",
-          "ccc",
-          "formation",
-          "mentoring",
-          "prayers",
-          "readings"
-        ]
-      },
-      "virtues": {
-        "name": "Virtues",
-        "summary": "<p>\"Once a person is striving to improve in the human virtues, his heart is already very close to Christ. If he is a Christian, he will realize that the theological virtues (faith, hope and charity) and all the other virtues which God's grace brings with it are an encouragement never to neglect the good qualities he shares with so many of his fellow men.</p><p>The human virtues are, I insist, the foundation for the supernatural ones. These in turn provide us with constant encouragement to behave as good human beings. In either case, it is not sufficient merely to want to have these virtues. We have to learn how to practise them. Discite benefacere, learn to do good. We need to make a habit of exercising each virtue, by actually being sincere, truthful, balanced, calm and patient… for love is proved by deeds and we cannot love God only by word, but 'with deeds and in truth'.)</p><p>('Human Virtues' in the book 'Friends of God' of Josemaría Escrivá. Link: <a href=\"https://escriva.org/en/amigos-de-dios/human-virtues/\">https://escriva.org/en/amigos-de-dios/human-virtues/</a>)</p>",    
-        "articles": [
-          "coaching",
-          "corporal-works-of-mercy",
-          "life-of-saints",
-          "service-projects",
-          "spiritual-works-of-mercy",
-          "stories",
-          "virtues"
-        ]
-      }
+      }]
+    },
+    {
+      "key": "help",
+      "name": "Help",
+      "summary": "",
+      "articles": [
+        "ask-any-question",
+        "connect-families"
+      ]
     }
-  },
-  "high-school": {
-    "name": "High School",
-    "summary": "",    
-    "articles": [
-      "apologetics",
-      "beatitudes",
-      "counseling",
-      "game-reviews",
-      "movie-club",
-      "reading-list"
-    ]
-  },
-  "excellence": {
-    "name": "Excellence",
-    "summary": "",    
-    "articles": [
-      "apostolate",
-      "being-fruitful",
-      "doing-work-well",
-      "finding-purpose",
-      "health",
-      "spiritual-reading"
-    ]
-  },
-  "help": {
-    "name": "Help",
-    "summary": "",    
-    "articles": [
-      "ask-any-question",
-      "connect-families"
-    ]
-  }
+  ]
 }
