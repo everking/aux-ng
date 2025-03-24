@@ -14,6 +14,6 @@ export class NavigationComponent {
 
   }
   public isCategoryActive(category:string): boolean {
-    return (this.articleService.getCurrentCategory() == category);
+    return (this.articleService.getCurrentCategory()?.key == category);
   }
 }

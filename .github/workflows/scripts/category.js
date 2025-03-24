@@ -2,17 +2,15 @@ const fs = require('fs');
 const path = require('path');
 
 // Read the JSON file
-const dataFolder = "/Users/edeguzma/personal-dev/aux-all/aux-ng-dev/src/assets/data/"
+const dataFolder = "/Users/edeguzma/personal-dev/aux-all/aux-ng-dev/src/assets/"
 const categories = {};
 const categoryOutputFile = "categories.json"
-const files = fs.readdirSync(`${dataFolder}`);
+const files = fs.readdirSync(`data/${dataFolder}`);
 files.forEach((entry, index) => {
     console.log(`file: ${entry}`);
     const rawData = fs.readFileSync(dataFolder + entry, 'utf8');
-//    console.log(rawData);
     const article = JSON.parse(rawData);
-//    console.log(JSON.stringify(article.document, null, 2));
-if (article.document && article.document.fields) {
+    if (article.document && article.document.fields) {
         const articleId = article.document.fields.articleId.stringValue;
         const category = article.document.fields?.meta?.mapValue?.fields?.category?.stringValue;
         const subCategory = article.document.fields?.meta?.mapValue?.fields?.subCategory?.stringValue;

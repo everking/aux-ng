@@ -1,0 +1,19 @@
+.home {
+  display: flex;
+  justify-content: center;
+}
+.terms-page {
+  max-width: 640px;
+  padding:20px;
+}
+.content-details {
+  padding: 20px 40px;
+}
+
+.banner-image {
+  border-radius: 20px;
+  margin-top: 20px;
+  max-width: 600px;
+  width:100%;
+}
+

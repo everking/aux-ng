@@ -1,5 +1,11 @@
 <div class="home">
   <div class="article-list">
-    <app-article-list [maxArticles]="15" [category]="pageId" [maxArticlesPerRow]="10"></app-article-list>
+    <ng-container *ngIf="category as cat">      
+      <ng-container *ngIf="cat.name">
+        <h1>{{ cat.name }}</h1>
+        <div [innerHTML]="cat.summary"></div>
+      </ng-container>
+    </ng-container>
+  <app-article-list [maxArticles]="15" [category]="pageId" [maxArticlesPerRow]="10"></app-article-list>
   </div>
 </div>

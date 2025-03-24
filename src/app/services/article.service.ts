@@ -4,10 +4,19 @@ import { HttpClient } from "@angular/common/http";
 import { LoginService } from './login.service';
 import { DOCUMENT } from '@angular/common';
 
-interface Category {
-  summary: string,
+export interface SubCategory {
+  key: string;
+  name: string;
+  summary: string;
   articles: string[];
-  subCategories: Record<string, { summary:string, articles: string[] }>;
+}
+
+export interface Category {
+  key: string;
+  name: string;
+  summary: string;
+  articles?: string[];
+  subCategories?: SubCategory[];
 }
 
 @Injectable({
@@ -18,19 +27,21 @@ export class ArticleService {
   private articles: Article[] = [];
   private articleMap: Map<string, Article> = new Map();
   private baseHref: string;
-  private currentCategory: string = "";
-  private forceFetch:boolean|null = null;
-  private categories: Record<string, Category> = {};
-
-  public getCurrentCategory():string {
+  private currentCategory: Category | undefined;
+  private categories: Category[] = [];
+  
+  public getCurrentCategory():Category | undefined {
     return this.currentCategory;
   }
 
   public setCurrentCategory(category:string) {
-    this.currentCategory = category;
+    this.currentCategory = this.getCategory(category);
   }
 
   public async loadCategories() {
+    if (this.categories.length > 1) {
+      return;
+    }
     const url = `${this.baseHref}assets/categories.json`;
     const response = await fetch(url, {
       method: 'GET',
@@ -40,20 +51,17 @@ export class ArticleService {
       console.error(`HTTP error! Status: ${response.status}`);
       return;
     }
-    this.categories = await response.json();
+    const data = await response.json();
+    this.categories = data.categories;
   }
 
-  public getSubCategoryMap(category: string):Record<string, {summary: string, articles: string[];}> {
-    return this.categories[category]?.subCategories;
+  public getSubCategories(categoryKey: string): Array<{ key: string; name: string; summary: string; articles: string[] }> {
+    const category = this.getCategory(categoryKey);
+    return category?.subCategories || [];
   }
-
-  public getCategoryMap(category: string):Record<string, {summary:string, articles: string[];}>{
-    return {
-      category: {
-        summary: this.categories[category]?.summary || '',
-        articles: (this.categories[category]?.articles || [])
-      }
-    }
+  
+  public getCategory(categoryKey: string):Category | undefined {
+    return this.categories.find(cat => cat.key === categoryKey);
   }
 
   public subCategoryDetails: Record<string, string> = {
@@ -68,14 +76,6 @@ export class ArticleService {
     "high-school": "High School",
     "excellence": "Excellence"
   };
-
-  public getSubCategory(subCategory: string, category: string = '') {
-    if (category && (subCategory === "default" || subCategory === "category")) {
-      return this.categoryDetails[category];
-    } else {
-      return this.subCategoryDetails[subCategory];
-    }
-  }
 
   public readonly defaultImageURI = "/assets/images/default-image.jpg";
   public readonly NEW_LABEL: string = "[ new ]";

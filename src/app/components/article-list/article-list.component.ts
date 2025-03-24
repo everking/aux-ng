@@ -22,15 +22,14 @@ export class ArticleListComponent implements OnChanges {
   @Input() maxArticles: number = 5;
   @Input() maxArticlesPerRow: number = 2;
   @Input() category = "home";
-  subCategoryMap:Record<string, {summary: string , articles: string[];}> = {} ;
+  subCategories:Array<{ key: string; name: string; summary: string; articles: string[] }> = [];
 
   constructor(public articleService: ArticleService) {
   }
 
   ngOnChanges() {
-    this.subCategoryMap = this.articleService.getSubCategoryMap(this.category);
-    if (!this.subCategoryMap) {
-      this.subCategoryMap = this.articleService.getCategoryMap(this.category);
+    if (this.category) {
+      this.subCategories = this.articleService.getSubCategories(this.category);
     }
   }
 

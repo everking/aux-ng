@@ -6,6 +6,8 @@ import { ArticleComponent } from "./components/article/article.component";
 import { EditArticleComponent } from "./main-pages/edit-article/edit-article.component";
 import { ParameterComponent } from "./main-pages/parameter/parameter.component";
 import { LoginComponent } from "./main-pages/login/login.component";
+import { PrivacyComponent } from "./main-pages/privacy/privacy.component";
+import { TermsComponent } from "./main-pages/terms/terms.component";
 
 export const routes: Routes = [
   /*
@@ -14,6 +16,8 @@ export const routes: Routes = [
   */
   { path: 'home', component: HomeComponent },
   { path: 'ask', component: AskComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'terms', component: TermsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
   { path: 'article/:articleId', component: ArticleComponent },
