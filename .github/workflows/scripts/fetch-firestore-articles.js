@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { updateCategoryPlacement } = require('./sync-category');
+const { updateCategoryPlacement } = require(path.resolve(__dirname, 'sync-category'));
 
 const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
 const dataFolder = 'src/assets/data/';
