@@ -1,13 +1,16 @@
+const fs = require('fs');
+const path = require('path');
+const { updateCategoryPlacement } = require('./sync-category');
+
+const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
+const dataFolder = 'src/assets/data/';
+const updateFilePath = path.join(dataFolder, '../update.json'); // One level up
+const categoriesPath = path.join(dataFolder, '../categories.json');
+
+// Helper: Update categories.json with correct placement
 (async () => {
-  const fs = require('fs');
-  const path = require('path');
-
-  const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
-  const dataFolder = 'src/assets/data/';
-  const updateFilePath = path.join(dataFolder, '../update.json'); // One level up
-  const currentTimestamp = new Date().toISOString(); // Capture the start time
-
-  let lastUpdated = "1970-01-01T00:00:00Z"; // Default fallback if update.json is missing or invalid
+  const currentTimestamp = new Date().toISOString();
+  let lastUpdated = "1970-01-01T00:00:00Z";
 
   // Read last update timestamp
   if (fs.existsSync(updateFilePath)) {
@@ -36,7 +39,7 @@
               op: 'GREATER_THAN', // Fetch articles updated after the given timestamp
               value: { timestampValue: lastUpdated }
             }
-          },
+          }
         }
       })
     });
@@ -59,6 +62,9 @@
 
           fs.writeFileSync(filePath, JSON.stringify(entry, null, 2), 'utf8');
           console.log(`Saved: ${filePath}`);
+
+          // 🔁 Update categories.json placement
+          updateCategoryPlacement(entry.document);
         } else {
           console.warn(`Skipping entry ${index} ${documentName} due to missing articleId.`);
         }

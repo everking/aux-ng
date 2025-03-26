@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 // Read the JSON file
-const dataFolder = "/Users/edeguzma/personal-dev/aux-all/aux-ng-dev/src/assets/"
+const dataFolder = "src/assets"
 const categories = {};
 const categoryOutputFile = "categories.json"
-const files = fs.readdirSync(`data/${dataFolder}`);
+const files = fs.readdirSync(`${dataFolder}/data/`);
 files.forEach((entry, index) => {
     console.log(`file: ${entry}`);
     const rawData = fs.readFileSync(dataFolder + entry, 'utf8');
