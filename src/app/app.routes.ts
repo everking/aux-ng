@@ -8,6 +8,7 @@ import { ParameterComponent } from "./main-pages/parameter/parameter.component";
 import { LoginComponent } from "./main-pages/login/login.component";
 import { PrivacyComponent } from "./main-pages/privacy/privacy.component";
 import { TermsComponent } from "./main-pages/terms/terms.component";
+import { SearchComponent } from "./main-pages/search/search.component";
 
 export const routes: Routes = [
   /*
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
+  { path: 'search/:query', component: SearchComponent },
   { path: 'article/:articleId', component: ArticleComponent },
   { path: 'preview/:articleId', component: ArticleComponent, data: { preview: true } },
   { path: 'edit-article/:articleId', component: EditArticleComponent },

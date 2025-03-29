@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { NgIf } from "@angular/common";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { Article } from "../../interfaces/article";

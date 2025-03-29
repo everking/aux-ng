@@ -1,0 +1,19 @@
+<div class="search-page">
+  <div class="search-box">
+    <input
+      type="text"
+      placeholder="{{placeholder}}"
+      [(ngModel)]="query" (keyup.enter)="search()"
+      class="search-input"
+    />
+  </div>
+  <div *ngIf="searching">Searching...</div>
+  <ul>
+    <li *ngFor="let result of results">
+      <a [routerLink]="['/article', result.id]">{{ result.article?.header }}</a>
+      <div class="article-body">
+        {{ stripHtml(result.article?.body || "") }}
+      </div>
+    </li>
+  </ul>  
+</div>
