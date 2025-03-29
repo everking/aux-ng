@@ -1,0 +1,470 @@
+[
+  {
+    "id": "zacchaeus",
+    "vector": []
+  },
+  {
+    "id": "virtues",
+    "vector": [
+      {
+        "term": "what",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "are",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "virtues",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "study-weekend",
+    "vector": [
+      {
+        "term": "weekend",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "study",
+        "tfidf": 3.662587827025453
+      }
+    ]
+  },
+  {
+    "id": "stories",
+    "vector": [
+      {
+        "term": "stories",
+        "tfidf": 3.662587827025453
+      }
+    ]
+  },
+  {
+    "id": "stories-x",
+    "vector": [
+      {
+        "term": "2",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "x",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "stories",
+        "tfidf": 3.662587827025453
+      }
+    ]
+  },
+  {
+    "id": "sports",
+    "vector": [
+      {
+        "term": "sports",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "sports-group",
+    "vector": []
+  },
+  {
+    "id": "spiritual",
+    "vector": [
+      {
+        "term": "spiritual",
+        "tfidf": 3.374905754573672
+      }
+    ]
+  },
+  {
+    "id": "spiritual-works-of-mercy",
+    "vector": [
+      {
+        "term": "works",
+        "tfidf": 3.662587827025453
+      },
+      {
+        "term": "mercy",
+        "tfidf": 3.662587827025453
+      },
+      {
+        "term": "spiritual",
+        "tfidf": 3.374905754573672
+      },
+      {
+        "term": "of",
+        "tfidf": 3.374905754573672
+      }
+    ]
+  },
+  {
+    "id": "spiritual-reading",
+    "vector": [
+      {
+        "term": "reading",
+        "tfidf": 3.662587827025453
+      },
+      {
+        "term": "spiritual",
+        "tfidf": 3.374905754573672
+      }
+    ]
+  },
+  {
+    "id": "service-projects",
+    "vector": [
+      {
+        "term": "service",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "projects",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "recollections",
+    "vector": [
+      {
+        "term": "recollections",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "readings",
+    "vector": [
+      {
+        "term": "readings",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "reading-list",
+    "vector": [
+      {
+        "term": "lists",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "reading",
+        "tfidf": 3.662587827025453
+      }
+    ]
+  },
+  {
+    "id": "prayers",
+    "vector": [
+      {
+        "term": "prayers",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "pointers",
+    "vector": []
+  },
+  {
+    "id": "movie-club",
+    "vector": [
+      {
+        "term": "movie",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "reviews",
+        "tfidf": 3.662587827025453
+      }
+    ]
+  },
+  {
+    "id": "mentoring",
+    "vector": [
+      {
+        "term": "mentoring",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "life-of-saints",
+    "vector": [
+      {
+        "term": "life",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "saints",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "of",
+        "tfidf": 3.374905754573672
+      }
+    ]
+  },
+  {
+    "id": "health",
+    "vector": [
+      {
+        "term": "health",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "game-reviews",
+    "vector": [
+      {
+        "term": "game",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "reviews",
+        "tfidf": 3.662587827025453
+      }
+    ]
+  },
+  {
+    "id": "friendship-clubs",
+    "vector": []
+  },
+  {
+    "id": "formation",
+    "vector": [
+      {
+        "term": "formation",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "finding-purpose",
+    "vector": [
+      {
+        "term": "finding",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "purpose",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "faith-reason",
+    "vector": [
+      {
+        "term": "faith",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "reason",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "eastwood",
+    "vector": []
+  },
+  {
+    "id": "doing-work-well",
+    "vector": [
+      {
+        "term": "doing",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "work",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "well",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "culture",
+    "vector": [
+      {
+        "term": "culture",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "counseling",
+    "vector": [
+      {
+        "term": "counseling",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "corporal-works-of-mercy",
+    "vector": [
+      {
+        "term": "corporal",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "works",
+        "tfidf": 3.662587827025453
+      },
+      {
+        "term": "mercy",
+        "tfidf": 3.662587827025453
+      },
+      {
+        "term": "of",
+        "tfidf": 3.374905754573672
+      }
+    ]
+  },
+  {
+    "id": "connect-families",
+    "vector": [
+      {
+        "term": "connect",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "families",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "coming-soon",
+    "vector": []
+  },
+  {
+    "id": "coaching",
+    "vector": [
+      {
+        "term": "coaching",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "ccc",
+    "vector": [
+      {
+        "term": "catechism",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "biblical",
+    "vector": [
+      {
+        "term": "biblical",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "bible-study",
+    "vector": [
+      {
+        "term": "bible",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "study",
+        "tfidf": 3.662587827025453
+      }
+    ]
+  },
+  {
+    "id": "being-fruitful",
+    "vector": [
+      {
+        "term": "being",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "fruitful",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "beatitudes",
+    "vector": [
+      {
+        "term": "living",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "the",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "beatitudes",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "ask-any-question",
+    "vector": [
+      {
+        "term": "ask",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "any",
+        "tfidf": 4.0680529351336165
+      },
+      {
+        "term": "questions",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "apostolate",
+    "vector": [
+      {
+        "term": "apostolate",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "apologetics",
+    "vector": [
+      {
+        "term": "apologetics",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  },
+  {
+    "id": "all-articles",
+    "vector": []
+  },
+  {
+    "id": "academic",
+    "vector": [
+      {
+        "term": "academic",
+        "tfidf": 4.0680529351336165
+      }
+    ]
+  }
+]
