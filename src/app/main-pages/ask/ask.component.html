@@ -5,7 +5,7 @@
         type="text"
         placeholder="{{placeholder}}"
         [(ngModel)]="query"
-        (keyup.enter)="search()"
+        (keydown.enter)="search()"
         class="search-input"
       />
     </div>
