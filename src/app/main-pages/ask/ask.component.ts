@@ -19,7 +19,9 @@ export class AskComponent {
   constructor(private articleService: ArticleService, private router: Router) {    
   }
   search() {
-    this.router.navigate(['/search', this.query]);
+    this.router.navigate(['/search'], {
+      queryParams: { q: this.query.trim() }
+    });
   }
 
   ngOnInit() {

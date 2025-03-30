@@ -22,7 +22,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'search/:query', component: SearchComponent },
   { path: 'article/:articleId', component: ArticleComponent },
   { path: 'preview/:articleId', component: ArticleComponent, data: { preview: true } },
   { path: 'edit-article/:articleId', component: EditArticleComponent },

@@ -61,8 +61,8 @@ export class SearchComponent {
   }
 
   async ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const query = params.get("query");
+    this.route.queryParamMap.subscribe(params => {
+      const query = params.get("q");
       if (query) {
         this.query = query;
         this.getIndexAndSearch();
@@ -73,7 +73,9 @@ export class SearchComponent {
   search() {
     const trimmed = this.query?.trim();
     if (trimmed){
-      this.router.navigate(['/search', trimmed]);
+      this.router.navigate(['/search'], {
+        queryParams: { "q": trimmed }
+      });
     }
   }
 
