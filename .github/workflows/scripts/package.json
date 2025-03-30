@@ -1,0 +1,17 @@
+{
+  "name": "aux-scripts",
+  "version": "1.0.0",
+  "description": "Auxilium GH Actions scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric de Guzman",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.1",
+    "openai": "^4.89.0"
+  }
+}
