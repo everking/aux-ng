@@ -2,11 +2,12 @@
   <div class="content">
     <div class="search-box">
       <input
-        type="text"
+        class="search-input"
         placeholder="{{placeholder}}"
+        type="text"
+        inputmode="search"
         [(ngModel)]="query"
         (keydown.enter)="search()"
-        class="search-input"
       />
     </div>
   
