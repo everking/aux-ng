@@ -5,6 +5,7 @@
 .search-page {
   max-width: 640px;
   padding:20px;
+  min-height: 500px;
 }
 .content-details {
   padding: 20px 40px;

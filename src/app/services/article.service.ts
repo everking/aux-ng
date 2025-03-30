@@ -136,7 +136,7 @@ export class ArticleService {
           return article;
         }
       }
-      const url = `${this.baseHref}assets/data/${articleId}.json`
+      const url = `${this.baseHref}assets/data/articles/${articleId}.json`
       const response = await fetch(url, {
         method: 'GET',
       });

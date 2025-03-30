@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 
 import { ArticleService } from '../../services/article.service';
 import { Article } from '../../interfaces/article';
@@ -31,14 +31,15 @@ export class SearchComponent {
   index: { id: string, embedding: number[] }[] = [];
   results: { id: string, score: number, article?: Article | undefined | null }[] = [];
 
-  constructor( private articleService: ArticleService, private route: ActivatedRoute ) {
+  constructor( private articleService: ArticleService, 
+    private route: ActivatedRoute, private router: Router) {
     // Load index using native fetch
   }
 
   getPlaceholder() {
     return this.placeholder;
   }
-  
+
   getIndex() {
     if (this.index.length > 0) {
       console.log('Index already loaded');
@@ -49,7 +50,7 @@ export class SearchComponent {
       .then(data => {
         this.index = data;
         if (this.query) {
-          this.search();
+          this.performSearch();
         }
         console.log('Index loaded:', this.index);
       })
@@ -57,14 +58,24 @@ export class SearchComponent {
   }
 
   async ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.query = params['query'];
-      console.log('Search query:', this.query);
+    this.route.paramMap.subscribe(params => {
+      const query = params.get("query");
+      if (query) {
+        this.query = query;
+        this.performSearch();
+      }
     });
     this.getIndex();
   }
 
-  async search() {
+  search() {
+    const trimmed = this.query?.trim();
+    if (trimmed){
+      this.router.navigate(['/search', trimmed]);
+    }
+  }
+
+  async performSearch() {
     const trimmedQuery = this.query.trim();
     if (!trimmedQuery) return;
 

@@ -58,7 +58,7 @@ const subCategory = "whole-child";
 import fs from 'fs';
 import path from 'path';
 
-const dataFolder = "/Users/edeguzma/personal-dev/aux-all/aux-ng/src/assets/data/";
+const dataFolder = "/Users/edeguzma/personal-dev/aux-all/aux-ng/src/assets/data/articles/";
 const documentNames = [];
 
 function readJsonFiles() {

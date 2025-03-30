@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Read the JSON file
-const dataFolder = "/Users/edeguzma/personal-dev/aux-all/aux-ng-dev/src/assets/data/"
+const dataFolder = "/Users/edeguzma/personal-dev/aux-all/aux-ng-dev/src/assets/data/articles/";
 const articlesJsonFile = "all-articles.json";
 const rawData = fs.readFileSync(dataFolder + articlesJsonFile, 'utf8');
 const articles = JSON.parse(rawData);
