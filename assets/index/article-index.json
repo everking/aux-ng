@@ -69,10 +69,6 @@
     ]
   },
   {
-    "id": "sports-group",
-    "vector": []
-  },
-  {
     "id": "spiritual",
     "vector": [
       {
@@ -169,10 +165,6 @@
     ]
   },
   {
-    "id": "pointers",
-    "vector": []
-  },
-  {
     "id": "movie-club",
     "vector": [
       {
@@ -232,10 +224,6 @@
         "tfidf": 3.662587827025453
       }
     ]
-  },
-  {
-    "id": "friendship-clubs",
-    "vector": []
   },
   {
     "id": "formation",
@@ -344,10 +332,6 @@
         "tfidf": 4.0680529351336165
       }
     ]
-  },
-  {
-    "id": "coming-soon",
-    "vector": []
   },
   {
     "id": "coaching",
