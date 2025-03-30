@@ -40,9 +40,12 @@ export class SearchComponent {
     return this.placeholder;
   }
 
-  getIndex() {
+  getIndexAndSearch() {
     if (this.index.length > 0) {
       console.log('Index already loaded');
+      if (this.query) {
+        this.performSearch();
+      }
       return;
     }
     fetch(INDEX_URL)
@@ -62,10 +65,9 @@ export class SearchComponent {
       const query = params.get("query");
       if (query) {
         this.query = query;
-        this.performSearch();
+        this.getIndexAndSearch();
       }
     });
-    this.getIndex();
   }
 
   search() {
@@ -77,17 +79,21 @@ export class SearchComponent {
 
   async performSearch() {
     const trimmedQuery = this.query.trim();
+    const cacheStorageIndex = "queryCache";
     if (!trimmedQuery) return;
 
     let queryEmbedding: number[];
 
-    const cached = localStorage.getItem(trimmedQuery);
+    const queryCache = JSON.parse(localStorage.getItem(cacheStorageIndex) || '{}');
+
+    const cached = queryCache[trimmedQuery];
     if (cached) {
       console.log('Using cached embedding');
       queryEmbedding = JSON.parse(cached);
     } else {
       queryEmbedding = await this.embedQuery(trimmedQuery);
-      localStorage.setItem(trimmedQuery, JSON.stringify(queryEmbedding));
+      queryCache[trimmedQuery] = JSON.stringify(queryEmbedding);
+      localStorage.setItem(cacheStorageIndex, JSON.stringify(queryCache));
     }
 
     const scoredResults = this.index.map(entry => ({
