@@ -16,17 +16,15 @@
   <script>
     window.onload = function() {
       const basePath = '/';
-      let currentPath = window.location.pathname;
-      let relativePath = currentPath;
-      if (basePath !== '/') {
-        const patternPath = `^${basePath}`
-        relativePath = currentPath.replace(patternPath, '');
-      }
-      if (!relativePath.startsWith('/')) {
-        relativePath = '/' + relativePath;
-      }
-      document.getElementById('redirect-message').innerText = `Redirecting to ${basePath}?ref=${relativePath}`;
-      window.location.href = `${basePath}?ref=${relativePath}`;
+      
+      // Get full path including query string and hash
+      const fullPath = window.location.pathname + window.location.search + window.location.hash;
+      
+      // Show user what's happening
+      document.getElementById('redirect-message').innerText = `Redirecting to ${basePath}?ref=${encodeURIComponent(fullPath)}`;
+      
+      // Redirect to index.html with ref param
+      window.location.href = `${basePath}?ref=${encodeURIComponent(fullPath)}`;
     };
   </script>
 </body>
