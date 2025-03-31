@@ -20,7 +20,8 @@ export class ParameterComponent implements OnInit {
       if (!this.refParam) {
         this.router.navigate(['/home']);
       } else {
-        this.router.navigate([this.refParam]);
+        const decodedPath = decodeURIComponent(this.refParam);
+        this.router.navigateByUrl(decodedPath);
       }
     });
   }
