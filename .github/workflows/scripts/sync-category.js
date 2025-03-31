@@ -3,8 +3,8 @@ const path = require('path');
 
 const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
 const dataFolder = 'src/assets/data/articles/';
-const updateFilePath = path.join(dataFolder, '../update.json'); // One level up
-const categoriesPath = path.join(dataFolder, '../categories.json');
+const updateFilePath = path.join(dataFolder, '../../update.json'); // One level up
+const categoriesPath = path.join(dataFolder, '../../categories.json');
 
 // Helper: Update categories.json with correct placement
 function updateCategoryPlacement(article) {

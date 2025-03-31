@@ -1,15 +1,29 @@
 const fs = require('fs');
 const path = require('path');
+const { GoogleAuth } = require('google-auth-library');
+
 const { updateCategoryPlacement } = require(path.resolve(__dirname, 'sync-category'));
 
 const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
 const dataFolder = 'src/assets/data/articles';
 const updateFilePath = path.join(dataFolder, '../update.json'); // One level up
 
+async function getAccessToken() {
+  const auth = new GoogleAuth({
+    keyFile: 'firebase-key.json',
+    scopes: ['https://www.googleapis.com/auth/datastore']
+  });
+
+  const client = await auth.getClient();
+  const token = await client.getAccessToken();
+  return token.token;
+}
+
 // Helper: Update categories.json with correct placement
 (async () => {
   const currentTimestamp = new Date().toISOString();
   let lastUpdated = "1970-01-01T00:00:00Z";
+  const token = await getAccessToken();
 
   // Read last update timestamp
   if (fs.existsSync(updateFilePath)) {
@@ -28,7 +42,7 @@ const updateFilePath = path.join(dataFolder, '../update.json'); // One level up
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.FIREBASE_TOKEN}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         structuredQuery: {
