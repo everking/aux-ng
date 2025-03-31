@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
 const dataFolder = 'src/assets/data/articles/';
-const updateFilePath = path.join(dataFolder, '../../update.json'); // One level up
 const categoriesPath = path.join(dataFolder, '../../categories.json');
 
 // Helper: Update categories.json with correct placement
@@ -20,15 +18,9 @@ function updateCategoryPlacement(article) {
   const categoriesData = JSON.parse(fs.readFileSync(categoriesPath, 'utf-8'));
   const isDefault = !subCategoryKey || subCategoryKey === 'default';
 
-  const currentCategory = categoriesData.categories.find(cat => {
-    if (cat.key !== categoryKey) return false;
-
-    if (isDefault) {
-      return cat.articles?.includes(articleId);
-    } else {
-      return cat.subCategories?.some(sub => sub.key === subCategoryKey && sub.articles?.includes(articleId));
-    }
-  });
+  const currentCategory = categoriesData.categories.find(cat => 
+    cat.subCategories?.some(sub => sub.key === subCategoryKey && sub.articles?.includes(articleId))
+  );
 
   // ✅ If already in the correct location, exit early
   if (currentCategory) {
