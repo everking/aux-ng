@@ -27,7 +27,8 @@ const updateFilePath = path.join(dataFolder, '../update.json'); // One level up
     const response = await fetch(queryUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.FIREBASE_TOKEN}`
       },
       body: JSON.stringify({
         structuredQuery: {
