@@ -12,6 +12,7 @@
     "dotenv": "^16.4.7",
     "fs-extra": "^11.3.0",
     "glob": "^11.0.1",
+    "google-auth-library": "^9.15.1",
     "openai": "^4.89.0"
   }
 }

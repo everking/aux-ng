@@ -19,7 +19,10 @@ jobs:
         node-version: '20' # Specify the Node.js version you're using
 
     - name: Install node-fetch dependency
-      run: npm install node-fetch # Use native fetch with node-fetch package
+      run: npm install node-fetch google-auth-library # Use native fetch with node-fetch package
+
+    - name: Write Firebase key
+      run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > firebase-key.json
 
     - name: Fetch data from Firestore
       run: |
