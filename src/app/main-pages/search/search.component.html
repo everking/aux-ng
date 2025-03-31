@@ -6,6 +6,7 @@
       type="text"
       [(ngModel)]="query"
       (keyup.enter)="search()"
+      (keydown.enter)="downSearch()"
     />
   </div>
   <div *ngIf="searching">Searching...</div>

@@ -41,6 +41,7 @@ export class SearchComponent {
   }
 
   getIndexAndSearch() {
+    console.log('getIndexAndSearch');
     if (this.index.length > 0) {
       console.log('Index already loaded');
       if (this.query) {
@@ -48,6 +49,7 @@ export class SearchComponent {
       }
       return;
     }
+    console.log('fetching index');
     fetch(INDEX_URL)
       .then(res => res.json())
       .then(data => {
@@ -61,6 +63,7 @@ export class SearchComponent {
   }
 
   async ngOnInit() {
+    console.log('Search component initialized');
     this.route.queryParamMap.subscribe(params => {
       const query = params.get("q");
       if (query) {
@@ -70,9 +73,16 @@ export class SearchComponent {
     });
   }
 
+  downSearch() {
+    console.log('Down search triggered');
+    this.search();
+  }
+  
   search() {
+    console.log('Search triggered with query:', this.query);
     const trimmed = this.query?.trim();
     if (trimmed){
+      console.log('Navigating to search with query:', trimmed);
       this.router.navigate(['/search'], {
         queryParams: { "q": trimmed }
       });
@@ -80,6 +90,7 @@ export class SearchComponent {
   }
 
   async performSearch() {
+    console.log('Performing search with query:', this.query);
     const trimmedQuery = this.query.trim();
     const cacheStorageIndex = "queryCache";
     if (!trimmedQuery) return;
