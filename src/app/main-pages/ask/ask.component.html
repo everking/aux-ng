@@ -1,13 +1,24 @@
 <div class="home">
   <div class="content">
-    <div class="search-box">
-      <input
-        class="search-input"
-        placeholder="{{placeholder}}"
-        type="text"
-        [(ngModel)]="query"
-        (keydown.enter)="search()"
-      />
+    <div class="search-container">
+      <div class="search-box">
+        <input
+          class="search-input"
+          placeholder="{{placeholder}}"
+          type="text"
+          inputmode="search"
+          [(ngModel)]="query"
+          (keydown.enter)="search()"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+          (ngModelChange)="onQueryChange($event)"
+        />
+        <ul *ngIf="showDropdown && mruQueries.length" class="dropdown-list">
+          <li *ngFor="let q of mruQueries" (click)="query = q; search()">
+            {{ q }}
+          </li>
+        </ul>
+      </div>
     </div>
   
     <img class="banner-image" src="assets/images/resources.jpeg" alt="Auxilium"/>

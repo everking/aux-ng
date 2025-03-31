@@ -41,3 +41,32 @@
   border: none;
   cursor: pointer;
 }
+
+.search-container {
+  position: relative;
+  width: 400px;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 0 0 10px 10px;
+  z-index: 1000;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-list li:hover {
+  background-color: #f0f0f0;
+}
