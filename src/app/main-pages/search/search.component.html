@@ -5,8 +5,7 @@
       placeholder="{{placeholder}}"
       type="text"
       [(ngModel)]="query"
-      (keyup.enter)="search()"
-      (keydown.enter)="downSearch()"
+      (keydown.enter)="search()"
     />
   </div>
   <div *ngIf="searching">Searching...</div>
