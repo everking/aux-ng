@@ -45,8 +45,9 @@ jobs:
       run: |
         git fetch origin gh-pages
         rm -rf gh-pages-worktree
-        git worktree add gh-pages-worktree origin/gh-pages
-  
+        git branch gh-pages origin/gh-pages || true
+        git worktree add gh-pages-worktree gh-pages
+
     - name: Copy assets to gh-pages worktree
       run: |
         rm -rf gh-pages-worktree/assets
