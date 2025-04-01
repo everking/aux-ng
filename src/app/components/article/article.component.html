@@ -15,7 +15,7 @@
       <br/>
     </span>
 
-    <div class="article-body" [innerHTML]="article.body"></div>
+    <div class="article-body" [innerHTML]="safeBodyHtml"></div>
   </div>
 </ng-container>
 <ng-template #loadingArticle>
