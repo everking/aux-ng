@@ -28,16 +28,53 @@ jobs:
       run: |
         # Use fetch to query Firestore
         node .github/workflows/scripts/fetch-firestore-articles.js
+
     - name: Commit and push changes
       run: |
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
         if ! git diff --quiet src/assets/; then
           git add src/assets/
-          git commit -m "Update Firestore articles"
+          git commit -m "Update Firestore articles in main."
           git push
         else
-          echo "No changes to commit"
+          echo "No changes to commit on main"
         fi
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}g
+
+    - name: Prepare gh-pages worktree
+      run: |
+        git fetch origin gh-pages
+        rm -rf gh-pages-worktree
+        git worktree add gh-pages-worktree origin/gh-pages
+  
+    - name: Copy assets to gh-pages worktree
+      run: |
+        rm -rf gh-pages-worktree/assets
+        cp -r src/assets gh-pages-worktree/assets
+  
+    - name: Get latest commit hash from main branch
+      id: get_main_hash
+      run: |
+        MAIN_HASH=$(git rev-parse --short=7 HEAD)
+        echo "hash=$MAIN_HASH" >> $GITHUB_OUTPUT
+
+    - name: Create version.json in gh-pages worktree
+      run: |
+        TIMESTAMP=$(node -e "console.log(new Date().toString())")
+        echo "{" > gh-pages-worktree/version.json
+        echo "  \"updated\": \"${TIMESTAMP}\"," >> gh-pages-worktree/version.json
+        echo "  \"version\": \"${{ steps.get_main_hash.outputs.hash }}\"" >> gh-pages-worktree/version.json
+        echo "}" >> gh-pages-worktree/version.json
+
+    - name: Commit and push to gh-pages branch
+      run: |
+        cd gh-pages-worktree
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        if ! git diff --quiet; then
+          git add assets/ version.json
+          git commit -m "Update Firestore articles and version info in gh-pages"
+          git push origin gh-pages
+        else
+          echo "No changes to commit on gh-pages"
+        fi
