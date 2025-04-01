@@ -5,7 +5,7 @@ import { Article } from "../../interfaces/article";
 import { ArticleService } from "../../services/article.service";
 import { LoginService } from '../../services/login.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import e from 'express';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-article',
@@ -25,6 +25,21 @@ export class ArticleComponent implements OnInit {
   externalLinkCheck: boolean = false;
   isPreview: boolean = false;
   private observer!: MutationObserver; 
+  safeBodyHtml: SafeHtml | null = null;
+
+  readonly YOUTUBE = {
+    WIDTH: 480,
+    HEIGHT: 270
+   } // 315
+
+  constructor(
+    private route: ActivatedRoute,
+    private loginService: LoginService,
+    private articleService: ArticleService,
+    private elRef: ElementRef,
+    private renderer: Renderer2,
+    private sanitizer: DomSanitizer) {
+  }
 
   ngAfterViewChecked() {
     setTimeout(() => this.updateExternalLinks(), 0);
@@ -53,29 +68,38 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-  constructor(
-    private route: ActivatedRoute,
-    private loginService: LoginService,
-    private articleService: ArticleService,
-    private elRef: ElementRef,
-    private renderer: Renderer2) {
-  }
-
   async ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
     this.isPreview = this.route.snapshot.data['preview'] || false;
     this.editLink = `/edit-article/${this.articleId}`;
     this.article = await this.articleService.fetchArticle(this.articleId, this.isPreview);
-    console.log(`body: ${this.article?.body}`);
+    if (this.article?.body) {
+      this.safeBodyHtml = this.sanitizer.bypassSecurityTrustHtml(
+        this.convertYoutubeLinks(this.article.body)
+      );
+    }
+
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
       this.initPreview(this.articleId);
     });
   }
 
+  convertYoutubeLinks(html: string): string {
+    const anchorRegex = /<a\s+href=["'](?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})["']\s*>(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}<\/a>/g;
+  
+    return html.replace(anchorRegex, (_, videoId) => {
+      return `
+        <div class="youtube-embed">
+          <iframe width="${this.YOUTUBE.WIDTH}" height="${this.YOUTUBE.HEIGHT}"
+            src="https://www.youtube.com/embed/${videoId}"
+            frameborder="0" allowfullscreen></iframe>
+        </div>`;
+    });
+  }
+
   async initPreview(articleId: string) {
-    console.log("initPreview")
     this.article = await this.articleService.fetchArticle(articleId, this.isPreview);    
   }
 }
