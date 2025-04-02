@@ -10,6 +10,7 @@ export interface ArticleMeta {
   tags?: string [];
   created?: Date;
   modified?: Date;
+  lastUpdated?: string;
 }
 
 export interface Article {

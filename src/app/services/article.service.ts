@@ -26,6 +26,7 @@ export interface Category {
 export class ArticleService {
   private articles: Article[] = [];
   private articleMap: Map<string, Article> = new Map();
+  private cacheArticleMap: Map<string, Article> = new Map();
   private baseHref: string;
   private currentCategory: Category | undefined;
   private categories: Category[] = [];
@@ -96,7 +97,7 @@ export class ArticleService {
     return header
   }
 
-  public getArticleFromFirebase(document: any):Article {
+  public firebaseToArticle(document: any):Article {
     const fields = document?.fields;
     const name = document?.name;
     console.log(`name: ${name}`);
@@ -115,10 +116,21 @@ export class ArticleService {
         name: document?.name?.toString(),
         category: fields?.meta?.mapValue?.fields?.category?.stringValue || '',
         subCategory: fields?.meta?.mapValue?.fields?.subCategory?.stringValue || 'default',
+        lastUpdated: fields?.meta?.mapValue?.fields?.lastUpdated?.timestampValue || '',
         documentId
       },
       articleId: fields?.articleId?.stringValue ?? crypto.randomUUID(),
     };
+  }
+
+  public isOld(articleId: string) {
+    const cacheLastUpdated = this.articleMap.get(articleId)?.meta.lastUpdated || '';
+    const dbLastUpdate = this.cacheArticleMap.get(articleId)?.meta.lastUpdated || '';
+    return cacheLastUpdated !== dbLastUpdate;
+  }
+
+  public getCachedArticle(articleId: string) {
+    return this.cacheArticleMap.get(articleId);
   }
 
   public async fetchArticle(articleId: string, isPreview: boolean = false): Promise<Article | null> {
@@ -152,7 +164,10 @@ export class ArticleService {
         return null;
       }
 
-      this.articleMap.set(articleId, this.getArticleFromFirebase(document.document));
+      const cacheArticle = this.firebaseToArticle(document.document)
+      this.articleMap.set(articleId, cacheArticle);
+      this.cacheArticleMap.set(articleId, cacheArticle);
+
       return this.articleMap.get(articleId)!;
     } catch (error) {
       console.error('Error fetching articles:', error);
@@ -203,7 +218,7 @@ export class ArticleService {
       }
       const document = documents[0].document;
 
-      this.articleMap.set(articleId, this.getArticleFromFirebase(document));
+      this.articleMap.set(articleId, this.firebaseToArticle(document));
       return this.articleMap.get(articleId)!;
     } catch (error) {
       console.error('Error fetching articles:', error);

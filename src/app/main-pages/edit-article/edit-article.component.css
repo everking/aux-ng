@@ -67,7 +67,7 @@ pre {
   background-color: #0056b3;
 }
 
-.preview-button, .save-button {
+.cancel-button, .preview-button, .save-button {
   margin: 10px 10px;
   background-color: #637d98; /* Modern blue */
   color: white;

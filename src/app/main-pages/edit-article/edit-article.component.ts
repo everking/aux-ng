@@ -102,6 +102,10 @@ export class EditArticleComponent implements OnInit {
     this.isEditing = !this.isEditing;
   }
 
+  onCancelClick() {
+    this.router.navigate([`/article/${this.articleId}`]);
+  }
+
   async onSaveClick() {
     const article: Article = {
       articleId: this.articleId,
