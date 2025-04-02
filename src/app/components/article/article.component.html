@@ -10,7 +10,8 @@
     </div>
 
     <span *ngIf="isLoggedIn">
-      [ <a class="editLink" [routerLink]="[editLink]">Edit Article</a> | <a class="editLink" (click)="getLatestArticle()">Preview</a> ]
+       <a class="editLink" [routerLink]="[editLink]">Edit Article</a> | 
+      <a class="editLink" (click)="previewArticle()">Preview</a><span *ngIf="isPreview">&nbsp;&nbsp;<img [src]="getStatusImage()" /> </span>
       <br/>
       <br/>
     </span>

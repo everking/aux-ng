@@ -4,7 +4,7 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { Article } from "../../interfaces/article";
 import { ArticleService } from "../../services/article.service";
 import { LoginService } from '../../services/login.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -38,17 +38,29 @@ export class ArticleComponent implements OnInit {
     private articleService: ArticleService,
     private elRef: ElementRef,
     private renderer: Renderer2,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    private router: Router
+  ) {
   }
 
   ngAfterViewChecked() {
     setTimeout(() => this.updateExternalLinks(), 0);
   }
 
-  public getLatestArticle() {
-    this.articleService.fetchArticle(this.articleId, true).then((article: Article|null) => {
-      this.article = article;
-    });
+  public previewArticle() {
+    this.router.navigate([`/preview/${this.articleId}`]);
+  }
+
+  public isOld(): boolean {
+    return this.articleService.isOld(this.articleId);
+  }
+
+  public getStatusImage() {
+    if (this.isOld()) {
+      return "/assets/images/warn-16.png"
+    } else {
+      return "/assets/images/ok-16.png"
+    }
   }
 
   private updateExternalLinks() {
@@ -84,6 +96,7 @@ export class ArticleComponent implements OnInit {
       this.articleId = params['articleId'];
       this.initPreview(this.articleId);
     });
+    this.articleService.setCurrentCategory(this.article?.meta.category || "");
   }
 
   convertYoutubeLinks(html: string): string {

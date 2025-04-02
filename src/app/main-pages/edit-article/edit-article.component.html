@@ -33,6 +33,7 @@
     </angular-editor>
   </div>
   <button class="save-button" (click)="onSaveClick()" [disabled]="!hasChanged()" [ngClass]="{'disabled-button': !hasChanged()}">Save</button>
+  <button class="cancel-button" (click)="onCancelClick()">Cancel</button>
   <p><span>{{saveMessage}}</span></p>
 
 </div>
