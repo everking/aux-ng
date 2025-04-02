@@ -58,9 +58,9 @@ export class EditArticleComponent implements OnInit {
     spellcheck: true,
     height: '15rem',
     minHeight: '5rem',
-    placeholder: 'Enter text here...',
+    placeholder: 'Start writing article here...',
     translate: 'no',
-    defaultFontName: 'Arial',
+    defaultFontName: 'EB Garamond',
     upload: (file: File): Observable<HttpEvent<UploadResponse>> => {
       return new Observable((observer: Observer<HttpEvent<UploadResponse>>) => {
         this.resizeAndCropImage(file, this.embedImageProps.width,  this.embedImageProps.height).then((base64Image) => {
