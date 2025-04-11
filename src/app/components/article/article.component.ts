@@ -80,6 +80,14 @@ export class ArticleComponent implements OnInit {
     this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
     this.isPreview = this.route.snapshot.data['preview'] || false;
     this.editLink = `/edit-article/${this.articleId}`;
+    if (this.isPreview) {
+      if (this.articleService.getCachedArticle(this.articleId) === undefined) {
+        const cachedArticle = await this.articleService.fetchArticle(this.articleId, false);
+        if (cachedArticle) {
+          this.articleService.setCachedArticle(this.articleId, cachedArticle);
+        }
+      }
+    }
     this.article = await this.articleService.fetchArticle(this.articleId, this.isPreview);
     if (this.article?.body) {
       this.safeBodyHtml = this.sanitizer.bypassSecurityTrustHtml(
