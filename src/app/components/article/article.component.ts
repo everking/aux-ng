@@ -108,6 +108,12 @@ export class ArticleComponent implements OnInit {
     html = html.replace(rawLinkRegex, (...args) => {
       return renderIframe(args[1]); // args[1] = videoId
     });
+
+    html = html.replace(/(^|[^"'=])((https?:\/\/[^\s<>"']+))/g, (match, prefix, url) => {
+      // Don't change it if it's already inside an anchor or another HTML tag
+      return `${prefix}<a href="${url}" target="_blank">${url}</a>`;
+    });
+
     return html;
   }
 
