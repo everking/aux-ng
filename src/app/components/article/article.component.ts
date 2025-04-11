@@ -27,11 +27,6 @@ export class ArticleComponent implements OnInit {
   private observer!: MutationObserver; 
   safeBodyHtml: SafeHtml | null = null;
 
-  readonly YOUTUBE = {
-    WIDTH: 480,
-    HEIGHT: 270
-   } // 315
-
   constructor(
     private route: ActivatedRoute,
     private loginService: LoginService,
@@ -104,7 +99,7 @@ export class ArticleComponent implements OnInit {
     const rawLinkRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?:[^\s<]*)/g;
     const renderIframe = (videoId: string): string => `
       <div class="youtube-embed">
-        <iframe width="${this.YOUTUBE.WIDTH}" height="${this.YOUTUBE.HEIGHT}"
+        <iframe
           src="https://www.youtube.com/embed/${videoId}"
           frameborder="0" allowfullscreen></iframe>
       </div>`;
