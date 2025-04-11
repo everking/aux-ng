@@ -100,16 +100,20 @@ export class ArticleComponent implements OnInit {
   }
 
   convertYoutubeLinks(html: string): string {
-    const anchorRegex = /<a\s+href=["'](?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})["']\s*>(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}<\/a>/g;
+    const anchorRegex = /<a\s+[^>]*href=["'](?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?:[^\s"']*)["'][^>]*>.*?<\/a>/g;
+    const rawLinkRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?:[^\s<]*)/g;
+    const renderIframe = (videoId: string): string => `
+      <div class="youtube-embed">
+        <iframe width="${this.YOUTUBE.WIDTH}" height="${this.YOUTUBE.HEIGHT}"
+          src="https://www.youtube.com/embed/${videoId}"
+          frameborder="0" allowfullscreen></iframe>
+      </div>`;
   
-    return html.replace(anchorRegex, (_, videoId) => {
-      return `
-        <div class="youtube-embed">
-          <iframe width="${this.YOUTUBE.WIDTH}" height="${this.YOUTUBE.HEIGHT}"
-            src="https://www.youtube.com/embed/${videoId}"
-            frameborder="0" allowfullscreen></iframe>
-        </div>`;
+    html = html.replace(anchorRegex, (_, videoId) => renderIframe(videoId));
+    html = html.replace(rawLinkRegex, (...args) => {
+      return renderIframe(args[1]); // args[1] = videoId
     });
+    return html;
   }
 
   async initPreview(articleId: string) {
