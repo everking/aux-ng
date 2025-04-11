@@ -124,9 +124,16 @@ export class ArticleService {
   }
 
   public isOld(articleId: string) {
-    const cacheLastUpdated = this.articleMap.get(articleId)?.meta.lastUpdated || '';
-    const dbLastUpdate = this.cacheArticleMap.get(articleId)?.meta.lastUpdated || '';
+    if (this.cacheArticleMap.get(articleId) === undefined) {      
+      return false;
+    }
+    const dbLastUpdate = this.articleMap.get(articleId)?.meta.lastUpdated || '';
+    const cacheLastUpdated = this.cacheArticleMap.get(articleId)?.meta.lastUpdated || '';
     return cacheLastUpdated !== dbLastUpdate;
+  }
+
+  public setCachedArticle(articleId: string, article: Article) {
+    return this.cacheArticleMap.set(articleId, article);
   }
 
   public getCachedArticle(articleId: string) {
