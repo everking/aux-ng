@@ -109,11 +109,23 @@ export class ArticleComponent implements OnInit {
       return renderIframe(args[1]); // args[1] = videoId
     });
 
+    const aTagMap: Record<string, string> = {};
+    let counter = 0;
+    html = html.replace(/<a\b[^>]*>.*?<\/a>/gi, (match) => {
+      const key = `__ATAG_${counter++}__`;
+      aTagMap[key] = match;
+      return key;
+    });
+
     html = html.replace(/(^|[^"'=])((https?:\/\/[^\s<>"']+))/g, (match, prefix, url) => {
       // Don't change it if it's already inside an anchor or another HTML tag
       return `${prefix}<a href="${url}" target="_blank">${url}</a>`;
     });
 
+    Object.keys(aTagMap).forEach((key) => {
+      html = html.replace(key, aTagMap[key]);
+    });
+    
     return html;
   }
 
