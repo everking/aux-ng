@@ -1,32 +1,19 @@
 import { Injectable, Inject } from '@angular/core';
-import { Article } from "../interfaces/article";
+import { Article, ArticlesMap, ArticleState } from "../interfaces/article";
+import { Category } from "../interfaces/categories";
 import { HttpClient } from "@angular/common/http";
 import { LoginService } from './login.service';
 import { DOCUMENT } from '@angular/common';
-
-export interface SubCategory {
-  key: string;
-  name: string;
-  summary: string;
-  articles: string[];
-}
-
-export interface Category {
-  key: string;
-  name: string;
-  summary: string;
-  articles?: string[];
-  subCategories?: SubCategory[];
-}
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ArticleService {
-  private articles: Article[] = [];
-  private articleMap: Map<string, Article> = new Map();
-  private cacheArticleMap: Map<string, Article> = new Map();
+  private articles: ArticlesMap = {
+    PREVIEW: {}, 
+    ACTIVE: {}
+  };
   private baseHref: string;
   private currentCategory: Category | undefined;
   private categories: Category[] = [];
@@ -123,38 +110,41 @@ export class ArticleService {
     };
   }
 
-  public isOld(articleId: string) {
-    if (this.cacheArticleMap.get(articleId) === undefined) {      
-      return false;
+  public isOld(articleId: string, retry: boolean = false): boolean {
+    if (!this.articles.ACTIVE[articleId]) {
+      if (retry) {
+        return false;
+      }
+      this.loadJsonArticle(articleId);  
+      this.isOld(articleId, true);
     }
-    const dbLastUpdate = this.articleMap.get(articleId)?.meta.lastUpdated || '';
-    const cacheLastUpdated = this.cacheArticleMap.get(articleId)?.meta.lastUpdated || '';
-    return cacheLastUpdated !== dbLastUpdate;
+    const previewLastUpdated = this.articles.PREVIEW[articleId]?.meta.lastUpdated || '';
+    const activeUpdated = this.articles.ACTIVE[articleId]?.meta.lastUpdated || '';
+    return previewLastUpdated !== activeUpdated;
   }
 
-  public setCachedArticle(articleId: string, article: Article) {
-    return this.cacheArticleMap.set(articleId, article);
-  }
-
-  public getCachedArticle(articleId: string) {
-    return this.cacheArticleMap.get(articleId);
-  }
-
-  public async fetchArticle(articleId: string, isPreview: boolean = false): Promise<Article | null> {
+  public async getArticle(articleId: string, state: ArticleState): Promise<Article | null | undefined> {
     try {
-      if (isPreview) {
-        return await this.fetchArticleFromFirestore(articleId, isPreview);
+      if (this.articles[state] && this.articles[state][articleId]) {
+        return this.articles[state][articleId];
       }
-      if (this.articleMap.get(articleId)) {
-        return this.articleMap.get(articleId)!;
+
+      let article: Article | null | undefined;
+      if (state === ArticleState.PREVIEW) {
+        article = await this.fetchFromFirestore(articleId);
+      } else {
+        article = await this.loadJsonArticle(articleId);
       }
-      // Fix for not fetching hard coded items until not needed.
-      if (this.articles.length) {
-        const article = this.articles.find(article => article.articleId === articleId);
-        if (article) {
-          return article;
-        }
-      }
+      this.articles[state][articleId] = article || null;
+      return article;
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      return null;
+    }
+  }
+
+  public async loadJsonArticle(articleId: string): Promise<Article | null> {
+    try {
       const url = `${this.baseHref}assets/data/articles/${articleId}.json`
       const response = await fetch(url, {
         method: 'GET',
@@ -172,31 +162,17 @@ export class ArticleService {
       }
 
       const cacheArticle = this.firebaseToArticle(document.document)
-      this.articleMap.set(articleId, cacheArticle);
-      this.cacheArticleMap.set(articleId, cacheArticle);
+      this.articles[ArticleState.ACTIVE][articleId] = cacheArticle;
 
-      return this.articleMap.get(articleId)!;
+      return cacheArticle!;
     } catch (error) {
       console.error('Error fetching articles:', error);
       return null;
     }
-  };
+  }
 
-  public async fetchArticleFromFirestore(articleId: string, forceUpdate: boolean = false): Promise<Article | null> {
+  public async fetchFromFirestore(articleId: string): Promise<Article | null> {
     try {
-      if (!forceUpdate) {
-        if (this.articleMap.get(articleId)) {
-          return this.articleMap.get(articleId)!;
-        }
-        // Fix for not fetching hard coded items until not needed.
-        if (this.articles.length) {
-          const article = this.articles.find(article => article.articleId === articleId);
-          if (article) {
-            return article;
-          }
-        }
-      }
-      
       const response = await fetch(`${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`, {
         method: 'POST',
         headers: this.getHeaders(),
@@ -224,17 +200,14 @@ export class ArticleService {
         return null;
       }
       const document = documents[0].document;
-
-      this.articleMap.set(articleId, this.firebaseToArticle(document));
-      return this.articleMap.get(articleId)!;
+      this.articles[ArticleState.PREVIEW][articleId] = this.firebaseToArticle(document);
+      return this.articles[ArticleState.PREVIEW][articleId]!;
     } catch (error) {
       console.error('Error fetching articles:', error);
       return null;
     }
   };
 
-
-  
   saveArticle = async (article: Article) => {
     try {
       const documentId = article.meta?.documentId;

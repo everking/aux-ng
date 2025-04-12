@@ -147,5 +147,4 @@ export class LoginService {
     });
     return response.json();
   }
-
 };
