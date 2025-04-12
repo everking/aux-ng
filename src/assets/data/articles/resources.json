@@ -5,9 +5,6 @@
       "articleId": {
         "stringValue": "resources"
       },
-      "body": {
-        "stringValue": "<h3>Zephyr Institute&#160;</h3><div><ul><li>https://www.zephyr.org/</li></ul></div><h3>Witherspoon Institute&#160;</h3><div><ul><li>https://winst.org/</li></ul></div><h3>Mary, Mother of Fairest Love</h3><div><ul><li>https://www.fairestlovefamilyproject.org/</li></ul></div>"
-      },
       "header": {
         "stringValue": "Resources"
       },
@@ -21,17 +18,20 @@
               "stringValue": ""
             },
             "subCategory": {
-              "stringValue": ""
+              "stringValue": "default"
             },
             "lastUpdated": {
-              "timestampValue": "2025-04-12T18:07:34.154Z"
+              "timestampValue": "2025-04-12T19:35:57.376Z"
             }
           }
         }
+      },
+      "body": {
+        "stringValue": "<h3>We&#8217;d love to hear from you! Please take a moment to fill out our short form</h3><div><ul><li>https://forms.gle/DdEBQBeGmGV9mFE68</li></ul></div><h3>Zephyr Institute&#160;</h3><div><ul><li>https://www.zephyr.org/</li></ul></div><h3>Witherspoon Institute&#160;</h3><div><ul><li>https://winst.org/</li></ul></div><h3>Mary, Mother of Fairest Love</h3><div><ul><li>https://www.fairestlovefamilyproject.org/</li></ul></div>"
       }
     },
     "createTime": "2025-04-12T18:07:34.722969Z",
-    "updateTime": "2025-04-12T18:07:34.722969Z"
+    "updateTime": "2025-04-12T19:36:02.069248Z"
   },
-  "readTime": "2025-04-12T18:29:47.503219Z"
+  "readTime": "2025-04-12T19:51:02.518552Z"
 }
