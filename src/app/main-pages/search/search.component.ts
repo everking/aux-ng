@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 
 import { ArticleService } from '../../services/article.service';
-import { Article } from '../../interfaces/article';
+import { Article, ArticleState } from '../../interfaces/article';
 
 const INDEX_URL = 'assets/index/article-embeddings.json';
 const EMBEDDING_ENDPOINT = 'https://us-central1-auxilium-420904.cloudfunctions.net/generateEmbedding';
@@ -142,7 +142,7 @@ export class SearchComponent {
     this.results = scoredResults.slice(0, RESULT_LIMIT);
 
     this.results.forEach(result => {
-      this.articleService.fetchArticle(result.id).then(article => {
+      this.articleService.getArticle(result.id, ArticleState.ACTIVE).then(article => {
         result.article = article;
       })
     });    

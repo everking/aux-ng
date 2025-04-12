@@ -11,12 +11,17 @@
 
     <span *ngIf="isLoggedIn">
        <a class="editLink" [routerLink]="[editLink]">Edit Article</a> | 
-      <a class="editLink" (click)="previewArticle()">Preview</a><span *ngIf="isPreview">&nbsp;&nbsp;<img [src]="getStatusImage()" /> </span>
+      <a class="editLink" (click)="previewArticle()"[title]="lastUpdated">{{previewToggleText}}</a><span *ngIf="isPreview">&nbsp;&nbsp;<img [title]="lastUpdated" [src]="getStatusImage()" /> </span>
       <br/>
       <br/>
     </span>
 
     <div class="article-body" [innerHTML]="safeBodyHtml"></div>
+    <br/>
+    <br/>
+    <span [title]="timestamp">
+      {{ lastUpdated }}
+    </span>
   </div>
 </ng-container>
 <ng-template #loadingArticle>

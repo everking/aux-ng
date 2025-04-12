@@ -4,7 +4,9 @@ import { NgIf } from '@angular/common';
 
 import { ArticleListComponent } from "../../components/article-list/article-list.component";
 import { Subscription } from 'rxjs';
-import { ArticleService, Category } from '../../services/article.service';
+import { ArticleService } from '../../services/article.service';
+import { Category } from '../../interfaces/categories';
+
 @Component({
     selector: 'app-family',
     imports: [

@@ -21,3 +21,13 @@ export interface Article {
   meta: ArticleMeta
 }
 
+export enum ArticleState {
+  PREVIEW = 'PREVIEW',
+  ACTIVE = 'ACTIVE'
+}
+
+export type ArticlesMap = {
+  [state in ArticleState]: {
+    [articleId: string]: Article | null | undefined;
+  };
+};

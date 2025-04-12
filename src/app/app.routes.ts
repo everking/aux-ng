@@ -9,6 +9,7 @@ import { LoginComponent } from "./main-pages/login/login.component";
 import { PrivacyComponent } from "./main-pages/privacy/privacy.component";
 import { TermsComponent } from "./main-pages/terms/terms.component";
 import { SearchComponent } from "./main-pages/search/search.component";
+import { ArticleState } from './interfaces/article';
 
 export const routes: Routes = [
   /*
@@ -22,8 +23,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'article/:articleId', component: ArticleComponent },
-  { path: 'preview/:articleId', component: ArticleComponent, data: { preview: true } },
+  { path: 'article/:articleId', component: ArticleComponent, data: { state: ArticleState.ACTIVE }  },
+  { path: 'preview/:articleId', component: ArticleComponent, data: { state: ArticleState.PREVIEW } },
   { path: 'edit-article/:articleId', component: EditArticleComponent },
   { path: ':pageId', component: ArticleCategoryComponent },
   { path: '', component: ParameterComponent }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { NgIf } from "@angular/common";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
-import { Article } from "../../interfaces/article";
+import { Article, ArticleState } from "../../interfaces/article";
 import { ArticleService } from "../../services/article.service";
 import { LoginService } from '../../services/login.service';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
@@ -18,14 +18,18 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrl: './article.component.scss'
 })
 export class ArticleComponent implements OnInit {
-  article!: Article | null;
+  article!: Article | null | undefined;
   articleId: string = '';
   isLoggedIn: boolean = false;
+  isPreview: boolean = false;
   editLink: string = '';
   externalLinkCheck: boolean = false;
-  isPreview: boolean = false;
+  state: ArticleState = ArticleState.ACTIVE;
   private observer!: MutationObserver; 
   safeBodyHtml: SafeHtml | null = null;
+  lastUpdated: string = '';
+  timestamp: string = '';
+  previewToggleText: string = 'Preview';
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +47,11 @@ export class ArticleComponent implements OnInit {
   }
 
   public previewArticle() {
-    this.router.navigate([`/preview/${this.articleId}`]);
+    if (this.isPreview) {
+      this.router.navigate([`/article/${this.articleId}`]);
+    } else {
+      this.router.navigate([`/preview/${this.articleId}`]);
+    }
   }
 
   public isOld(): boolean {
@@ -75,25 +83,49 @@ export class ArticleComponent implements OnInit {
     }
   }
 
+  getUserFriendlyLastUpdated(timestamp?: string): string {
+    if (!timestamp) {
+      return '';
+    }
+
+    const now = new Date();
+    const updated = new Date(timestamp);
+    const seconds = Math.floor((now.getTime() - updated.getTime()) / 1000);
+  
+    const intervals = [
+      { label: 'year', seconds: 31536000 },
+      { label: 'month', seconds: 2592000 },
+      { label: 'week', seconds: 604800 },
+      { label: 'day', seconds: 86400 },
+      { label: 'hour', seconds: 3600 },
+      { label: 'minute', seconds: 60 },
+    ];
+  
+    for (const interval of intervals) {
+      const count = Math.floor(seconds / interval.seconds);
+      if (count >= 1) {
+        return `Last updated: ${count} ${interval.label}${count > 1 ? 's' : ''} ago`;
+      }
+    }
+  
+    return 'just now';
+  }
+
   async ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
-    this.isPreview = this.route.snapshot.data['preview'] || false;
+    this.state = this.route.snapshot.data['state'] || ArticleState.ACTIVE;
+    this.isPreview = this.state === ArticleState.PREVIEW;
+    this.previewToggleText = this.isPreview ? 'Live' : 'Preview';
     this.editLink = `/edit-article/${this.articleId}`;
-    if (this.isPreview) {
-      if (this.articleService.getCachedArticle(this.articleId) === undefined) {
-        const cachedArticle = await this.articleService.fetchArticle(this.articleId, false);
-        if (cachedArticle) {
-          this.articleService.setCachedArticle(this.articleId, cachedArticle);
-        }
-      }
-    }
-    this.article = await this.articleService.fetchArticle(this.articleId, this.isPreview);
+    this.article = await this.articleService.getArticle(this.articleId, this.state);
     if (this.article?.body) {
       this.safeBodyHtml = this.sanitizer.bypassSecurityTrustHtml(
         this.convertYoutubeLinks(this.article.body)
       );
     }
+    this.timestamp = this.article?.meta.lastUpdated || '';
+    this.lastUpdated = this.getUserFriendlyLastUpdated(this.article?.meta.lastUpdated) || '';
 
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
@@ -138,6 +170,6 @@ export class ArticleComponent implements OnInit {
   }
 
   async initPreview(articleId: string) {
-    this.article = await this.articleService.fetchArticle(articleId, this.isPreview);    
+    this.article = await this.articleService.getArticle(articleId, ArticleState.PREVIEW);    
   }
 }

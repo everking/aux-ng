@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from '../../services/article.service';
+import { ArticleState } from '../../interfaces/article';
 import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorConfig, AngularEditorModule, UploadResponse } from '@kolkov/angular-editor';
 import { Article } from '../../interfaces/article';
@@ -121,6 +122,7 @@ export class EditArticleComponent implements OnInit {
     };
     const isSaved:boolean = await this.articleService.saveArticle(article);
     if (isSaved) {
+      await this.articleService.fetchFromFirestore(this.articleId);
       this.saveMessage = "Saved!";
       console.log("Saved!");
       this.changed = true;
@@ -146,7 +148,7 @@ export class EditArticleComponent implements OnInit {
       this.router.navigate(['/login'], { queryParams: { redirect: `/edit-article/${this.articleId}` }});
     }
 
-    this.articleService.fetchArticleFromFirestore(this.articleId).then((article)=> {
+    this.articleService.fetchFromFirestore(this.articleId).then((article)=> {
       this.body = article?.body;
       this.header = article?.header;
       this.imageURI = article?.imageURI || '';
