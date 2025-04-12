@@ -17,14 +17,25 @@ export const routes: Routes = [
    ':pageId' and '' should be last.
   */
   { path: 'home', component: HomeComponent },
-  { path: 'ask', component: AskComponent },
+  { path: 'ask', redirectTo: 'resources', pathMatch: 'full' },
+  { path: 'resources', component: ArticleComponent, data: { 
+      articleId: 'resources', 
+      state: ArticleState.ACTIVE 
+    }  
+  },
   { path: 'privacy', component: PrivacyComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'article/:articleId', component: ArticleComponent, data: { state: ArticleState.ACTIVE }  },
-  { path: 'preview/:articleId', component: ArticleComponent, data: { state: ArticleState.PREVIEW } },
+  { path: 'article/:articleId', component: ArticleComponent, data: { 
+      state: ArticleState.ACTIVE 
+    }  
+  },
+  { path: 'preview/:articleId', component: ArticleComponent, data: { 
+      state: ArticleState.PREVIEW 
+    } 
+  },
   { path: 'edit-article/:articleId', component: EditArticleComponent },
   { path: ':pageId', component: ArticleCategoryComponent },
   { path: '', component: ParameterComponent }
