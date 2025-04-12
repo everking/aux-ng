@@ -113,7 +113,7 @@ export class ArticleComponent implements OnInit {
 
   async ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
-    this.articleId = this.route.snapshot.paramMap.get('articleId') || '';
+    this.articleId = this.route.snapshot.paramMap.get('articleId') || this.route.snapshot.data['articleId'] || '';
     this.state = this.route.snapshot.data['state'] || ArticleState.ACTIVE;
     this.isPreview = this.state === ArticleState.PREVIEW;
     this.previewToggleText = this.isPreview ? 'Live' : 'Preview';
