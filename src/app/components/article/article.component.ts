@@ -129,7 +129,6 @@ export class ArticleComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.articleId = params['articleId'];
-      this.initPreview(this.articleId);
     });
     this.articleService.setCurrentCategory(this.article?.meta.category || "");
   }
@@ -167,9 +166,5 @@ export class ArticleComponent implements OnInit {
     });
     
     return html;
-  }
-
-  async initPreview(articleId: string) {
-    this.article = await this.articleService.getArticle(articleId, ArticleState.PREVIEW);    
   }
 }
