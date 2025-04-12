@@ -9,6 +9,7 @@ import { PrivacyComponent } from "./main-pages/privacy/privacy.component";
 import { TermsComponent } from "./main-pages/terms/terms.component";
 import { SearchComponent } from "./main-pages/search/search.component";
 import { ArticleState } from './interfaces/article';
+import { PendingComponent } from './components/pending/pending.component';
 
 export const routes: Routes = [
   /*
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'pending', component: PendingComponent },
   { path: 'article/:articleId', component: ArticleComponent, data: { 
       state: ArticleState.ACTIVE 
     }  
