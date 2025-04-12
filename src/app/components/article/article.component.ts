@@ -6,13 +6,15 @@ import { ArticleService } from "../../services/article.service";
 import { LoginService } from '../../services/login.service';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-article',
   imports: [
     NgIf,
     MatProgressSpinner,
-    RouterModule
+    RouterModule,
+    SearchComponent
   ],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss'
@@ -30,6 +32,7 @@ export class ArticleComponent implements OnInit {
   lastUpdated: string = '';
   timestamp: string = '';
   previewToggleText: string = 'Preview';
+  showSearch: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -115,6 +118,7 @@ export class ArticleComponent implements OnInit {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.articleId = this.route.snapshot.paramMap.get('articleId') || this.route.snapshot.data['articleId'] || '';
     this.state = this.route.snapshot.data['state'] || ArticleState.ACTIVE;
+    this.showSearch =  this.route.snapshot.data['showSearch'] || false;
     this.isPreview = this.state === ArticleState.PREVIEW;
     this.previewToggleText = this.isPreview ? 'Live' : 'Preview';
     this.editLink = `/edit-article/${this.articleId}`;

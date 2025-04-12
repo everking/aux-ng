@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from "./main-pages/home/home.component";
 import { ArticleCategoryComponent } from "./main-pages/article-category/article-category.component";
-import { AskComponent } from "./main-pages/ask/ask.component";
 import { ArticleComponent } from "./components/article/article.component";
 import { EditArticleComponent } from "./main-pages/edit-article/edit-article.component";
 import { ParameterComponent } from "./main-pages/parameter/parameter.component";
@@ -20,7 +19,8 @@ export const routes: Routes = [
   { path: 'ask', redirectTo: 'resources', pathMatch: 'full' },
   { path: 'resources', component: ArticleComponent, data: { 
       articleId: 'resources', 
-      state: ArticleState.ACTIVE 
+      state: ArticleState.ACTIVE ,
+      showSearch: true
     }  
   },
   { path: 'privacy', component: PrivacyComponent },
