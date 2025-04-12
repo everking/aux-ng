@@ -7,6 +7,9 @@
   &-body {
     max-width: 480px;
     color: black;
+    word-break: break-word;
+    line-break: strict;
+    hyphens: auto;
 
     &-loading {
       display: flex;
