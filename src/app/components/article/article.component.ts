@@ -132,7 +132,9 @@ export class ArticleComponent implements OnInit {
     this.lastUpdated = this.getUserFriendlyLastUpdated(this.article?.meta.lastUpdated) || '';
 
     this.route.params.subscribe(params => {
-      this.articleId = params['articleId'];
+      if (params['articleId']) {
+        this.articleId = params['articleId'];
+      }
     });
     this.articleService.setCurrentCategory(this.article?.meta.category || "");
   }
