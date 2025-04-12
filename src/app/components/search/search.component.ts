@@ -6,17 +6,17 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-ask',
+    selector: 'app-search',
     imports: [
         CommonModule,
         MatGridListModule,
         NgIf,
         FormsModule,
     ],
-    templateUrl: './ask.component.html',
-    styleUrl: './ask.component.css'
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.css'
 })
-export class AskComponent {
+export class SearchComponent {
   placeholder = 'Need help? Try “I need activity ideas for my kids."';
   query = '';
   mruQueries: string[] = [];
