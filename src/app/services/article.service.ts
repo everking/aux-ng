@@ -171,6 +171,66 @@ export class ArticleService {
     }
   }
 
+  public async fetchUpdateDate(): Promise<string | null | undefined> {
+    try {
+      const url = `${this.baseHref}assets/data/update.json`
+      const response = await fetch(url, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        console.error(`HTTP error! Status: ${response.status}`);
+        return null;
+      }
+      const updateJson = await response.json();
+      return updateJson.lastUpdated;
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      return null;
+    }
+  }
+
+  public async fetchPendingArticles(): Promise<{ lastUpdated: string | undefined | null; articles: Array<Article> }| null> {
+    try {
+      const lastUpdated:string | undefined | null = await this.fetchUpdateDate();
+      const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
+      const response = await fetch(queryUrl, {
+        method: 'POST',
+        headers: this.getHeaders(),
+        body: JSON.stringify({
+          structuredQuery: {
+            from: [{ collectionId: 'articles' }],
+            where: {
+              fieldFilter: {
+                field: { fieldPath: 'meta.lastUpdated' },
+                op: 'GREATER_THAN', // Fetch articles updated after the given timestamp
+                value: { timestampValue: lastUpdated }
+              }
+            }
+          }
+        })
+      });  
+
+      if (!response.ok) {
+        console.error(`HTTP error! Status: ${response.status}`);
+        return null;
+      }
+      const articles = await response.json();
+      let articleCount = 0;
+      const articleList: Article[] = [];
+      articles.forEach((entry:any, index: number) => {
+        if (entry.document) {
+          const artcicle:Article = this.firebaseToArticle(entry.document);
+          articleList.push(artcicle);
+        }
+      }); 
+      return { lastUpdated, articles: articleList };
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      return {lastUpdated: '', articles: []};
+    }
+  };
+
   public async fetchFromFirestore(articleId: string): Promise<Article | null> {
     try {
       const response = await fetch(`${this.BASE_FIRESTORE}/projects/auxilium-420904/databases/aux-db/documents:runQuery`, {

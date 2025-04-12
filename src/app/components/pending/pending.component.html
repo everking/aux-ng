@@ -1,0 +1,29 @@
+<h3>Pending Article Updates</h3>
+<p>Last update: {{lastUpdated | date:'medium'}}</p>
+<div class="table-container">
+  <!-- Header row -->
+  <div class="table-row table-header">
+    <div class="table-cell">Article ID</div>
+    <div class="table-cell">Header</div>
+    <div class="table-cell">Last Updated</div>
+  </div>
+
+  <!-- Rows or empty message -->
+  <ng-container *ngIf="articles && articles.length > 0; else emptyRow">
+    <div class="table-row" *ngFor="let article of articles">
+      <div class="table-cell">
+        <a [routerLink]="['/article', article.articleId]">{{ article.articleId }}</a>
+      </div>
+      <div class="table-cell">{{ article.header }}</div>
+      <div class="table-cell">{{ article.meta?.lastUpdated | date:'medium' }}</div>
+    </div>
+  </ng-container>
+
+  <ng-template #emptyRow>
+    <div class="table-row">
+      <div class="table-cell" style="flex: 1; text-align: center;" colspan="3">
+        No articles found.
+      </div>
+    </div>
+  </ng-template>
+</div>
