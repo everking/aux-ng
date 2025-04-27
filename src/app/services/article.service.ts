@@ -65,7 +65,7 @@ export class ArticleService {
     "excellence": "Excellence"
   };
 
-  public readonly defaultImageURI = "/assets/images/default-image.jpg";
+  public readonly defaultImageURI = "/assets/images/default-image.png";
   public readonly NEW_LABEL: string = "[ new ]";
   public readonly BASE_FIRESTORE: string = "https://firestore.googleapis.com/v1";
 
