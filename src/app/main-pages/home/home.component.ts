@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HomeComponent {
   rosaryInfo: string = '';
-  rosaryLink: string = '';
+  todaysMysteries: string = '';
 
   constructor(private articleService:ArticleService) {
 
@@ -21,7 +21,6 @@ export class HomeComponent {
       link: string;
     }
     
-    const rosaryBaseUrl = "https://servant-savio.github.io/mystic/rosary";
     const mysteries: Record<string, Mystery> = {
       "Sunday": {
         "name": "Glorious Mysteries",
@@ -57,6 +56,6 @@ export class HomeComponent {
     const today = new Date();
     const dayName = today.toLocaleDateString('en-US', options);
     this.rosaryInfo = mysteries[dayName].name;
-    this.rosaryLink = `/article/${mysteries[dayName].link}`;
+    this.todaysMysteries = mysteries[dayName].link;
   }
 }
