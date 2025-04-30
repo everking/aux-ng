@@ -2,24 +2,6 @@
   "document": {
     "name": "projects/auxilium-420904/databases/aux-db/documents/articles/Mgl2CN4yLc0hDgG0Qxsp",
     "fields": {
-      "body": {
-        "stringValue": "<font face=\"EB Garamond\">https://www.youtube.com/watch?v=ry7FbjkN-p0<br><br><h3>The Agony in the Garden</h3><div>&#8220;Then Jesus came with them to a place called Gethsemane, and he said to his disciples, 'Sit here while I go over there and pray.' He took along Peter and the two sons of Zebedee, and began to feel sorrow and distress. Then he said to them, 'My soul is sorrowful even to death. Remain here and keep watch with me.' He advanced a little and fell prostrate in prayer, saying, 'My Father, if it is possible, let this cup pass from me; yet, not as I will, but as you will.'&#8221; - Matthew 26:36-39</div><div><br></div><div><b>Fruit of the mystery:</b> Obedience to God&#8217;s Will<br><br><h3>The Scourging at the Pillar</h3><div>&#8220;Then he released Barabbas to them, but after he had Jesus scourged, he handed him over to be crucified.&#8221; - Matthew 27:26</div><div><br></div><div><b>Fruit of the mystery:</b> Mortification</div></div><div><br></div><div><h3>The Crowning with Thorns</h3><div>&#8220;Then the soldiers of the governor took Jesus inside the praetorium and gathered the whole cohort around him. They stripped off his clothes and threw a scarlet military cloak about him. Weaving a crown out of thorns, they placed it on his head, and a reed in his right hand. And kneeling before him, they mocked him, saying, 'Hail, King of the Jews!'&#8221; - Matthew 27:27-29</div><div><br></div><div><b>Fruit of the mystery: </b>Courage</div></div><div><br></div><div><h3>The Carrying of the Cross</h3><div>&#8220;They pressed into service a passer-by, Simon, a Cyrenian, who was coming in from the country, the father of Alexander and Rufus, to carry his cross. They brought him to the place of Golgotha (which is translated Place of the Skull).&#8221; - Mark 15:21-22&#160;&#160;</div><div><br></div><div><b>Fruit of the mystery:</b> Patience</div></div><div><br></div><div><h3>The Crucifixion and Death</h3><div>&#8220;When they came to the place called the Skull, they crucified him and the criminals there, one on his right, the other on his left. [Then Jesus said, 'Father, forgive them, they know not what they do.'] They divided his garments by casting lots. The people stood by and watched; the rulers, meanwhile, sneered at him and said, 'He saved others, let him save himself if he is the chosen one, the Messiah of God.' Even the soldiers jeered at him. As they approached to offer him wine they called out, 'If you are King of the Jews, save yourself.' Above him there was an inscription that read, 'This is the King of the Jews.' Now one of the criminals hanging there reviled Jesus, saying, 'Are you not the Messiah? Save yourself and us.' The other, however, rebuking him, said in reply, 'Have you no fear of God, for you are subject to the same condemnation? And indeed, we have been condemned justly, for the sentence we received corresponds to our crimes, but this man has done nothing criminal.' Then he said, 'Jesus, remember me when you come into your kingdom.' He replied to him, 'Amen, I say to you, today you will be with me in Paradise.'</div><div><br></div><div>&#34;It was now about noon and darkness came over the whole land until three in the afternoon because of an eclipse of the sun. Then the veil of the temple was torn down the middle. Jesus cried out in a loud voice, 'Father, into your hands I commend my spirit'; and when he had said this he breathed his last.&#8221; - Luke 23:33-46&#160;&#160;</div><div><br></div><div><b>Fruit of the mystery:</b> Sorrow for our Sins</div></div></font>"
-      },
-      "meta": {
-        "mapValue": {
-          "fields": {
-            "lastUpdated": {
-              "timestampValue": "2025-04-30T03:56:23.386Z"
-            },
-            "category": {
-              "stringValue": ""
-            },
-            "subCategory": {
-              "stringValue": ""
-            }
-          }
-        }
-      },
       "articleId": {
         "stringValue": "sorrowful-mysteries"
       },
@@ -28,10 +10,28 @@
       },
       "header": {
         "stringValue": "Sorrowful Mysteries"
+      },
+      "meta": {
+        "mapValue": {
+          "fields": {
+            "category": {
+              "stringValue": ""
+            },
+            "subCategory": {
+              "stringValue": "default"
+            },
+            "lastUpdated": {
+              "timestampValue": "2025-04-30T05:05:08.505Z"
+            }
+          }
+        }
+      },
+      "body": {
+        "stringValue": "<font face=\"EB Garamond\">https://www.youtube.com/watch?v=ry7FbjkN-p0<br><br></font><a href=\"https://www.usccb.org/how-to-pray-the-rosary\" target=\"_blank\">&gt; Rosary Guide</a><font face=\"EB Garamond\"><br><h3>The Agony in the Garden</h3><div>&#8220;Then Jesus came with them to a place called Gethsemane, and he said to his disciples, 'Sit here while I go over there and pray.' He took along Peter and the two sons of Zebedee, and began to feel sorrow and distress. Then he said to them, 'My soul is sorrowful even to death. Remain here and keep watch with me.' He advanced a little and fell prostrate in prayer, saying, 'My Father, if it is possible, let this cup pass from me; yet, not as I will, but as you will.'&#8221; - Matthew 26:36-39</div><div><br></div><div><b>Fruit of the mystery:</b> Obedience to God&#8217;s Will<br><br><h3>The Scourging at the Pillar</h3><div>&#8220;Then he released Barabbas to them, but after he had Jesus scourged, he handed him over to be crucified.&#8221; - Matthew 27:26</div><div><br></div><div><b>Fruit of the mystery:</b> Mortification</div></div><div><br></div><div><h3>The Crowning with Thorns</h3><div>&#8220;Then the soldiers of the governor took Jesus inside the praetorium and gathered the whole cohort around him. They stripped off his clothes and threw a scarlet military cloak about him. Weaving a crown out of thorns, they placed it on his head, and a reed in his right hand. And kneeling before him, they mocked him, saying, 'Hail, King of the Jews!'&#8221; - Matthew 27:27-29</div><div><br></div><div><b>Fruit of the mystery: </b>Courage</div></div><div><br></div><div><h3>The Carrying of the Cross</h3><div>&#8220;They pressed into service a passer-by, Simon, a Cyrenian, who was coming in from the country, the father of Alexander and Rufus, to carry his cross. They brought him to the place of Golgotha (which is translated Place of the Skull).&#8221; - Mark 15:21-22&#160;&#160;</div><div><br></div><div><b>Fruit of the mystery:</b> Patience</div></div><div><br></div><div><h3>The Crucifixion and Death</h3><div>&#8220;When they came to the place called the Skull, they crucified him and the criminals there, one on his right, the other on his left. [Then Jesus said, 'Father, forgive them, they know not what they do.'] They divided his garments by casting lots. The people stood by and watched; the rulers, meanwhile, sneered at him and said, 'He saved others, let him save himself if he is the chosen one, the Messiah of God.' Even the soldiers jeered at him. As they approached to offer him wine they called out, 'If you are King of the Jews, save yourself.' Above him there was an inscription that read, 'This is the King of the Jews.' Now one of the criminals hanging there reviled Jesus, saying, 'Are you not the Messiah? Save yourself and us.' The other, however, rebuking him, said in reply, 'Have you no fear of God, for you are subject to the same condemnation? And indeed, we have been condemned justly, for the sentence we received corresponds to our crimes, but this man has done nothing criminal.' Then he said, 'Jesus, remember me when you come into your kingdom.' He replied to him, 'Amen, I say to you, today you will be with me in Paradise.'</div><div><br></div><div>&#34;It was now about noon and darkness came over the whole land until three in the afternoon because of an eclipse of the sun. Then the veil of the temple was torn down the middle. Jesus cried out in a loud voice, 'Father, into your hands I commend my spirit'; and when he had said this he breathed his last.&#8221; - Luke 23:33-46&#160;&#160;</div><div><br></div><div><b>Fruit of the mystery:</b> Sorrow for our Sins</div></div></font>"
       }
     },
     "createTime": "2025-04-30T03:56:25.237536Z",
-    "updateTime": "2025-04-30T03:56:25.237536Z"
+    "updateTime": "2025-04-30T05:05:09.089205Z"
   },
-  "readTime": "2025-04-30T04:19:27.519363Z"
+  "readTime": "2025-04-30T05:07:50.345473Z"
 }
