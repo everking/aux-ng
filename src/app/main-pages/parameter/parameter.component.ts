@@ -18,26 +18,11 @@ export class ParameterComponent implements OnInit {
 
       // If no 'ref' query parameter is present, redirect to /home
       if (!this.refParam) {
+        console.log('Redirect to home');
         this.router.navigate(['/home']);
       } else {
-
-        const decodedPath = decodeURIComponent(this.refParam);
-        const normalizedPath = decodedPath.replace(/^\/+/, ''); // remove leading slash
-      
-        const allRoutes = this.routes.flatMap(r => r);  // flatten the array of route arrays
-      
-        const isValidRoute = allRoutes.some((route: Route) => {
-          return route.path === normalizedPath;
-        });
-
-        if (isValidRoute || normalizedPath.startsWith('edit-article/')) {
-          this.router.navigateByUrl(decodedPath);
-        } else {
-          console.warn('Invalid route:', decodedPath);
-          // Optionally redirect to 404 or fallback
-          this.router.navigateByUrl('/resources');
-        }
-
+        console.log('Redirect to:', this.refParam);
+        this.router.navigate([this.refParam]);        
       }
     });
   }
