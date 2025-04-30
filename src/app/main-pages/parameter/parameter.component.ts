@@ -30,7 +30,7 @@ export class ParameterComponent implements OnInit {
           return route.path === normalizedPath;
         });
 
-        if (isValidRoute) {
+        if (isValidRoute || normalizedPath.startsWith('edit-article/')) {
           this.router.navigateByUrl(decodedPath);
         } else {
           console.warn('Invalid route:', decodedPath);
