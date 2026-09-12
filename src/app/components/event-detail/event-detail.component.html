@@ -20,6 +20,11 @@
 
     <span *ngIf="isLoggedIn">
       <a class="editLink" [routerLink]="[editLink]">Edit Event</a>
+      |
+      <button type="button" class="editLink deleteLink" (click)="onDelete()" [disabled]="deleting">
+        {{ deleting ? 'Deleting...' : 'Delete Event' }}
+      </button>
+      <span class="delete-message" *ngIf="deleteMessage">{{ deleteMessage }}</span>
       <br/>
       <br/>
     </span>

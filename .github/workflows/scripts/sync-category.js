@@ -63,4 +63,32 @@ function updateCategoryPlacement(article) {
   fs.writeFileSync(categoriesPath, JSON.stringify(categoriesData, null, 2), 'utf8');
 }
 
-module.exports = { updateCategoryPlacement };
+function removeArticleFromCategories(articleId) {
+  if (!articleId) {
+    return;
+  }
+  const categoriesData = JSON.parse(fs.readFileSync(categoriesPath, 'utf-8'));
+  let changed = false;
+  categoriesData.categories.forEach((cat) => {
+    cat.subCategories?.forEach((sub) => {
+      const before = sub.articles?.length || 0;
+      sub.articles = sub.articles?.filter((id) => id !== articleId) || [];
+      if (sub.articles.length !== before) {
+        changed = true;
+      }
+    });
+    if (cat.articles) {
+      const before = cat.articles.length;
+      cat.articles = cat.articles.filter((id) => id !== articleId);
+      if (cat.articles.length !== before) {
+        changed = true;
+      }
+    }
+  });
+  if (changed) {
+    fs.writeFileSync(categoriesPath, JSON.stringify(categoriesData, null, 2), 'utf8');
+    console.log(`Removed "${articleId}" from categories.json`);
+  }
+}
+
+module.exports = { updateCategoryPlacement, removeArticleFromCategories };

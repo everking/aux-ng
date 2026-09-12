@@ -28,6 +28,7 @@ export interface BulletinEvent {
   recurrence: DateRecurrence | null;
   tags: string[];
   where: string;
+  deleted?: boolean;
   meta: BulletinEventMeta;
 }
 

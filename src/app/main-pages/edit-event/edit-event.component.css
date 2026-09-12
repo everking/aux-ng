@@ -36,6 +36,26 @@
   padding-left: 100px;
 }
 
+.delete-button {
+  margin: 10px 10px;
+  background-color: #8a4b4b;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+
+.delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .cancel-button, .save-button {
   margin: 10px 10px;
   background-color: #637d98;

@@ -3,7 +3,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { LoginService } from '../../services/login.service';
 import { EventService } from '../../services/event.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   BulletinEvent,
@@ -34,6 +34,8 @@ export class EventDetailComponent implements OnInit, AfterViewChecked {
   safeBodyHtml: SafeHtml | null = null;
   dateRange = '';
   status: EventStatus = 'upcoming';
+  deleting = false;
+  deleteMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -42,11 +44,31 @@ export class EventDetailComponent implements OnInit, AfterViewChecked {
     private articleService: ArticleService,
     private elRef: ElementRef,
     private renderer: Renderer2,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {}
 
   ngAfterViewChecked() {
     setTimeout(() => this.updateExternalLinks(), 0);
+  }
+
+  async onDelete() {
+    if (!this.event || this.deleting) {
+      return;
+    }
+    const confirmed = window.confirm('Delete this event? It will be removed from the Events board.');
+    if (!confirmed) {
+      return;
+    }
+    this.deleting = true;
+    this.deleteMessage = '';
+    const deleted = await this.eventService.deleteEvent(this.event);
+    if (deleted) {
+      await this.router.navigate(['/events']);
+      return;
+    }
+    this.deleting = false;
+    this.deleteMessage = 'Sorry. Not deleted.';
   }
 
   get statusLabel(): string {
