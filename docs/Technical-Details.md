@@ -25,3 +25,10 @@
 - **`src/app/main-pages/search/search.component.ts:183-191`** — `cosineSimilarity()` vector math for semantic search scoring.
 - **`.github/workflows/scripts/generate-index.js:19-25`** — `generateEmbedding()` calls OpenAI API to create 1536-d embeddings from article header + body + lastUpdated timestamp.
 - **`.github/workflows/scripts/generate-index.js:28-78`** — Main `generateEmbeddings()` processes all JSON articles, strips HTML, merges into incremental index file.
+
+## GitHub Actions Integration
+
+- **`.github/workflows/fetch-firestore-articles.yaml:1-82`** — Manual-trigger workflow (schedule disabled) that fetches Firestore articles, converts to JSON, syncs to `src/assets/data/articles/`, and mirrors assets to gh-pages branch with `version.json` tracking.
+- **`.github/workflows/scripts/fetch-firestore-articles.js:1-100`** — Node script using Firestore REST API to query articles with `meta.lastUpdated > lastFetchTime`, writes individual JSON files per article, updates category placement.
+- **`.github/workflows/gh-pages.yaml:1-43`** — Push-triggered workflow that builds Angular app in production, sets CNAME (dev.auxilium.guide vs auxilium.guide based on repo), deploys to GitHub Pages via `peaceiris/actions-gh-pages`.
+- **Dual-state publishing model** — PREVIEW state reads live from Firestore (editors see changes immediately); ACTIVE state reads from static JSON files synced via GH Actions (production serves cached content).
