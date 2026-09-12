@@ -8,6 +8,9 @@
           <div class="article-preview-description">
             {{ strippedBody }}
           </div>
+          <div class="tag-list" *ngIf="article?.meta?.tags?.length">
+            <span class="tag-list-chip" *ngFor="let tag of article?.meta?.tags">{{ tag }}</span>
+          </div>
         <div class="article-preview-category-tag">{{ article?.meta?.subCategory| uppercase }}</div>
     </div>
   </a>

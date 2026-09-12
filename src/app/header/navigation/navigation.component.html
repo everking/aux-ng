@@ -8,6 +8,11 @@
     >
       Home
     </button>
+    <button mat-stroked-button routerLink="/events" 
+      [ngClass]="{'active-link': isEventsActive()}"
+    >
+      Events
+    </button>
     <button mat-stroked-button routerLink="/family" 
       [ngClass]="{'active-link': isCategoryActive('family')}" 
     >

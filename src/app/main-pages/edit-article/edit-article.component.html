@@ -25,6 +25,7 @@
     </div>
   </div>
 
+  <app-tag-input [tags]="tags" (tagsChange)="onTagsChange($event)"></app-tag-input>
   <app-image-drop [imageURI]="imageURI" (imageDropped)="onImageDropped($event)"></app-image-drop>
   <div>
     <angular-editor [(ngModel)]="body" 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
-import { NgIf } from "@angular/common";
+import { NgFor, NgIf } from "@angular/common";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { Article, ArticleState } from "../../interfaces/article";
 import { ArticleService } from "../../services/article.service";
@@ -12,6 +12,7 @@ import { SearchComponent } from '../search/search.component';
   selector: 'app-article',
   imports: [
     NgIf,
+    NgFor,
     MatProgressSpinner,
     RouterModule,
     SearchComponent

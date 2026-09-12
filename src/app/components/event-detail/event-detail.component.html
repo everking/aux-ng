@@ -1,0 +1,37 @@
+<ng-container *ngIf="event else loadingEvent">
+  <div class="article">
+    <div class="image-box">
+      <div class="clip-box">
+        <img class="banner-image" src="{{event.imageURI}}" alt="{{event.header}}">
+      </div>
+    </div>
+    <div class="article-header-image-text">
+      <h2>{{ event.header }}</h2>
+      <div class="event-date-range">{{ dateRange }}</div>
+      <div class="event-schedule" *ngIf="event.schedule">{{ event.schedule }}</div>
+      <div class="event-where" *ngIf="event.where">{{ event.where }}</div>
+      <div class="tag-list" *ngIf="event.tags?.length">
+        <span class="tag-list-chip" *ngFor="let tag of event.tags">{{ tag }}</span>
+      </div>
+      <div class="event-status" [class.happening]="status === 'happening'" [class.ended]="status === 'ended'">
+        {{ statusLabel }}
+      </div>
+    </div>
+
+    <span *ngIf="isLoggedIn">
+      <a class="editLink" [routerLink]="[editLink]">Edit Event</a>
+      <br/>
+      <br/>
+    </span>
+
+    <div class="article-body" [innerHTML]="safeBodyHtml"></div>
+  </div>
+</ng-container>
+<ng-template #loadingEvent>
+  <div class="article-body-loading" *ngIf="!notFound">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="article-body-loading" *ngIf="notFound">
+    <p>Event not found.</p>
+  </div>
+</ng-template>

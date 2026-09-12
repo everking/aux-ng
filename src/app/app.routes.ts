@@ -10,6 +10,9 @@ import { TermsComponent } from "./main-pages/terms/terms.component";
 import { SearchComponent } from "./main-pages/search/search.component";
 import { ArticleState } from './interfaces/article';
 import { PendingComponent } from './components/pending/pending.component';
+import { EventsComponent } from './main-pages/events/events.component';
+import { EventDetailComponent } from './components/event-detail/event-detail.component';
+import { EditEventComponent } from './main-pages/edit-event/edit-event.component';
 
 export const routes: Routes = [
   /*
@@ -30,6 +33,9 @@ export const routes: Routes = [
   { path: 'signup', component: LoginComponent },
   { path: 'search', component: SearchComponent },
   { path: 'pending', component: PendingComponent },
+  { path: 'events', component: EventsComponent },
+  { path: 'event/:eventId', component: EventDetailComponent },
+  { path: 'edit-event/:eventId', component: EditEventComponent },
   { path: 'article/:articleId', component: ArticleComponent, data: { 
       state: ArticleState.ACTIVE 
     }  

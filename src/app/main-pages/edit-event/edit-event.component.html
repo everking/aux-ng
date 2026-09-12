@@ -1,0 +1,36 @@
+<div class="edit-event">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <h1>{{ isNew ? 'Submit Event' : 'Edit Event' }}</h1>
+  </div>
+
+  <div class="form-group">
+    <label for="header">Title</label>
+    <input id="header" [(ngModel)]="header" type="text" (ngModelChange)="onFieldChange()" placeholder="Event title">
+  </div>
+  <div class="form-group">
+    <label for="dates">Dates</label>
+    <input id="dates" [(ngModel)]="dates" type="text"
+      (ngModelChange)="onFieldChange()"
+      (blur)="resolveDates()"
+      (keydown.tab)="resolveDates()"
+      placeholder="next Friday, 3rd Monday of the month, 09/18/2026">
+  </div>
+  <p class="date-hint" *ngIf="dateHint">{{ dateHint }}</p>
+  <p class="date-error" *ngIf="dateError">{{ dateError }}</p>
+  <div class="form-group">
+    <label for="where">Where</label>
+    <input id="where" [(ngModel)]="where" type="text" (ngModelChange)="onFieldChange()" placeholder="Place or address">
+  </div>
+  <app-tag-input [tags]="tags" (tagsChange)="onTagsChange($event)"></app-tag-input>
+
+  <app-image-drop [imageURI]="imageURI" (imageDropped)="onImageDropped($event)"></app-image-drop>
+  <div>
+    <angular-editor [(ngModel)]="body"
+      [config]="editorConfig"
+      (ngModelChange)="onArticleChange()">
+    </angular-editor>
+  </div>
+  <button class="save-button" (click)="onSaveClick()" [disabled]="!hasChanged()" [ngClass]="{'disabled-button': !hasChanged()}">Save</button>
+  <button class="cancel-button" (click)="onCancelClick()">Cancel</button>
+  <p><span>{{saveMessage}}</span></p>
+</div>

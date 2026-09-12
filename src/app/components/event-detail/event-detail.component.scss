@@ -20,6 +20,11 @@
   }
 }
 
+.article-header-image-text {
+  text-align: center;
+  max-width: 480px;
+}
+
 .banner-image {
   border-radius: 15px;
   margin-top: 20px;
@@ -29,7 +34,7 @@
 }
 
 .clip-box {
-  max-width: 480px; /* Fixed width */
+  max-width: 480px;
   max-height: 320px;
   display: flex;
   height: 100%;
@@ -38,20 +43,36 @@
 
 .image-box {
   margin-top: 20px;
-  max-width: 480px; /* Fixed width */
+  max-width: 480px;
   max-height: 320px;
   display: flex;
   height: 100%;
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: black; /* Filler background */
+  background-color: black;
   border-radius: 15px;
   overflow: hidden;
 }
 
 .editLink {
   cursor: pointer;
+}
+
+.event-date-range {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0e5757;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+.event-schedule,
+.event-where {
+  font-size: 15px;
+  color: #0e5757;
+  opacity: 0.8;
+  margin-bottom: 8px;
 }
 
 .tag-list {
@@ -71,8 +92,21 @@
   font-size: 13px;
 }
 
-/* 
+.event-status {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
 
-.youtube-embed - defined in global styles.scss
+.event-status.happening {
+  opacity: 1;
+  color: #0e5757;
+  font-weight: 700;
+}
 
-*/
+.event-status.ended {
+  opacity: 0.8;
+  color: #8a4b4b;
+}

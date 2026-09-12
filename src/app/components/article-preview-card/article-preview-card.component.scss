@@ -89,6 +89,22 @@ $card-width: 250;
   display: none;
 }
 
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.tag-list-chip {
+  background: #f4f8f7;
+  color: #0e5757;
+  border: 1px solid #b7d0cb;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 12px;
+}
+
 .image-container {
   width: #{$card-width - 20}px; /* Fixed width */
   height: #{$card-width - 20}px; /* Fixed height */
