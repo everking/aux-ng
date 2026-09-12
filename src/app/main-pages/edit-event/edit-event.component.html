@@ -30,7 +30,10 @@
       (ngModelChange)="onArticleChange()">
     </angular-editor>
   </div>
-  <button class="save-button" (click)="onSaveClick()" [disabled]="!hasChanged()" [ngClass]="{'disabled-button': !hasChanged()}">Save</button>
-  <button class="cancel-button" (click)="onCancelClick()">Cancel</button>
+  <button class="save-button" (click)="onSaveClick()" [disabled]="!hasChanged() || deleting" [ngClass]="{'disabled-button': !hasChanged()}">Save</button>
+  <button class="cancel-button" (click)="onCancelClick()" [disabled]="deleting">Cancel</button>
+  <button *ngIf="!isNew" class="delete-button" (click)="onDeleteClick()" [disabled]="deleting">
+    {{ deleting ? 'Deleting...' : 'Delete' }}
+  </button>
   <p><span>{{saveMessage}}</span></p>
 </div>

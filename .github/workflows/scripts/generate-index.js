@@ -42,6 +42,10 @@ async function generateEmbeddings(input = null) {
     const fields = json.document?.fields || {};
 
     const id = fields.articleId?.stringValue || path.basename(file, '.json');
+    if (fields.deleted?.booleanValue) {
+      console.log(`Skipping deleted: ${id}`);
+      continue;
+    }
     const header = fields.header?.stringValue || '';
     const lastUpdated = fields.meta?.mapValue?.fields?.lastUpdated?.timestampValue || '';
     const body = fields.body?.stringValue || '';
@@ -69,6 +73,17 @@ async function generateEmbeddings(input = null) {
   const indexMap = new Map(existing.map(e => [e.id, e]));
   for (const { id, embedding } of newEmbeddings) {
     indexMap.set(id, { id, embedding });
+  }
+
+  const liveIds = new Set([
+    ...glob.sync(`${dataDir}/*.json`).map((file) => path.basename(file, '.json')),
+    ...glob.sync(`${dataDir}/articles/*.json`).map((file) => path.basename(file, '.json'))
+  ]);
+  for (const id of Array.from(indexMap.keys())) {
+    if (!liveIds.has(id)) {
+      indexMap.delete(id);
+      console.log(`Removed stale embedding: ${id}`);
+    }
   }
 
   const merged = Array.from(indexMap.values());

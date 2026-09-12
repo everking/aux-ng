@@ -2,10 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const { GoogleAuth } = require('google-auth-library');
 
-const { updateCategoryPlacement } = require(path.resolve(__dirname, 'sync-category'));
+const { updateCategoryPlacement, removeArticleFromCategories } = require(path.resolve(__dirname, 'sync-category'));
 
 const queryUrl = 'https://firestore.googleapis.com/v1/projects/auxilium-420904/databases/aux-db/documents:runQuery';
+const firestoreBase = 'https://firestore.googleapis.com/v1';
 const dataFolder = 'src/assets/data/articles';
+const embeddingsPath = path.join(dataFolder, '../../index/article-embeddings.json');
 const updateFilePath = path.join(dataFolder, '../update.json'); // One level up
 
 async function getAccessToken() {
@@ -19,7 +21,56 @@ async function getAccessToken() {
   return token.token;
 }
 
-// Helper: Update categories.json with correct placement
+async function deleteFirestoreDocument(documentName, token) {
+  const response = await fetch(`${firestoreBase}/${documentName}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  if (response.ok || response.status === 404) {
+    console.log(`Deleted Firestore document: ${documentName}`);
+    return;
+  }
+
+  throw new Error(`Failed to delete ${documentName}: ${response.status} ${response.statusText}`);
+}
+
+function removeEmbedding(articleId) {
+  if (!fs.existsSync(embeddingsPath)) {
+    console.warn(`No embeddings file at ${embeddingsPath}`);
+    return;
+  }
+
+  const embeddings = JSON.parse(fs.readFileSync(embeddingsPath, 'utf8'));
+  if (!Array.isArray(embeddings)) {
+    console.warn('Embeddings file is not an array; skipping embedding removal.');
+    return;
+  }
+
+  const next = embeddings.filter((entry) => entry?.id !== articleId);
+  if (next.length === embeddings.length) {
+    console.log(`No embedding found for "${articleId}"`);
+    return;
+  }
+
+  fs.writeFileSync(embeddingsPath, JSON.stringify(next, null, 2), 'utf8');
+  console.log(`Removed embedding for "${articleId}"`);
+}
+
+async function purgeDeletedArticle({ articleId, documentName, filePath, token }) {
+  await deleteFirestoreDocument(documentName, token);
+
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+    console.log(`Removed deleted: ${filePath}`);
+  }
+
+  removeArticleFromCategories(articleId);
+  removeEmbedding(articleId);
+}
+
 (async () => {
   const currentTimestamp = new Date().toISOString();
   let lastUpdated = "1970-01-01T00:00:00Z";
@@ -65,25 +116,29 @@ async function getAccessToken() {
     const articles = await response.json();
     let articleCount = 0;
 
-    articles.forEach((entry, index) => {
-      if (entry.document) {
-        articleCount++;
-        const documentName = entry.document.name;
+    for (const [index, entry] of articles.entries()) {
+      if (!entry.document) {
+        continue;
+      }
 
-        if (entry.document.fields && entry.document.fields.articleId) {
-          const articleId = entry.document.fields.articleId.stringValue;
-          const filePath = path.join(dataFolder, `${articleId}.json`);
+      articleCount++;
+      const documentName = entry.document.name;
 
+      if (entry.document.fields && entry.document.fields.articleId) {
+        const articleId = entry.document.fields.articleId.stringValue;
+        const filePath = path.join(dataFolder, `${articleId}.json`);
+
+        if (entry.document.fields.deleted?.booleanValue) {
+          await purgeDeletedArticle({ articleId, documentName, filePath, token });
+        } else {
           fs.writeFileSync(filePath, JSON.stringify(entry, null, 2), 'utf8');
           console.log(`Saved: ${filePath}`);
-
-          // 🔁 Update categories.json placement
           updateCategoryPlacement(entry.document);
-        } else {
-          console.warn(`Skipping entry ${index} ${documentName} due to missing articleId.`);
         }
+      } else {
+        console.warn(`Skipping entry ${index} ${documentName} due to missing articleId.`);
       }
-    });
+    }
 
     if (articleCount === 0) {
       console.log("No new articles found.");

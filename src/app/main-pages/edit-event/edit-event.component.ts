@@ -44,6 +44,7 @@ export class EditEventComponent implements OnInit {
   saveMessage = '';
   changed = false;
   isNew = false;
+  deleting = false;
   embedImageProps = {
     width: 384,
     height: 216
@@ -142,6 +143,40 @@ export class EditEventComponent implements OnInit {
     } else {
       this.router.navigate([`/event/${this.eventId}`]);
     }
+  }
+
+  async onDeleteClick() {
+    if (this.isNew || this.deleting) {
+      return;
+    }
+    const confirmed = window.confirm('Delete this event? It will be removed from the Events board.');
+    if (!confirmed) {
+      return;
+    }
+    this.deleting = true;
+    const deleted = await this.eventService.deleteEvent({
+      eventId: this.eventId,
+      header: this.header,
+      body: this.body,
+      imageURI: this.imageURI,
+      dates: this.dates,
+      dateFrom: this.dateFrom,
+      dateTo: this.dateTo,
+      schedule: this.schedule,
+      recurrence: this.recurrence,
+      tags: this.tags,
+      where: this.where,
+      meta: {
+        documentId: this.documentId,
+        name: this.name
+      }
+    });
+    if (deleted) {
+      await this.router.navigate(['/events']);
+      return;
+    }
+    this.deleting = false;
+    this.saveMessage = 'Sorry. Not deleted.';
   }
 
   async onSaveClick() {

@@ -52,6 +52,22 @@ describe('EventService', () => {
     expect(event.dateTo).toBe('2026-03-03');
     expect(event.meta.documentId).toBe('abc123');
     expect(event.meta.createdBy).toBe('editor@example.com');
+    expect(event.deleted).toBeFalse();
+  });
+
+  it('maps a deleted Firestore event', () => {
+    const event = service.firebaseToEvent({
+      name: 'projects/auxilium-420904/databases/aux-db/documents/articles/abc123',
+      fields: {
+        articleId: { stringValue: 'gone' },
+        eventId: { stringValue: 'gone' },
+        header: { stringValue: 'Gone' },
+        dateFrom: { stringValue: '2026-10-01' },
+        dateTo: { stringValue: '2026-10-01' },
+        deleted: { booleanValue: true }
+      }
+    });
+    expect(event.deleted).toBeTrue();
   });
 });
 

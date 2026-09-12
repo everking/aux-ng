@@ -8,6 +8,7 @@ import { readFirestoreStringArray, toFirestoreStringArray } from '../utils';
 interface FirestoreValue {
   stringValue?: string;
   timestampValue?: string;
+  booleanValue?: boolean;
   arrayValue?: {
     values?: FirestoreValue[];
   };
@@ -34,6 +35,7 @@ interface FirestoreDocument {
     schedule?: FirestoreValue;
     recurrence?: FirestoreValue;
     where?: FirestoreValue;
+    deleted?: FirestoreValue;
     eventId?: FirestoreValue;
     articleId?: FirestoreValue;
     meta?: FirestoreValue;
@@ -98,6 +100,7 @@ export class EventService {
       recurrence,
       tags: readFirestoreStringArray(fields?.meta?.mapValue?.fields?.tags),
       where: fields?.where?.stringValue || '',
+      deleted: fields?.deleted?.booleanValue === true,
       meta: {
         name: document?.name?.toString(),
         lastUpdated: fields?.meta?.mapValue?.fields?.lastUpdated?.timestampValue || '',
@@ -113,8 +116,14 @@ export class EventService {
     const byId = new Map(published.map((event) => [event.eventId, event]));
 
     if (this.loginService.isLoggedIn()) {
-      const live = await this.fetchFirestoreEvents();
-      live.forEach((event) => byId.set(event.eventId, event));
+      const live = await this.fetchFirestoreEvents(true);
+      live.forEach((event) => {
+        if (event.deleted) {
+          byId.delete(event.eventId);
+        } else {
+          byId.set(event.eventId, event);
+        }
+      });
     }
 
     return Array.from(byId.values());
@@ -127,7 +136,7 @@ export class EventService {
 
     for (const eventId of eventIds) {
       const event = await this.loadJsonEvent(eventId);
-      if (event) {
+      if (event && !event.deleted) {
         events.push(event);
       }
     }
@@ -135,7 +144,7 @@ export class EventService {
     return events;
   }
 
-  public async fetchFirestoreEvents(): Promise<BulletinEvent[]> {
+  public async fetchFirestoreEvents(includeDeleted = false): Promise<BulletinEvent[]> {
     try {
       const response = await fetch(
         `${this.BASE_FIRESTORE}/${this.PROJECT_PATH}/documents:runQuery`,
@@ -169,7 +178,7 @@ export class EventService {
           events.push(this.firebaseToEvent(entry.document));
         }
       });
-      return events;
+      return includeDeleted ? events : events.filter((event) => !event.deleted);
     } catch (error) {
       console.error('Error fetching events:', error);
       return [];
@@ -179,11 +188,18 @@ export class EventService {
   public async fetchEvent(eventId: string): Promise<BulletinEvent | null> {
     if (this.loginService.isLoggedIn()) {
       const live = await this.fetchFromFirestore(eventId);
+      if (live?.deleted) {
+        return null;
+      }
       if (live) {
         return live;
       }
     }
-    return this.loadJsonEvent(eventId);
+    const published = await this.loadJsonEvent(eventId);
+    if (published?.deleted) {
+      return null;
+    }
+    return published;
   }
 
   public async loadJsonEvent(eventId: string): Promise<BulletinEvent | null> {
@@ -260,7 +276,7 @@ export class EventService {
       const documentName = event.meta?.name;
       const createdBy = meta?.createdBy || this.loginService.getFirebaseLogin()?.email || '';
 
-      const fieldPaths = ['body', 'header', 'imageURI', 'dates', 'dateFrom', 'dateTo', 'schedule', 'recurrence', 'where', 'meta'];
+      const fieldPaths = ['body', 'header', 'imageURI', 'dates', 'dateFrom', 'dateTo', 'schedule', 'recurrence', 'where', 'deleted', 'meta'];
       const updateMask = fieldPaths.map((field) => `updateMask.fieldPaths=${field}`).join('&');
       const newEventUrl = `${this.BASE_FIRESTORE}/${this.PROJECT_PATH}/documents/articles`;
       const firestorePath =
@@ -306,6 +322,9 @@ export class EventService {
             where: {
               stringValue: where || ''
             },
+            deleted: {
+              booleanValue: false
+            },
             meta: {
               mapValue: {
                 fields: {
@@ -332,6 +351,46 @@ export class EventService {
       return response.ok;
     } catch (error) {
       console.error('Error saving event:', error);
+      return false;
+    }
+  };
+
+  deleteEvent = async (event: BulletinEvent): Promise<boolean> => {
+    try {
+      const documentName = event.meta?.name;
+      const documentId = event.meta?.documentId;
+      if (!documentName || documentId === this.NEW_LABEL) {
+        return false;
+      }
+
+      const lastUpdated = new Date().toISOString();
+      const updateMask = ['deleted', 'meta.lastUpdated']
+        .map((field) => `updateMask.fieldPaths=${field}`)
+        .join('&');
+      const response = await fetch(`${this.BASE_FIRESTORE}/${documentName}?${updateMask}`, {
+        method: 'PATCH',
+        headers: this.getHeaders(),
+        body: JSON.stringify({
+          fields: {
+            deleted: {
+              booleanValue: true
+            },
+            meta: {
+              mapValue: {
+                fields: {
+                  lastUpdated: {
+                    timestampValue: lastUpdated
+                  }
+                }
+              }
+            }
+          }
+        })
+      });
+
+      return response.ok;
+    } catch (error) {
+      console.error('Error deleting event:', error);
       return false;
     }
   };
