@@ -107,7 +107,10 @@
       "key": "events",
       "name": "Events",
       "summary": "Current and upcoming community events.",
-      "articles": []
+      "articles": [
+        "75d85819-1ac8-4ae4-983a-bdc08d993c37",
+        "d27c6449-5466-49a1-9ab2-66192c1ce55c"
+      ]
     }
   ]
 }
