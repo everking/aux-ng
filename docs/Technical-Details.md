@@ -32,3 +32,7 @@
 - **`.github/workflows/scripts/fetch-firestore-articles.js:1-100`** — Node script using Firestore REST API to query articles with `meta.lastUpdated > lastFetchTime`, writes individual JSON files per article, updates category placement.
 - **`.github/workflows/gh-pages.yaml:1-43`** — Push-triggered workflow that builds Angular app in production, sets CNAME (dev.auxilium.guide vs auxilium.guide based on repo), deploys to GitHub Pages via `peaceiris/actions-gh-pages`.
 - **Dual-state publishing model** — PREVIEW state reads live from Firestore (editors see changes immediately); ACTIVE state reads from static JSON files synced via GH Actions (production serves cached content).
+
+## Key Architecture Pattern
+
+The app uses a **dual-state content architecture**: editors write to Firestore via Angular app (PREVIEW state), GH Actions periodically sync Firestore → static JSON files (ACTIVE state), and production serves the ACTIVE JSON cache. This decouples editing from publishing and enables static hosting.
