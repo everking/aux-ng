@@ -1,0 +1,59 @@
+.edit-event {
+  padding: 10px;
+  max-width: 640px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  width: 100px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.date-hint {
+  color: #0e5757;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  padding-left: 100px;
+}
+
+.date-error {
+  color: #8a4b4b;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  padding-left: 100px;
+}
+
+.cancel-button, .save-button {
+  margin: 10px 10px;
+  background-color: #637d98;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+
+.disabled-button {
+  background-color: grey;
+  cursor: not-allowed;
+  opacity: 0.5;
+}

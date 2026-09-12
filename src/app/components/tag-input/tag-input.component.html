@@ -1,0 +1,36 @@
+<div class="tag-input">
+  <span class="tag-input-label">{{ label }}</span>
+  <div class="tag-input-values">
+    <span class="tag-list-chip" *ngFor="let tag of tags">
+      {{ tag }}
+      <button type="button" class="tag-chip-remove" (click)="remove(tag)" [attr.aria-label]="'Remove ' + tag">×</button>
+    </span>
+    <a href="#" class="tag-add-link" (click)="openPopup($event)">Add</a>
+  </div>
+</div>
+
+<div class="tag-popup-backdrop" *ngIf="open" (click)="closePopup()" (keydown.escape)="closePopup()" tabindex="0">
+  <div class="tag-popup" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" tabindex="0" role="dialog" aria-label="Add a tag">
+    <h3>Add tags</h3>
+    <label class="tag-option" *ngFor="let tag of availableTags">
+      <input type="checkbox" [name]="'tag-' + tag" [(ngModel)]="checked[tag]">
+      <span>{{ tag }}</span>
+    </label>
+    <label class="tag-option">
+      <input type="checkbox" name="tag-other" [(ngModel)]="otherSelected">
+      <span>other</span>
+    </label>
+    <input
+      *ngIf="otherSelected"
+      class="tag-other-input"
+      [(ngModel)]="otherText"
+      type="text"
+      maxlength="40"
+      placeholder="New tag"
+    >
+    <div class="tag-popup-actions">
+      <button type="button" class="tag-popup-add" (click)="confirmAdd()" [disabled]="!canAdd">Add</button>
+      <button type="button" class="tag-popup-cancel" (click)="closePopup()">Cancel</button>
+    </div>
+  </div>
+</div>

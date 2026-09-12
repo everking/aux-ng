@@ -7,6 +7,7 @@ import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angul
 import { AngularEditorConfig, AngularEditorModule, UploadResponse } from '@kolkov/angular-editor';
 import { Article } from '../../interfaces/article';
 import { ImageDropComponent } from '../image-drop/image-drop.component';
+import { TagInputComponent } from '../../components/tag-input/tag-input.component';
 import { LoginService } from '../../services/login.service';
 import {Observable, Observer} from 'rxjs';
 import {HttpEvent, HttpResponse} from '@angular/common/http';
@@ -17,6 +18,7 @@ import {HttpEvent, HttpResponse} from '@angular/common/http';
     FormsModule,
     AngularEditorModule, 
     ImageDropComponent,
+    TagInputComponent,
     ReactiveFormsModule,
     CommonModule
   ],
@@ -34,6 +36,7 @@ export class EditArticleComponent implements OnInit {
   category?: string = '';
   subCategory?: string = '';
   imageURI?: string = '';
+  tags: string[] = [];
   saveMessage: string = '';
   changed: boolean = false;
   public isEditing = false;
@@ -95,6 +98,11 @@ export class EditArticleComponent implements OnInit {
     this.changed = true;
   }
 
+  onTagsChange(tags: string[]) {
+    this.tags = tags;
+    this.changed = true;
+  }
+
   hasChanged() {
     return this.changed;
   }
@@ -117,7 +125,8 @@ export class EditArticleComponent implements OnInit {
         documentId: this.documentId,
         name: this.name,
         category: this.category,
-        subCategory: this.subCategory
+        subCategory: this.subCategory,
+        tags: this.tags
       }
     };
     const isSaved:boolean = await this.articleService.saveArticle(article);
@@ -155,6 +164,7 @@ export class EditArticleComponent implements OnInit {
       this.documentId = article?.meta?.documentId || this.articleService.NEW_LABEL;
       this.category = article?.meta?.category;
       this.subCategory = article?.meta?.subCategory;
+      this.tags = article?.meta?.tags || [];
       this.name = article?.meta?.name || this.articleService.NEW_LABEL;
       this.changed = false;
     })

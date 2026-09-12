@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
-import { SlicePipe, UpperCasePipe } from "@angular/common";
+import { NgFor, NgIf, SlicePipe, UpperCasePipe } from "@angular/common";
 import { Article, ArticleState } from "../../interfaces/article";
 import { RouterLink } from "@angular/router";
 import { stripHtml } from '../../utils';
@@ -11,6 +11,8 @@ import { ArticleService } from '../../services/article.service';
     imports: [
         MatCardModule,
         UpperCasePipe,
+        NgFor,
+        NgIf,
         SlicePipe,
         RouterLink,
     ],

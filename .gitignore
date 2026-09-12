@@ -2,6 +2,7 @@
 
 # Ignore the environment.ts file
 /environment.ts
+.env
 
 # Compiled output
 /dist

@@ -102,6 +102,12 @@
         "connect-families",
         "ask-any-question"
       ]
+    },
+    {
+      "key": "events",
+      "name": "Events",
+      "summary": "Current and upcoming community events.",
+      "articles": []
     }
   ]
 }

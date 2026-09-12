@@ -8,6 +8,9 @@
     <app-search *ngIf="showSearch"></app-search>
     <div class="article-header-image-text">
       <h2>{{ article.header }}</h2>
+      <div class="tag-list" *ngIf="article.meta?.tags?.length">
+        <span class="tag-list-chip" *ngFor="let tag of article.meta.tags">{{ tag }}</span>
+      </div>
     </div>
 
     <span *ngIf="isLoggedIn">

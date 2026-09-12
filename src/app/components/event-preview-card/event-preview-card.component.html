@@ -1,0 +1,19 @@
+<div class="article-preview wiggle-item" *ngIf="event">
+  <a [routerLink]="['/event', event.eventId]">
+    <div class="article-preview-card-container">
+      <div class="image-container">
+        <img src="{{event.imageURI}}" alt="{{event.header}}">
+      </div>
+      <h2>{{ event.header | slice:0:40 }}</h2>
+      <div class="event-date-range">{{ dateRange }}</div>
+      <div class="event-schedule" *ngIf="event.schedule">{{ event.schedule }}</div>
+      <div class="event-where" *ngIf="event.where">{{ event.where }}</div>
+      <div class="article-preview-description">
+        {{ strippedBody }}
+      </div>
+      <div class="event-status" [class.happening]="status === 'happening'">
+        {{ statusLabel }}
+      </div>
+    </div>
+  </a>
+</div>

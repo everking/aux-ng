@@ -4,6 +4,7 @@ import { Category } from "../interfaces/categories";
 import { HttpClient } from "@angular/common/http";
 import { LoginService } from './login.service';
 import { DOCUMENT } from '@angular/common';
+import { readFirestoreStringArray, toFirestoreStringArray } from '../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -104,6 +105,7 @@ export class ArticleService {
         category: fields?.meta?.mapValue?.fields?.category?.stringValue || '',
         subCategory: fields?.meta?.mapValue?.fields?.subCategory?.stringValue || 'default',
         lastUpdated: fields?.meta?.mapValue?.fields?.lastUpdated?.timestampValue || '',
+        tags: readFirestoreStringArray(fields?.meta?.mapValue?.fields?.tags),
         documentId
       },
       articleId: fields?.articleId?.stringValue ?? crypto.randomUUID(),
@@ -312,7 +314,8 @@ export class ArticleService {
                     },
                     "lastUpdated": {
                       "timestampValue": lastUpdated
-                    }
+                    },
+                    "tags": toFirestoreStringArray(meta?.tags || [])
                   }
                 }
               }

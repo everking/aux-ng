@@ -1,0 +1,122 @@
+.tag-input {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.tag-input-label {
+  width: 100px;
+  font-weight: bold;
+  padding-top: 4px;
+}
+
+.tag-input-values {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag-list-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f4f8f7;
+  color: #0e5757;
+  border: 1px solid #b7d0cb;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 13px;
+}
+
+.tag-chip-remove {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #0e5757;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+}
+
+.tag-add-link {
+  color: #0e5757;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tag-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 87, 87, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.tag-popup {
+  background: #fff;
+  border: 1px solid #b7d0cb;
+  border-radius: 8px;
+  padding: 16px 18px;
+  min-width: 240px;
+  max-width: 360px;
+  max-height: 80vh;
+  overflow: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.tag-popup h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.tag-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.tag-other-input {
+  width: 100%;
+  margin: 8px 0 12px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.tag-popup-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag-popup-add,
+.tag-popup-cancel {
+  padding: 6px 14px;
+  border-radius: 4px;
+  border: 1px solid #0e5757;
+  cursor: pointer;
+  font: inherit;
+}
+
+.tag-popup-add {
+  background: #0e5757;
+  color: #fff;
+}
+
+.tag-popup-add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tag-popup-cancel {
+  background: #fff;
+  color: #0e5757;
+}

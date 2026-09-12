@@ -1,0 +1,29 @@
+<div class="events-page">
+  <div class="events-header">
+    <div>
+      <h1>Events</h1>
+      <p class="events-intro">
+        A bulletin board of current and upcoming events. Logged-in members can submit an event with a date window.
+      </p>
+    </div>
+    <button mat-stroked-button routerLink="/edit-event/new">Submit Event</button>
+  </div>
+
+  <div class="events-loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div class="events-empty" *ngIf="!loading && loadFailed">
+    Unable to load events right now.
+  </div>
+
+  <div class="events-empty" *ngIf="!loading && !loadFailed && events.length === 0">
+    No current or upcoming events. Submit one to get the board started.
+  </div>
+
+  <div class="events-list" *ngIf="!loading && events.length">
+    <div class="events-list-item" *ngFor="let event of events">
+      <app-event-preview-card [event]="event"></app-event-preview-card>
+    </div>
+  </div>
+</div>
