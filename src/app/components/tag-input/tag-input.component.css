@@ -120,3 +120,15 @@
   background: #fff;
   color: #0e5757;
 }
+
+@media (max-width: 764px) {
+  .tag-input {
+    flex-direction: column;
+  }
+
+  .tag-input-label {
+    width: auto;
+    padding-top: 0;
+    margin-bottom: 6px;
+  }
+}

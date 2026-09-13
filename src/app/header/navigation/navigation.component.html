@@ -1,40 +1,54 @@
 <div class="navigation">
   <div class="navigation-header-image">
     <img src="assets/images/auxilium-new.png" alt="Auxilium"/>
+    <button type="button"
+      class="navigation-burger"
+      [class.open]="menuOpen"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen"
+      [attr.aria-label]="menuOpen ? 'Close menu' : 'Open menu'"
+    >
+      <span class="navigation-burger-bar"></span>
+      <span class="navigation-burger-bar"></span>
+      <span class="navigation-burger-bar"></span>
+    </button>
   </div>
-  <div class="navigation-header-links">
+  <div class="navigation-header-links" [class.open]="menuOpen">
     <button mat-stroked-button  routerLink="/home" 
-      routerLinkActive="active-link" 
+      routerLinkActive="active-link"
+      (click)="closeMenu()"
     >
       Home
     </button>
     <button mat-stroked-button routerLink="/events" 
       [ngClass]="{'active-link': isEventsActive()}"
+      (click)="closeMenu()"
     >
       Events
     </button>
     <button mat-stroked-button routerLink="/family" 
-      [ngClass]="{'active-link': isCategoryActive('family')}" 
+      [ngClass]="{'active-link': isCategoryActive('family')}"
+      (click)="closeMenu()"
     >
       Family
     </button>
     <button mat-stroked-button routerLink="/school" 
       [ngClass]="{'active-link': isCategoryActive('high-school')}"
+      (click)="closeMenu()"
     >
       School
     </button>
     <button mat-stroked-button routerLink="/excellence" 
       [ngClass]="{'active-link': isCategoryActive('excellence')}"
+      (click)="closeMenu()"
     >
       Excellence
     </button>
     <button mat-stroked-button routerLink="/ask" 
       routerLinkActive="active-link"
+      (click)="closeMenu()"
     >
       Resources
     </button>
   </div>
 </div>
-
-
-

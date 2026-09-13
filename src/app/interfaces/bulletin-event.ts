@@ -150,4 +150,25 @@ export function sortCurrentEvents(events: BulletinEvent[], today: string = today
     });
 }
 
+export function addDaysISO(iso: string, days: number): string {
+  const date = parseLocalDate(iso);
+  if (!date) {
+    return iso;
+  }
+  date.setDate(date.getDate() + days);
+  return todayISO(date);
+}
+
+export function upcomingEventsForHome(
+  events: BulletinEvent[],
+  today: string = todayISO(),
+  weeks = 2,
+  limit = 4
+): BulletinEvent[] {
+  const horizon = addDaysISO(today, weeks * 7 - 1);
+  return sortCurrentEvents(events, today)
+    .filter((event) => event.dateFrom <= horizon)
+    .slice(0, limit);
+}
+
 export { parseRecurrenceJson };

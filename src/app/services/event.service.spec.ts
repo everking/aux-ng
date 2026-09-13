@@ -7,7 +7,8 @@ import {
   getEventStatus,
   isCurrentOrFuture,
   sortCurrentEvents,
-  todayISO
+  todayISO,
+  upcomingEventsForHome
 } from '../interfaces/bulletin-event';
 
 describe('EventService', () => {
@@ -126,6 +127,27 @@ describe('bulletin event date helpers', () => {
 
   it('formats a multi-day window in the same year without repeating the year', () => {
     expect(formatDateRange('2026-03-15', '2026-03-22')).toBe('Mar 15 – Mar 22, 2026');
+  });
+
+  it('limits home highlights to the next two weeks and four items', () => {
+    const highlighted = upcomingEventsForHome(
+      [
+        event('2026-09-12', '2026-09-12'),
+        event('2026-09-18', '2026-09-18'),
+        event('2026-09-20', '2026-09-21'),
+        event('2026-09-25', '2026-09-25'),
+        event('2026-09-26', '2026-09-26'),
+        event('2026-10-01', '2026-10-01')
+      ],
+      today
+    );
+
+    expect(highlighted.map((item) => item.dateFrom)).toEqual([
+      '2026-09-12',
+      '2026-09-18',
+      '2026-09-20',
+      '2026-09-25'
+    ]);
   });
 
   it('sorts current events by start date and drops past events', () => {

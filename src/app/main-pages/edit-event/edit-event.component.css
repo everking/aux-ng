@@ -1,12 +1,21 @@
 .edit-event {
-  padding: 10px;
+  width: 100%;
   max-width: 640px;
+  min-width: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.edit-event angular-editor {
+  display: block;
+  max-width: 100%;
 }
 
 .form-group {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  min-width: 0;
 }
 
 .form-group label {
@@ -76,4 +85,21 @@
   background-color: grey;
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+@media (max-width: 764px) {
+  .form-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-group label {
+    width: auto;
+    margin-bottom: 6px;
+  }
+
+  .date-hint,
+  .date-error {
+    padding-left: 0;
+  }
 }
