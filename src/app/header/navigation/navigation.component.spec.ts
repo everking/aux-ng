@@ -24,6 +24,14 @@ describe('NavigationComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('toggles the mobile menu', () => {
+    expect(component.menuOpen).toBeFalse();
+    component.toggleMenu();
+    expect(component.menuOpen).toBeTrue();
+    component.closeMenu();
+    expect(component.menuOpen).toBeFalse();
+  });
+
   it('places Events between Home and Family', () => {
     const buttons = Array.from(
       fixture.nativeElement.querySelectorAll('.navigation-header-links button')

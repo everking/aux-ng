@@ -1,4 +1,4 @@
-<div style="padding: 10px;max-width:640px">
+<div class="edit-article">
   <div style="display: flex; align-items: center; justify-content: space-between;">
     <h1>{{ header }}</h1>
     <button (click)="toggleEditMode()" style="border: none; background: none; cursor: pointer;">
@@ -36,5 +36,4 @@
   <button class="save-button" (click)="onSaveClick()" [disabled]="!hasChanged()" [ngClass]="{'disabled-button': !hasChanged()}">Save</button>
   <button class="cancel-button" (click)="onCancelClick()">Cancel</button>
   <p><span>{{saveMessage}}</span></p>
-
 </div>

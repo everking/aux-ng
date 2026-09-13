@@ -36,3 +36,37 @@
 .rosary {
   margin:10px;
 }
+
+.happening {
+  margin: 10px;
+}
+
+.happening h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.happening-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.happening-list li {
+  min-width: 0;
+}
+
+.happening-date {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+@media (max-width: 520px) {
+  .happening-list {
+    grid-template-columns: 1fr;
+  }
+}

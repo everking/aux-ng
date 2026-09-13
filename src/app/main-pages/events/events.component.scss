@@ -1,19 +1,27 @@
+.home {
+  display: flex;
+  justify-content: center;
+}
+
 .events-page {
   max-width: 755px;
   min-width: 360px;
-  padding: 20px;
 }
 
 .events-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 0 10px 10px 10px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 0;
+}
+
+.events-header h1 {
+  margin: 0;
 }
 
 .events-intro {
-  max-width: 480px;
+  padding: 0 20px 20px 20px;
   margin: 0;
 }
 
@@ -42,7 +50,7 @@
   }
 
   .events-header {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .events-list-item {
