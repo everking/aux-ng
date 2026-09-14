@@ -1,84 +1,117 @@
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
-const { OpenAI } = require('openai');
 
-require('dotenv').config();
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+try {
+  require('dotenv').config();
+} catch {
+  /* optional for GitHub Actions, which injects XAI_API_KEY */
+}
 
 const assetDir = path.resolve(__dirname, '../../../src/assets');
-const dataDir = path.join(assetDir, 'data');
+const articlesDir = path.join(assetDir, 'data', 'articles');
 const outputDir = path.join(assetDir, 'index');
 const outputFile = path.join(outputDir, 'article-embeddings.json');
+const XAI_EMBEDDINGS_URL = 'https://api.x.ai/v1/embeddings';
+const XAI_EMBEDDING_MODEL = 'v1';
 
-// Helper to strip HTML tags
 function stripHtml(html) {
   return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
-async function generateEmbedding(text) {
-  const res = await openai.embeddings.create({
-    model: 'text-embedding-3-small',
-    input: text,
-  });
-  return res.data[0].embedding;
+function listJsonFiles(dir) {
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+  return fs.readdirSync(dir)
+    .filter((name) => name.endsWith('.json'))
+    .map((name) => path.join(dir, name));
 }
 
-// Main reusable method
+function readJson(file) {
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+async function generateEmbedding(text) {
+  const apiKey = process.env.XAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('XAI_API_KEY is not set');
+  }
+
+  const response = await fetch(XAI_EMBEDDINGS_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: XAI_EMBEDDING_MODEL,
+      input: `passage: ${text}`,
+      encoding_format: 'float'
+    })
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`xAI embeddings error: ${response.status} ${errorText}`);
+  }
+
+  const json = await response.json();
+  const embedding = json?.data?.[0]?.embedding;
+  if (!Array.isArray(embedding)) {
+    throw new Error('xAI embeddings response did not include a vector');
+  }
+  return embedding;
+}
+
 async function generateEmbeddings(input = null) {
   const files = input
-    ? [path.join(dataDir, `${input}.json`)]
-    : glob.sync(`${dataDir}/*.json`);
+    ? [path.join(articlesDir, `${input}.json`)]
+    : listJsonFiles(articlesDir);
 
   const newEmbeddings = [];
 
   for (const file of files) {
     if (!fs.existsSync(file)) {
-      console.warn(`⚠️ File not found: ${file}`);
+      console.warn(`File not found: ${file}`);
       continue;
     }
 
-    const json = await fs.readJson(file);
+    const json = readJson(file);
     const fields = json.document?.fields || {};
-
     const id = fields.articleId?.stringValue || path.basename(file, '.json');
     if (fields.deleted?.booleanValue) {
       console.log(`Skipping deleted: ${id}`);
       continue;
     }
+
     const header = fields.header?.stringValue || '';
     const lastUpdated = fields.meta?.mapValue?.fields?.lastUpdated?.timestampValue || '';
     const body = fields.body?.stringValue || '';
-
-    const plainBody = stripHtml(body);
-    const fullText = [header, `Last updated: ${lastUpdated}`, plainBody].join('\n').trim();
-
+    const fullText = [header, `Last updated: ${lastUpdated}`, stripHtml(body)].join('\n').trim();
     if (!fullText) {
-      console.warn(`⚠️ Skipping empty content: ${id}`);
+      console.warn(`Skipping empty content: ${id}`);
       continue;
     }
 
     const embedding = await generateEmbedding(fullText);
-    newEmbeddings.push({ id, embedding });
-    console.log(`✅ Embedded: ${id}`);
+    newEmbeddings.push({ id, embedding, lastUpdated });
+    console.log(`Embedded: ${id}`);
   }
 
-  await fs.ensureDir(outputDir);
+  fs.mkdirSync(outputDir, { recursive: true });
 
   let existing = [];
-  if (await fs.pathExists(outputFile)) {
-    existing = await fs.readJson(outputFile);
+  if (fs.existsSync(outputFile)) {
+    existing = readJson(outputFile);
   }
 
-  const indexMap = new Map(existing.map(e => [e.id, e]));
-  for (const { id, embedding } of newEmbeddings) {
-    indexMap.set(id, { id, embedding });
+  const indexMap = new Map();
+  if (input) {
+    existing.forEach((entry) => indexMap.set(entry.id, entry));
   }
+  newEmbeddings.forEach((entry) => indexMap.set(entry.id, entry));
 
-  const liveIds = new Set([
-    ...glob.sync(`${dataDir}/*.json`).map((file) => path.basename(file, '.json')),
-    ...glob.sync(`${dataDir}/articles/*.json`).map((file) => path.basename(file, '.json'))
-  ]);
+  const liveIds = new Set(listJsonFiles(articlesDir).map((file) => path.basename(file, '.json')));
   for (const id of Array.from(indexMap.keys())) {
     if (!liveIds.has(id)) {
       indexMap.delete(id);
@@ -86,19 +119,18 @@ async function generateEmbeddings(input = null) {
     }
   }
 
-  const merged = Array.from(indexMap.values());
-  await fs.writeJson(outputFile, merged, { spaces: 2 });
-
-  console.log(`🧠 Indexed ${newEmbeddings.length} articles. Total in index: ${merged.length}`);
+  const merged = Array.from(indexMap.values()).map(({ id, embedding }) => ({ id, embedding }));
+  fs.writeFileSync(outputFile, JSON.stringify(merged, null, 2), 'utf8');
+  console.log(`Indexed ${newEmbeddings.length} documents with xAI. Total in index: ${merged.length}`);
 }
 
-// Run from CLI if invoked directly
 if (require.main === module) {
-  const arg = process.argv[2];
-    generateEmbeddings(arg);
+  generateEmbeddings(process.argv[2]).catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
 }
 
-// Export for use as a module
 module.exports = {
-  generateEmbeddings,
+  generateEmbeddings
 };

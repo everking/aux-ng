@@ -1,0 +1,38 @@
+name: Generate embeddings
+
+on:
+  workflow_dispatch:
+    inputs:
+      article_id:
+        description: 'Optional article/event id. Leave empty to re-index all.'
+        required: false
+        default: ''
+
+jobs:
+  generate_embeddings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Generate embeddings with xAI
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        run: node .github/workflows/scripts/generate-index.js ${{ github.event.inputs.article_id }}
+
+      - name: Commit and push embeddings
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          if ! git diff --quiet src/assets/index/article-embeddings.json; then
+            git add src/assets/index/article-embeddings.json
+            git commit -m "Update article embeddings from xAI."
+            git push
+          else
+            echo "No embedding changes to commit"
+          fi

@@ -29,6 +29,11 @@ jobs:
         # Use fetch to query Firestore
         node .github/workflows/scripts/fetch-firestore-articles.js
 
+    - name: Generate embeddings with xAI
+      env:
+        XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+      run: node .github/workflows/scripts/generate-index.js
+
     - name: Commit and push changes
       run: |
         git config --local user.name "GitHub Actions"
