@@ -130,8 +130,7 @@ export class EventService {
   }
 
   public async fetchPublishedEvents(): Promise<BulletinEvent[]> {
-    await this.articleService.loadCategories();
-    const eventIds = this.articleService.getCategory(this.EVENTS_CATEGORY)?.articles || [];
+    const eventIds = await this.loadPublishedEventIds();
     const events: BulletinEvent[] = [];
 
     for (const eventId of eventIds) {
@@ -142,6 +141,23 @@ export class EventService {
     }
 
     return events;
+  }
+
+  private async loadPublishedEventIds(): Promise<string[]> {
+    try {
+      const response = await fetch(`${this.baseHref}assets/data/events.json`, { method: 'GET' });
+      if (response.ok) {
+        const ids = await response.json();
+        if (Array.isArray(ids) && ids.length) {
+          return ids.filter((id) => typeof id === 'string');
+        }
+      }
+    } catch (error) {
+      console.warn('Could not load events.json, falling back to categories.json', error);
+    }
+
+    await this.articleService.loadCategories();
+    return this.articleService.getCategory(this.EVENTS_CATEGORY)?.articles || [];
   }
 
   public async fetchFirestoreEvents(includeDeleted = false): Promise<BulletinEvent[]> {

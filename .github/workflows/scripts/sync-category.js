@@ -91,4 +91,16 @@ function removeArticleFromCategories(articleId) {
   }
 }
 
-module.exports = { updateCategoryPlacement, removeArticleFromCategories };
+function setCategoryArticles(categoryKey, articleIds) {
+  const categoriesData = JSON.parse(fs.readFileSync(categoriesPath, 'utf-8'));
+  const targetCategory = categoriesData.categories.find((cat) => cat.key === categoryKey);
+  if (!targetCategory) {
+    console.warn(`Category '${categoryKey}' not found`);
+    return;
+  }
+  targetCategory.articles = [...new Set(articleIds.filter(Boolean))];
+  fs.writeFileSync(categoriesPath, JSON.stringify(categoriesData, null, 2), 'utf8');
+  console.log(`Set ${targetCategory.articles.length} articles on "${categoryKey}"`);
+}
+
+module.exports = { updateCategoryPlacement, removeArticleFromCategories, setCategoryArticles };
