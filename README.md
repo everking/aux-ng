@@ -12,9 +12,10 @@ git update-index --assume-unchanged .github/workflows/scripts/.env
 
 GitHub Actions secrets used by workflows:
 - `FIREBASE_SERVICE_ACCOUNT` — Fetch Firestore Articles
-- `XAI_API_KEY` — embedding generation via `https://api.x.ai/v1` (Generate embeddings / Fetch Firestore Articles)
+- `XAI_API_KEY` — tried first for embeddings (`https://api.x.ai/v1`)
+- `OPENAI_API_KEY` — used if xAI embeddings are unavailable
 
-Search query embeddings still go through the `generateEmbedding` Cloud Function. Point that function at xAI as well, or search will keep using OpenAI at query time.
+Search tries **xAI → OpenAI → keyword**. Cosine ranking is skipped when the query vector and `article-embeddings.json` were built by different providers. Redeploy the function with `bash functions/deploy.sh`.
 
 ## Development server
 
