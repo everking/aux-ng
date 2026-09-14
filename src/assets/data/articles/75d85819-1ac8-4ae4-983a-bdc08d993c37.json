@@ -23,6 +23,15 @@
       "dateTo": {
         "stringValue": "2026-12-31"
       },
+      "recurrence": {
+        "stringValue": ""
+      },
+      "schedule": {
+        "stringValue": ""
+      },
+      "deleted": {
+        "booleanValue": false
+      },
       "meta": {
         "mapValue": {
           "fields": {
@@ -33,17 +42,47 @@
               "stringValue": "default"
             },
             "lastUpdated": {
-              "timestampValue": "2026-09-12T09:13:51.007Z"
+              "timestampValue": "2026-09-14T07:12:08.029Z"
             },
             "createdBy": {
               "stringValue": "eric.deguzman@outlook.com"
+            },
+            "tags": {
+              "arrayValue": {
+                "values": [
+                  {
+                    "stringValue": "men"
+                  },
+                  {
+                    "stringValue": "women"
+                  },
+                  {
+                    "stringValue": "boys"
+                  },
+                  {
+                    "stringValue": "girls"
+                  },
+                  {
+                    "stringValue": "holiday"
+                  },
+                  {
+                    "stringValue": "celebration"
+                  }
+                ]
+              }
             }
           }
         }
+      },
+      "dates": {
+        "stringValue": "12/25/2026 – 12/31/2026"
+      },
+      "where": {
+        "stringValue": ""
       }
     },
     "createTime": "2026-09-12T09:13:51.693961Z",
-    "updateTime": "2026-09-12T09:13:51.693961Z"
+    "updateTime": "2026-09-14T07:12:07.964038Z"
   },
-  "readTime": "2026-09-12T14:33:34.854189Z"
+  "readTime": "2026-09-14T07:57:37.598333Z"
 }
