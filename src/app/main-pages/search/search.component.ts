@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 
 import { ArticleService } from '../../services/article.service';
 import { Article, ArticleState } from '../../interfaces/article';
+import { stripHtml as htmlToText } from '../../utils';
 
 const INDEX_URL = 'assets/index/article-embeddings.json';
 const EMBEDDING_ENDPOINT = 'https://us-central1-auxilium-420904.cloudfunctions.net/generateEmbedding';
@@ -153,9 +154,7 @@ export class SearchComponent {
   }
 
   stripHtml(html: string): string {
-    const tempElement = document.createElement('div');
-    tempElement.innerHTML = html;
-    return this.truncate(tempElement.textContent || tempElement.innerText || '', 150);
+    return this.truncate(htmlToText(html), 150);
   }
 
   async embedQuery(query: string): Promise<{results: number[], lastUsed?: number}> {
