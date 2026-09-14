@@ -7,6 +7,19 @@
     <p class="events-intro">
       A bulletin board of current and upcoming events. Logged-in members can submit an event with a date window.
     </p>
+    <div class="events-tags">
+      <div class="events-tags-label">Tags</div>
+      <label class="events-tag-option">
+        <input type="checkbox" [ngModel]="allTags" (ngModelChange)="onAllTagsChange($event)">
+        All
+      </label>
+      <ng-container *ngIf="!allTags">
+        <label class="events-tag-option" *ngFor="let tag of availableTags">
+          <input type="checkbox" [ngModel]="!!selected[tag]" (ngModelChange)="onTagChange(tag, $event)">
+          {{ tag }}
+        </label>
+      </ng-container>
+    </div>
 
     <div class="events-loading" *ngIf="loading">
       <mat-spinner></mat-spinner>
@@ -20,8 +33,12 @@
       No current or upcoming events. Submit one to get the board started.
     </div>
 
-    <div class="events-list" *ngIf="!loading && events.length">
-      <div class="events-list-item" *ngFor="let event of events">
+    <div class="events-empty" *ngIf="!loading && !loadFailed && events.length && displayedEvents.length === 0">
+      No events match the selected tags.
+    </div>
+
+    <div class="events-list" *ngIf="!loading && displayedEvents.length">
+      <div class="events-list-item" *ngFor="let event of displayedEvents">
         <app-event-preview-card [event]="event"></app-event-preview-card>
       </div>
     </div>

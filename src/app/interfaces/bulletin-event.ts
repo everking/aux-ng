@@ -171,4 +171,17 @@ export function upcomingEventsForHome(
     .slice(0, limit);
 }
 
+export function filterEventsByTags(events: BulletinEvent[], selectedTags: string[]): BulletinEvent[] {
+  const wanted = selectedTags
+    .map((tag) => tag.trim().toLowerCase())
+    .filter(Boolean);
+  if (!wanted.length) {
+    return events;
+  }
+  const wantedSet = new Set(wanted);
+  return events.filter((event) =>
+    (event.tags || []).some((tag) => wantedSet.has(tag.toLowerCase()))
+  );
+}
+
 export { parseRecurrenceJson };
