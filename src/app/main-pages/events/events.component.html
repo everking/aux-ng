@@ -1,12 +1,15 @@
 <div class="home">
   <div class="events-page">
     <div class="events-header">
+      <a class="add-event" routerLink="/edit-event/new">
+        <span class="add-event-icon" aria-hidden="true"></span>
+        Add Event
+      </a>
       <h1>Events</h1>
-      <button mat-stroked-button routerLink="/edit-event/new">Submit Event</button>
+      <p class="events-intro">
+        A bulletin board of current and upcoming events. Logged-in members can submit an event with a date window.
+      </p>
     </div>
-    <p class="events-intro">
-      A bulletin board of current and upcoming events. Logged-in members can submit an event with a date window.
-    </p>
     <div class="events-tags">
       <div class="events-tags-label">Tags</div>
       <label class="events-tag-option">
@@ -30,7 +33,7 @@
     </div>
 
     <div class="events-empty" *ngIf="!loading && !loadFailed && events.length === 0">
-      No current or upcoming events. Submit one to get the board started.
+      No current or upcoming events. Add one to get the board started.
     </div>
 
     <div class="events-empty" *ngIf="!loading && !loadFailed && events.length && displayedEvents.length === 0">

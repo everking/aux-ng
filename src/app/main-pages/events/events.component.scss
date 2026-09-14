@@ -9,20 +9,66 @@
 }
 
 .events-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 10px 0;
+  padding: 10px 20px 12px 10px;
+}
+
+.events-header::after {
+  content: '';
+  display: block;
+  clear: both;
 }
 
 .events-header h1 {
-  margin: 0;
+  margin: 0 0 8px;
 }
 
 .events-intro {
-  padding: 0 20px 12px 20px;
   margin: 0;
+}
+
+.add-event {
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0 8px 16px;
+  color: #0e5757;
+  text-decoration: none;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.add-event:hover {
+  opacity: 0.8;
+}
+
+.add-event-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.add-event-icon::before,
+.add-event-icon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.add-event-icon::before {
+  width: 12px;
+  height: 2px;
+}
+
+.add-event-icon::after {
+  width: 2px;
+  height: 12px;
 }
 
 .events-tags {
@@ -64,10 +110,6 @@
   .events-page {
     min-width: 0;
     width: 100%;
-  }
-
-  .events-header {
-    flex-wrap: wrap;
   }
 
   .events-list-item {
