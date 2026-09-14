@@ -20,12 +20,13 @@
     </div>
   </div>
   <div *ngIf="searching">Searching...</div>
+  <div class="search-error" *ngIf="!searching && searchError">{{ searchError }}</div>
   <ul>
     <li *ngFor="let result of results">
-      <a [routerLink]="['/article', result.id]">{{ result.article?.header }}</a>
+      <a [routerLink]="resultLink(result)">{{ resultTitle(result) }}</a>
       <div class="article-body">
-        {{ stripHtml(result.article?.body || "") }}
+        {{ resultSnippet(result) }}
       </div>
     </li>
-  </ul>  
+  </ul>
 </div>

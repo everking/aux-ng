@@ -4,15 +4,15 @@ const path = require('path');
 try {
   require('dotenv').config();
 } catch {
-  /* optional for GitHub Actions, which injects XAI_API_KEY */
+  /* optional for GitHub Actions */
 }
+
+const { embedWithFallback } = require('../../../functions/embed-providers');
 
 const assetDir = path.resolve(__dirname, '../../../src/assets');
 const articlesDir = path.join(assetDir, 'data', 'articles');
 const outputDir = path.join(assetDir, 'index');
 const outputFile = path.join(outputDir, 'article-embeddings.json');
-const XAI_EMBEDDINGS_URL = 'https://api.x.ai/v1/embeddings';
-const XAI_EMBEDDING_MODEL = 'v1';
 
 function stripHtml(html) {
   return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -31,44 +31,39 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-async function generateEmbedding(text) {
-  const apiKey = process.env.XAI_API_KEY;
-  if (!apiKey) {
-    throw new Error('XAI_API_KEY is not set');
+function readIndex(file) {
+  if (!fs.existsSync(file)) {
+    return { provider: '', model: '', embeddings: [] };
   }
-
-  const response = await fetch(XAI_EMBEDDINGS_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: XAI_EMBEDDING_MODEL,
-      input: `passage: ${text}`,
-      encoding_format: 'float'
-    })
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`xAI embeddings error: ${response.status} ${errorText}`);
+  const json = readJson(file);
+  if (Array.isArray(json)) {
+    return { provider: 'openai', model: 'text-embedding-3-small', embeddings: json };
   }
+  return {
+    provider: json.provider || '',
+    model: json.model || '',
+    embeddings: Array.isArray(json.embeddings) ? json.embeddings : []
+  };
+}
 
-  const json = await response.json();
-  const embedding = json?.data?.[0]?.embedding;
-  if (!Array.isArray(embedding)) {
-    throw new Error('xAI embeddings response did not include a vector');
+function describeKey(name, value) {
+  if (!value) {
+    return `${name}: not set`;
   }
-  return embedding;
+  return `${name}: set len=${value.length} last4=${value.slice(-4)}`;
 }
 
 async function generateEmbeddings(input = null) {
+  console.log(describeKey('XAI_API_KEY', process.env.XAI_API_KEY));
+  console.log(describeKey('OPENAI_API_KEY', process.env.OPENAI_API_KEY));
+
   const files = input
     ? [path.join(articlesDir, `${input}.json`)]
     : listJsonFiles(articlesDir);
 
   const newEmbeddings = [];
+  let provider = '';
+  let model = '';
 
   for (const file of files) {
     if (!fs.existsSync(file)) {
@@ -93,21 +88,19 @@ async function generateEmbeddings(input = null) {
       continue;
     }
 
-    const embedding = await generateEmbedding(fullText);
-    newEmbeddings.push({ id, embedding, lastUpdated });
-    console.log(`Embedded: ${id}`);
+    const result = await embedWithFallback(fullText, 'passage');
+    provider = result.provider;
+    model = result.model;
+    newEmbeddings.push({ id, embedding: result.embedding, lastUpdated });
+    console.log(`Embedded (${result.provider}/${result.model}): ${id}`);
   }
 
   fs.mkdirSync(outputDir, { recursive: true });
-
-  let existing = [];
-  if (fs.existsSync(outputFile)) {
-    existing = readJson(outputFile);
-  }
-
+  const existing = readIndex(outputFile);
   const indexMap = new Map();
-  if (input) {
-    existing.forEach((entry) => indexMap.set(entry.id, entry));
+  const sameSpace = input && existing.provider && provider && existing.provider === provider;
+  if (sameSpace) {
+    existing.embeddings.forEach((entry) => indexMap.set(entry.id, entry));
   }
   newEmbeddings.forEach((entry) => indexMap.set(entry.id, entry));
 
@@ -119,9 +112,13 @@ async function generateEmbeddings(input = null) {
     }
   }
 
-  const merged = Array.from(indexMap.values()).map(({ id, embedding }) => ({ id, embedding }));
-  fs.writeFileSync(outputFile, JSON.stringify(merged, null, 2), 'utf8');
-  console.log(`Indexed ${newEmbeddings.length} documents with xAI. Total in index: ${merged.length}`);
+  const embeddings = Array.from(indexMap.values()).map(({ id, embedding }) => ({ id, embedding }));
+  fs.writeFileSync(outputFile, JSON.stringify({
+    provider: provider || existing.provider || 'unknown',
+    model: model || existing.model || '',
+    embeddings
+  }, null, 2), 'utf8');
+  console.log(`Indexed ${newEmbeddings.length} documents with ${provider || 'none'}. Total in index: ${embeddings.length}`);
 }
 
 if (require.main === module) {

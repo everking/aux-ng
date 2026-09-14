@@ -67,6 +67,16 @@
   cursor: pointer;
 }
 
+.search-error {
+  color: #8a4b4b;
+  margin: 12px 0;
+}
+
 .dropdown-list li:hover {
   background-color: #f0f0f0;
+}
+
+.search-error {
+  color: #8a4b4b;
+  margin: 12px 0;
 }

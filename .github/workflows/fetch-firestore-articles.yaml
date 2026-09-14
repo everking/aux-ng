@@ -32,6 +32,7 @@ jobs:
     - name: Generate embeddings with xAI
       env:
         XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: node .github/workflows/scripts/generate-index.js
 
     - name: Commit and push changes
