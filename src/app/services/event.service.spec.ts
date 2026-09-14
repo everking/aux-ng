@@ -121,12 +121,12 @@ describe('bulletin event date helpers', () => {
     expect(getEventStatus(event('2026-08-01', '2026-09-11'), today)).toBe('ended');
   });
 
-  it('formats a same-day window as a single date', () => {
-    expect(formatDateRange('2026-03-15', '2026-03-15')).toBe('Mar 15, 2026');
+  it('formats a same-day window as a single date with weekday', () => {
+    expect(formatDateRange('2026-09-16', '2026-09-16')).toBe('Sep 16, 2026 (Wed)');
   });
 
-  it('formats a multi-day window in the same year without repeating the year', () => {
-    expect(formatDateRange('2026-03-15', '2026-03-22')).toBe('Mar 15 – Mar 22, 2026');
+  it('formats a multi-day window with start and end weekdays', () => {
+    expect(formatDateRange('2026-10-01', '2026-10-04')).toBe('Oct 1 – Oct 4, 2026 (Thu – Sun)');
   });
 
   it('limits home highlights to the next two weeks and four items', () => {

@@ -102,6 +102,10 @@ export function parseLocalDate(date: string): Date | null {
   return new Date(year, month - 1, day);
 }
 
+function weekdayShort(date: Date): string {
+  return date.toLocaleDateString('en-US', { weekday: 'short' });
+}
+
 export function formatDateRange(dateFrom: string, dateTo: string): string {
   const from = parseLocalDate(dateFrom);
   const to = parseLocalDate(dateTo || dateFrom);
@@ -120,14 +124,15 @@ export function formatDateRange(dateFrom: string, dateTo: string): string {
   };
 
   if (dateFrom === (dateTo || dateFrom)) {
-    return from.toLocaleDateString('en-US', full);
+    return `${from.toLocaleDateString('en-US', full)} (${weekdayShort(from)})`;
   }
 
+  const weekdays = `(${weekdayShort(from)} – ${weekdayShort(to)})`;
   if (from.getFullYear() === to.getFullYear()) {
-    return `${from.toLocaleDateString('en-US', monthDay)} – ${to.toLocaleDateString('en-US', full)}`;
+    return `${from.toLocaleDateString('en-US', monthDay)} – ${to.toLocaleDateString('en-US', full)} ${weekdays}`;
   }
 
-  return `${from.toLocaleDateString('en-US', full)} – ${to.toLocaleDateString('en-US', full)}`;
+  return `${from.toLocaleDateString('en-US', full)} – ${to.toLocaleDateString('en-US', full)} ${weekdays}`;
 }
 
 export function eventDateLabel(event: Pick<BulletinEvent, 'dateFrom' | 'dateTo' | 'recurrence'>): string {
