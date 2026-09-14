@@ -4,6 +4,8 @@ $card-width: 250;
   $image-header-height: 185;
 
   width: #{$card-width}px;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 30px 10px;
 
   img {

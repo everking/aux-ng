@@ -1,6 +1,8 @@
 .home {
   display: flex;
   justify-content: center;
+  width: 100%;
+  min-width: 0;
   .mat-grid-tile {
     border: 1px solid #000000;
   }
@@ -8,7 +10,10 @@
 .content {
   max-width: 640px;
   min-width: 200px;
-  padding:20px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
   justify-content: center;
 }
 .content-details {
@@ -63,6 +68,13 @@
   display: block;
   font-size: 0.9rem;
   opacity: 0.75;
+}
+
+@media (max-width: 764px) {
+  .content {
+    min-width: 0;
+    padding: 16px 12px;
+  }
 }
 
 @media (max-width: 520px) {
