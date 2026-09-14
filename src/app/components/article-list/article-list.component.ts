@@ -4,6 +4,7 @@ import { Article } from "../../interfaces/article";
 import { ArticleService } from "../../services/article.service";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { ArticlePreviewCardComponent } from "../article-preview-card/article-preview-card.component";
+import { stripHtml as htmlToText } from '../../utils';
 
 @Component({
   selector: 'app-article-list',
@@ -82,9 +83,7 @@ export class ArticleListComponent implements OnChanges {
   }
 
   private stripHtml(html: string): string {
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    return div.textContent || div.innerText || '';
+    return htmlToText(html);
   }
 
   private truncateToWord(text: string, limit: number): string {
