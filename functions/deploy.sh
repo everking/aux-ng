@@ -65,6 +65,8 @@ IFS=','
 SECRET_JOINED="${SECRET_FLAGS[*]}"
 unset IFS
 
+EMBEDDINGS_API="${EMBEDDINGS_API:-OPEN_AI}"
+
 gcloud functions deploy generateEmbedding \
   --project="$PROJECT" \
   --account="$ACCOUNT" \
@@ -76,6 +78,7 @@ gcloud functions deploy generateEmbedding \
   --source="$ROOT/functions" \
   --memory=1024MB \
   --timeout=30s \
+  --set-env-vars="EMBEDDINGS_API=${EMBEDDINGS_API}" \
   --set-secrets="$SECRET_JOINED"
 
 echo "Deployed https://${REGION}-${PROJECT}.cloudfunctions.net/generateEmbedding"

@@ -20,8 +20,9 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Generate embeddings with xAI
+      - name: Generate embeddings
         env:
+          EMBEDDINGS_API: OPEN_AI
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node .github/workflows/scripts/generate-index.js ${{ github.event.inputs.article_id }}
@@ -30,9 +31,9 @@ jobs:
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
-          if ! git diff --quiet src/assets/index/article-embeddings.json; then
-            git add src/assets/index/article-embeddings.json
-            git commit -m "Update article embeddings from xAI."
+          if ! git diff --quiet -- src/assets/index/; then
+            git add src/assets/index/
+            git commit -m "Update article embeddings."
             git push
           else
             echo "No embedding changes to commit"

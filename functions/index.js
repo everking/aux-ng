@@ -1,9 +1,8 @@
-const { embedWithFallback } = require('./embed-providers');
+const { embedText } = require('./embed-providers');
 
 /**
  * POST { "input": "search text" }
- * Tries xAI embeddings, then OpenAI, and returns an OpenAI-compatible payload
- * plus provider/model so the client can avoid mixing vector spaces.
+ * Uses EMBEDDINGS_API=X_AI|OPEN_AI (no fallback).
  */
 exports.generateEmbedding = async (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
@@ -30,7 +29,7 @@ exports.generateEmbedding = async (req, res) => {
   }
 
   try {
-    const result = await embedWithFallback(input, 'query');
+    const result = await embedText(input, 'query');
     res.status(200).json({
       provider: result.provider,
       model: result.model,

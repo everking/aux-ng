@@ -9,10 +9,9 @@ import { Article, ArticleState } from '../../interfaces/article';
 import { EventService } from '../../services/event.service';
 import { BulletinEvent } from '../../interfaces/bulletin-event';
 import { stripHtml as htmlToText } from '../../utils';
-import { keywordScore, tfidfScore } from '../../utils/search-text';
 
-const INDEX_URL = 'assets/index/article-embeddings.json';
-const LEXICAL_INDEX_URL = 'assets/index/article-index.json';
+const ACTIVE_URL = 'assets/index/active.json';
+const LEGACY_INDEX_URL = 'assets/index/article-embeddings.json';
 const EMBEDDING_ENDPOINT = 'https://us-central1-auxilium-420904.cloudfunctions.net/generateEmbedding';
 const RESULT_LIMIT = 10;
 
@@ -22,11 +21,6 @@ export interface SearchHit {
   kind: 'article' | 'event';
   article?: Article | null;
   event?: BulletinEvent | null;
-}
-
-interface LexicalEntry {
-  id: string;
-  vector: { term: string; tfidf: number }[];
 }
 
 @Component({
@@ -49,7 +43,6 @@ export class SearchComponent {
   placeholder = 'Need help? Try “I need activity ideas for my kids."';
   index: { id: string; embedding: number[] }[] = [];
   indexProvider = '';
-  lexicalIndex: LexicalEntry[] = [];
   results: SearchHit[] = [];
   mruQueries: string[] = [];
   showDropdown = false;
@@ -68,29 +61,69 @@ export class SearchComponent {
   }
 
   getIndexAndSearch() {
-    const ready = this.index.length > 0 || this.lexicalIndex.length > 0;
-    if (ready) {
+    if (this.index.length > 0) {
       if (this.query) {
         this.performSearch();
       }
       return;
     }
-    Promise.all([
-      fetch(INDEX_URL).then((res) => (res.ok ? res.json() : [])).catch(() => []),
-      fetch(LEXICAL_INDEX_URL).then((res) => (res.ok ? res.json() : [])).catch(() => [])
-    ]).then(([embeddings, lexical]) => {
-      if (Array.isArray(embeddings)) {
-        this.index = embeddings;
-        this.indexProvider = 'openai';
-      } else {
-        this.index = embeddings?.embeddings || [];
-        this.indexProvider = embeddings?.provider || '';
-      }
-      this.lexicalIndex = Array.isArray(lexical) ? lexical : [];
+    this.loadEmbeddingIndex().then(() => {
       if (this.query) {
         this.performSearch();
       }
+    }).catch((error) => {
+      console.error('Failed to load embedding index', error);
     });
+  }
+
+  private folderForApi(api: string): string {
+    const raw = String(api || 'OPEN_AI').toUpperCase().replace(/-/g, '_');
+    return raw === 'X_AI' || raw === 'XAI' ? 'x-ai' : 'open-ai';
+  }
+
+  private parseIndex(payload: unknown): { id: string; embedding: number[] }[] {
+    if (Array.isArray(payload)) {
+      return payload;
+    }
+    const wrapped = payload as { embeddings?: { id: string; embedding: number[] }[]; provider?: string };
+    if (wrapped?.provider) {
+      this.indexProvider = wrapped.provider;
+    }
+    return wrapped?.embeddings || [];
+  }
+
+  private async loadEmbeddingIndex() {
+    let api = 'OPEN_AI';
+    try {
+      const activeRes = await fetch(ACTIVE_URL);
+      if (activeRes.ok) {
+        const active = await activeRes.json();
+        api = active.EMBEDDINGS_API || api;
+      }
+    } catch {
+      /* fall through to default */
+    }
+    this.indexProvider = api === 'X_AI' ? 'xai' : 'openai';
+    const folder = this.folderForApi(api);
+    const urls = [
+      `assets/index/${folder}/article-embeddings.json`,
+      LEGACY_INDEX_URL
+    ];
+    for (const url of urls) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) {
+          continue;
+        }
+        this.index = this.parseIndex(await res.json());
+        if (this.index.length) {
+          return;
+        }
+      } catch {
+        continue;
+      }
+    }
+    this.index = [];
   }
 
   async ngOnInit() {
@@ -155,22 +188,11 @@ export class SearchComponent {
     this.results = [];
 
     try {
-      let articleHits: SearchHit[] = [];
-      try {
-        articleHits = await this.embeddingSearch(trimmedQuery, now);
-      } catch (error) {
-        console.warn('Embedding search unavailable, using keyword search.', error);
-        articleHits = this.keywordArticleSearch(trimmedQuery);
-      }
-      if (!articleHits.length) {
-        articleHits = this.keywordArticleSearch(trimmedQuery);
-      }
-
-      const eventHits = await this.keywordEventSearch(trimmedQuery);
-      const merged = [...articleHits, ...eventHits].sort((a, b) => b.score - a.score);
-      this.results = merged.filter((hit) => hit.score > 0).slice(0, RESULT_LIMIT);
+      const hits = await this.embeddingSearch(trimmedQuery, now);
+      this.results = hits
+        .sort((a, b) => b.score - a.score)
+        .slice(0, RESULT_LIMIT);
       await this.hydrateResults();
-
       if (!this.results.length) {
         this.searchError = 'No matching articles or events.';
       }
@@ -199,7 +221,7 @@ export class SearchComponent {
 
     const sample = this.index[0]?.embedding;
     if (!sample || sample.length !== queryEmbedding.results.length) {
-      throw new Error('Embedding dimensions do not match the published index; using keyword search.');
+      throw new Error('Embedding dimensions do not match the published index.');
     }
 
     return this.index.map((entry) => ({
@@ -207,31 +229,6 @@ export class SearchComponent {
       kind: 'article' as const,
       score: this.cosineSimilarity(queryEmbedding.results, entry.embedding)
     }));
-  }
-
-  private keywordArticleSearch(query: string): SearchHit[] {
-    return this.lexicalIndex
-      .map((entry) => ({
-        id: entry.id,
-        kind: 'article' as const,
-        score: tfidfScore(query, entry.vector || [])
-      }))
-      .filter((hit) => hit.score > 0);
-  }
-
-  private async keywordEventSearch(query: string): Promise<SearchHit[]> {
-    const events = await this.eventService.fetchPublishedEvents();
-    return events
-      .map((event) => ({
-        id: event.eventId,
-        kind: 'event' as const,
-        event,
-        score: keywordScore(
-          query,
-          [event.header, event.where, event.schedule, event.dates, ...(event.tags || []), htmlToText(event.body)].join(' ')
-        )
-      }))
-      .filter((hit) => hit.score > 0);
   }
 
   private async hydrateResults() {
