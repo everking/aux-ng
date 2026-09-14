@@ -77,22 +77,25 @@ $card-width: 250;
 }
 
 @media (max-width: 764px) {
-  $card-width: calc(50vw - 10px);
-
   .article-preview {
-    width: $card-width;
+    width: 100%;
+    padding: 16px 8px;
+    box-sizing: border-box;
+
     img {
-      width: calc($card-width - 20px);
+      width: 100%;
     }
   }
 
-  .image-container img {
-    height: calc($card-width - 20px);
-    width: auto;
+  .image-container {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
   }
 
-  .image-container {
-    width: calc($card-width - 20px);
-    height: calc($card-width - 20px);
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

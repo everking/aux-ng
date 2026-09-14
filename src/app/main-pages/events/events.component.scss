@@ -6,10 +6,12 @@
 .events-page {
   max-width: 755px;
   min-width: 360px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .events-header {
-  padding: 10px 20px 12px 10px;
+  padding: 10px 16px 12px;
 }
 
 .events-header::after {
@@ -72,7 +74,7 @@
 }
 
 .events-tags {
-  padding: 0 20px 20px 20px;
+  padding: 0 16px 20px;
 }
 
 .events-tags-label {
@@ -91,10 +93,12 @@
 .events-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .events-list-item {
   flex: 0 1 250px;
+  box-sizing: border-box;
 }
 
 .events-loading,
@@ -110,9 +114,17 @@
   .events-page {
     min-width: 0;
     width: 100%;
+    padding: 0 12px;
+  }
+
+  .events-header,
+  .events-tags {
+    padding-left: 4px;
+    padding-right: 4px;
   }
 
   .events-list-item {
-    flex: 0 1 calc(50vw - 10px);
+    flex: 0 1 50%;
+    max-width: 50%;
   }
 }
