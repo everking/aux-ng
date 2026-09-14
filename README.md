@@ -10,6 +10,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 git update-index --assume-unchanged .github/workflows/scripts/.env
 ```
 
+GitHub Actions secrets used by workflows:
+- `FIREBASE_SERVICE_ACCOUNT` — Fetch Firestore Articles
+- `XAI_API_KEY` — embedding generation via `https://api.x.ai/v1` (Generate embeddings / Fetch Firestore Articles)
+
+Search query embeddings still go through the `generateEmbedding` Cloud Function. Point that function at xAI as well, or search will keep using OpenAI at query time.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4080/`. The application will automatically reload if you change any of the source files.
