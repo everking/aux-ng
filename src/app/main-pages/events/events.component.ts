@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { EventService } from '../../services/event.service';
 import { ArticleService } from '../../services/article.service';
@@ -30,7 +29,6 @@ interface EventTagFilter {
     NgIf,
     NgForOf,
     RouterModule,
-    MatButton,
     MatProgressSpinner,
     EventPreviewCardComponent
   ],
