@@ -7,12 +7,11 @@ try {
   /* optional for GitHub Actions */
 }
 
-const { embedWithFallback } = require('../../../functions/embed-providers');
+const { embedText, selectedProvider, providerFolder } = require('../../../functions/embed-providers');
 
 const assetDir = path.resolve(__dirname, '../../../src/assets');
 const articlesDir = path.join(assetDir, 'data', 'articles');
 const outputDir = path.join(assetDir, 'index');
-const outputFile = path.join(outputDir, 'article-embeddings.json');
 
 function stripHtml(html) {
   return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -54,6 +53,8 @@ function describeKey(name, value) {
 }
 
 async function generateEmbeddings(input = null) {
+  const provider = selectedProvider();
+  console.log(`EMBEDDINGS_API=${provider}`);
   console.log(describeKey('XAI_API_KEY', process.env.XAI_API_KEY));
   console.log(describeKey('OPENAI_API_KEY', process.env.OPENAI_API_KEY));
 
@@ -62,7 +63,7 @@ async function generateEmbeddings(input = null) {
     : listJsonFiles(articlesDir);
 
   const newEmbeddings = [];
-  let provider = '';
+  let usedProvider = provider;
   let model = '';
 
   for (const file of files) {
@@ -88,17 +89,21 @@ async function generateEmbeddings(input = null) {
       continue;
     }
 
-    const result = await embedWithFallback(fullText, 'passage');
-    provider = result.provider;
+    const result = await embedText(fullText, 'passage');
+    usedProvider = result.provider;
     model = result.model;
     newEmbeddings.push({ id, embedding: result.embedding, lastUpdated });
     console.log(`Embedded (${result.provider}/${result.model}): ${id}`);
   }
 
-  fs.mkdirSync(outputDir, { recursive: true });
+  const folder = providerFolder(provider);
+  const providerDir = path.join(outputDir, folder);
+  const outputFile = path.join(providerDir, 'article-embeddings.json');
+  const activeFile = path.join(outputDir, 'active.json');
+  fs.mkdirSync(providerDir, { recursive: true });
   const existing = readIndex(outputFile);
   const indexMap = new Map();
-  const sameSpace = input && existing.provider && provider && existing.provider === provider;
+  const sameSpace = input && existing.provider && usedProvider && existing.provider === usedProvider;
   if (sameSpace) {
     existing.embeddings.forEach((entry) => indexMap.set(entry.id, entry));
   }
@@ -114,11 +119,15 @@ async function generateEmbeddings(input = null) {
 
   const embeddings = Array.from(indexMap.values()).map(({ id, embedding }) => ({ id, embedding }));
   fs.writeFileSync(outputFile, JSON.stringify({
-    provider: provider || existing.provider || 'unknown',
+    provider: usedProvider || existing.provider || 'unknown',
     model: model || existing.model || '',
     embeddings
   }, null, 2), 'utf8');
-  console.log(`Indexed ${newEmbeddings.length} documents with ${provider || 'none'}. Total in index: ${embeddings.length}`);
+  fs.writeFileSync(activeFile, JSON.stringify({
+    EMBEDDINGS_API: provider
+  }, null, 2), 'utf8');
+  console.log(`Wrote ${outputFile} and ${activeFile}`);
+  console.log(`Indexed ${newEmbeddings.length} documents with ${usedProvider || 'none'}. Total in index: ${embeddings.length}`);
 }
 
 if (require.main === module) {

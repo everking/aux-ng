@@ -3,6 +3,20 @@ const XAI_MODEL = 'v1';
 const OPENAI_URL = 'https://api.openai.com/v1/embeddings';
 const OPENAI_MODEL = 'text-embedding-3-small';
 
+function selectedProvider() {
+  const raw = String(process.env.EMBEDDINGS_API || 'OPEN_AI')
+    .trim()
+    .toUpperCase()
+    .replace(/-/g, '_');
+  if (raw === 'X_AI' || raw === 'XAI') {
+    return 'X_AI';
+  }
+  if (raw === 'OPEN_AI' || raw === 'OPENAI') {
+    return 'OPEN_AI';
+  }
+  throw new Error(`Unknown EMBEDDINGS_API="${process.env.EMBEDDINGS_API}". Use X_AI or OPEN_AI.`);
+}
+
 async function postEmbedding(url, apiKey, body) {
   const response = await fetch(url, {
     method: 'POST',
@@ -24,51 +38,41 @@ async function postEmbedding(url, apiKey, body) {
   return { embedding, raw: json };
 }
 
-async function embedWithFallback(text, kind = 'query') {
-  const errors = [];
-  const prefixed = kind === 'passage' ? `passage: ${text}` : `query: ${text}`;
-
-  if (process.env.XAI_API_KEY) {
-    try {
-      const result = await postEmbedding(XAI_URL, process.env.XAI_API_KEY, {
-        model: XAI_MODEL,
-        input: prefixed,
-        encoding_format: 'float'
-      });
-      return {
-        provider: 'xai',
-        model: XAI_MODEL,
-        embedding: result.embedding,
-        raw: result.raw
-      };
-    } catch (error) {
-      errors.push(`xai: ${error.message}`);
+async function embedText(text, kind = 'query') {
+  const provider = selectedProvider();
+  if (provider === 'X_AI') {
+    const apiKey = process.env.XAI_API_KEY;
+    if (!apiKey) {
+      throw new Error('EMBEDDINGS_API=X_AI but XAI_API_KEY is not set');
     }
+    const prefixed = kind === 'passage' ? `passage: ${text}` : `query: ${text}`;
+    const result = await postEmbedding(XAI_URL, apiKey, {
+      model: XAI_MODEL,
+      input: prefixed,
+      encoding_format: 'float'
+    });
+    return { provider: 'xai', model: XAI_MODEL, embedding: result.embedding, raw: result.raw };
   }
 
-  if (process.env.OPENAI_API_KEY) {
-    try {
-      const result = await postEmbedding(OPENAI_URL, process.env.OPENAI_API_KEY, {
-        model: OPENAI_MODEL,
-        input: text
-      });
-      return {
-        provider: 'openai',
-        model: OPENAI_MODEL,
-        embedding: result.embedding,
-        raw: result.raw
-      };
-    } catch (error) {
-      errors.push(`openai: ${error.message}`);
-    }
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('EMBEDDINGS_API=OPEN_AI but OPENAI_API_KEY is not set');
   }
+  const result = await postEmbedding(OPENAI_URL, apiKey, {
+    model: OPENAI_MODEL,
+    input: text
+  });
+  return { provider: 'openai', model: OPENAI_MODEL, embedding: result.embedding, raw: result.raw };
+}
 
-  const detail = errors.join(' | ') || 'No embedding provider configured';
-  throw new Error(detail);
+function providerFolder(api = selectedProvider()) {
+  return api === 'X_AI' ? 'x-ai' : 'open-ai';
 }
 
 module.exports = {
-  embedWithFallback,
+  embedText,
+  selectedProvider,
+  providerFolder,
   XAI_MODEL,
   OPENAI_MODEL
 };

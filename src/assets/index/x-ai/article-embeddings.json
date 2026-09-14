@@ -1,0 +1,5 @@
+{
+  "provider": "xai",
+  "model": "v1",
+  "embeddings": []
+}

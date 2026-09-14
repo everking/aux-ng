@@ -12,10 +12,10 @@ git update-index --assume-unchanged .github/workflows/scripts/.env
 
 GitHub Actions secrets used by workflows:
 - `FIREBASE_SERVICE_ACCOUNT` — Fetch Firestore Articles
-- `XAI_API_KEY` — tried first for embeddings (`https://api.x.ai/v1`)
-- `OPENAI_API_KEY` — used if xAI embeddings are unavailable
+- `XAI_API_KEY` — used when `EMBEDDINGS_API=X_AI`
+- `OPENAI_API_KEY` — used when `EMBEDDINGS_API=OPEN_AI`
 
-Search tries **xAI → OpenAI → keyword**. Cosine ranking is skipped when the query vector and `article-embeddings.json` were built by different providers. Redeploy the function with `bash functions/deploy.sh`.
+Set `EMBEDDINGS_API` to `X_AI` or `OPEN_AI` (currently `OPEN_AI`). There is no provider fallback. Vectors are stored separately in `src/assets/index/open-ai/` and `src/assets/index/x-ai/`; `src/assets/index/active.json` records which folder search should load. Redeploy the function with `bash functions/deploy.sh`.
 
 ## Development server
 

@@ -29,8 +29,9 @@ jobs:
         # Use fetch to query Firestore
         node .github/workflows/scripts/fetch-firestore-articles.js
 
-    - name: Generate embeddings with xAI
+    - name: Generate embeddings
       env:
+        EMBEDDINGS_API: OPEN_AI
         XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: node .github/workflows/scripts/generate-index.js
