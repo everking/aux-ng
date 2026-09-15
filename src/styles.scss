@@ -55,7 +55,17 @@ a {
 }
 
 html, body { height: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 body { margin: 0; overflow-x: hidden; }
+
+input,
+select,
+textarea {
+  font-size: 16px;
+}
 
 angular-editor,
 .angular-editor,
