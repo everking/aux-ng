@@ -1,10 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  min-width: 0;
+}
+
 .home {
   display: flex;
   justify-content: center;
+  width: 100%;
+  min-width: 0;
 }
 .content {
+  width: 100%;
   max-width: 480px;
-  padding:20px;
+  padding: 12px 0 4px;
+  box-sizing: border-box;
+  min-width: 0;
 }
 .content-details {
   padding: 20px 40px;
@@ -18,16 +30,21 @@
 }
 
 .search-input {
-  width: 400px;
-  padding: 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  margin-bottom: 0px;
+  margin-bottom: 0;
+  font-size: 16px;
 }
 
 .search-container {
   position: relative;
-  width: 400px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .dropdown-list {

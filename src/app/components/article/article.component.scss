@@ -22,13 +22,31 @@
   align-items: center;
   padding: 20px;
   min-height: 60vh;
+  min-width: 0;
+  overflow-x: hidden;
+
+  &-header-image-text {
+    width: 100%;
+    max-width: 480px;
+    min-width: 0;
+    text-align: center;
+    box-sizing: border-box;
+  }
 
   &-body {
+    width: 100%;
     max-width: 480px;
-    color: black;
+    min-width: 0;
+    box-sizing: border-box;
+    color: #0e5757;
+    overflow-wrap: break-word;
     word-break: break-word;
     line-break: strict;
-    hyphens: auto;
+
+    :is(h1, h2, h3, h4, p, ul, ol, li, a, div) {
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
 
     &-loading {
       display: flex;
