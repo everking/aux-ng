@@ -19,6 +19,9 @@ const config: CapacitorConfig = {
         packageOptions: {
           '@capacitor-firebase/messaging': {
             symlink: true
+          },
+          '@capacitor/browser': {
+            symlink: true
           }
         }
       }

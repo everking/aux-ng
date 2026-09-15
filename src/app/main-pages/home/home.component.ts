@@ -4,6 +4,8 @@ import { ArticleService } from '../../services/article.service';
 import { RouterModule } from '@angular/router';
 import { BrowseListService } from '../../services/browse-list.service';
 import { EventService } from '../../services/event.service';
+import { ReadingsService } from '../../services/readings.service';
+import { Capacitor } from '@capacitor/core';
 import {
   BulletinEvent,
   formatDateRange,
@@ -20,11 +22,14 @@ export class HomeComponent implements OnInit {
   rosaryInfo = '';
   todaysMysteries = '';
   happeningEvents: BulletinEvent[] = [];
+  gospel = '';
+  gospelLink = '';
 
   constructor(
     private articleService: ArticleService,
     private eventService: EventService,
-    private browse: BrowseListService
+    private browse: BrowseListService,
+    private readings: ReadingsService
   ) {}
 
   rememberHappening(): void {
@@ -86,12 +91,31 @@ export class HomeComponent implements OnInit {
     this.rosaryInfo = mysteries[dayName].name;
     this.todaysMysteries = mysteries[dayName].link;
 
-    try {
-      const events = await this.eventService.fetchEvents();
-      this.happeningEvents = upcomingEventsForHome(events);
-    } catch (error) {
-      console.error('Error loading home events:', error);
-      this.happeningEvents = [];
+    const [eventsResult, daily] = await Promise.all([
+      this.eventService.fetchEvents().catch((error) => {
+        console.error('Error loading home events:', error);
+        return [] as BulletinEvent[];
+      }),
+      this.readings.getTodaysGospel()
+    ]);
+    this.happeningEvents = upcomingEventsForHome(eventsResult);
+    this.gospel = daily.gospel;
+    this.gospelLink = daily.usccbLink;
+  }
+
+  async openGospel(event: Event): Promise<void> {
+    event.preventDefault();
+    if (!this.gospelLink) {
+      return;
     }
+    if (Capacitor.isNativePlatform()) {
+      const { Browser } = await import('@capacitor/browser');
+      await Browser.open({
+        url: this.gospelLink,
+        presentationStyle: 'fullscreen'
+      });
+      return;
+    }
+    window.open(this.gospelLink, '_blank', 'noopener,noreferrer');
   }
 }
