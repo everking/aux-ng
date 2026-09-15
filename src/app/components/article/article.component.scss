@@ -1,8 +1,27 @@
+.page-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.article-toolbar {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .article {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  min-height: 60vh;
 
   &-body {
     max-width: 480px;
@@ -36,8 +55,15 @@
   width: 100%;
 }
 
-.image-box {
+.image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
   margin-top: 20px;
+}
+
+.image-box {
+  margin-top: 0;
   max-width: 480px; /* Fixed width */
   max-height: 320px;
   display: flex;

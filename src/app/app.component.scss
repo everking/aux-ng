@@ -14,6 +14,12 @@
   .mat-grid-tile {
     border: 1px solid #000000;
   }
+
+  > *:not(router-outlet) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }
 
 .app-footer {

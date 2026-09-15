@@ -1,13 +1,13 @@
 <div class="home">
   <div class="content">
     <div class="rosary">
-      Pray the Rosary | <a [routerLink]="['/article', todaysMysteries]">{{ rosaryInfo }}</a>
+      Pray the Rosary | <a [routerLink]="['/article', todaysMysteries]" (click)="rememberRosary()">{{ rosaryInfo }}</a>
     </div>
     <div class="happening" *ngIf="happeningEvents.length">
       <h3><a routerLink="/events">What's happening?</a></h3>
       <ul class="happening-list">
         <li *ngFor="let event of happeningEvents">
-          <a [routerLink]="['/event', event.eventId]">{{ event.header }}</a>
+          <a [routerLink]="['/event', event.eventId]" (click)="rememberHappening()">{{ event.header }}</a>
           <span class="happening-date">{{ eventDate(event) }}</span>
         </li>
       </ul>

@@ -31,6 +31,17 @@ export class ArticleListComponent implements OnChanges {
 
   constructor(public articleService: ArticleService) {}
 
+  get pageArticleIds(): string[] {
+    return this.subCategories.flatMap((sub) => sub.articles || []);
+  }
+
+  get parentUrl(): string {
+    if (this.category === 'high-school') {
+      return '/school';
+    }
+    return this.category ? `/${this.category}` : '/home';
+  }
+
   ngOnChanges() {
     if (this.category) {
       this.subCategories = this.articleService.getSubCategories(this.category);

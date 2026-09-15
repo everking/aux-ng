@@ -1,9 +1,23 @@
-<ng-container *ngIf="event else loadingEvent">
-  <div class="article">
-    <div class="image-box">
-      <div class="clip-box">
-        <img class="banner-image" src="{{event.imageURI}}" alt="{{event.header}}">
+<div class="article" appSwipeBrowse [swipeDisabled]="loading" (swipeLeft)="goNext()" (swipeRight)="goPrev()">
+  <div class="article-toolbar">
+    <app-back-link fallback="/events"></app-back-link>
+  </div>
+  <div class="page-loading" *ngIf="loading">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+  <ng-container *ngIf="event">
+    <div class="image-frame">
+      <div class="image-box">
+        <div class="clip-box">
+          <img class="banner-image" src="{{event.imageURI}}" alt="{{event.header}}">
+        </div>
       </div>
+      <app-browse-pager
+        [currentId]="eventId"
+        [busy]="loading"
+        (previous)="goPrev()"
+        (next)="goNext()"
+      ></app-browse-pager>
     </div>
     <div class="article-header-image-text">
       <h2>{{ event.header }}</h2>
@@ -15,6 +29,17 @@
       </div>
       <div class="event-status" [class.happening]="status === 'happening'" [class.ended]="status === 'ended'">
         {{ statusLabel }}
+      </div>
+      <div class="remind-me" *ngIf="status !== 'ended'">
+        <button type="button"
+          class="remind-button"
+          [class.on]="reminderOn"
+          [disabled]="!canRemind || reminderBusy"
+          (click)="onRemindToggle()">
+          {{ reminderBusy ? 'Saving...' : remindLabel }}
+        </button>
+        <p class="remind-hint">{{ remindHint }}</p>
+        <p class="remind-hint error" *ngIf="reminderMessage">{{ reminderMessage }}</p>
       </div>
     </div>
 
@@ -30,13 +55,8 @@
     </span>
 
     <div class="article-body" [innerHTML]="safeBodyHtml"></div>
-  </div>
-</ng-container>
-<ng-template #loadingEvent>
-  <div class="article-body-loading" *ngIf="!notFound">
-    <mat-spinner></mat-spinner>
-  </div>
-  <div class="article-body-loading" *ngIf="notFound">
+  </ng-container>
+  <div class="article-body-loading" *ngIf="!loading && notFound">
     <p>Event not found.</p>
   </div>
-</ng-template>
+</div>

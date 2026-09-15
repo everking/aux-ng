@@ -42,7 +42,11 @@
 
     <div class="events-list" *ngIf="!loading && displayedEvents.length">
       <div class="events-list-item" *ngFor="let event of displayedEvents">
-        <app-event-preview-card [event]="event"></app-event-preview-card>
+        <app-event-preview-card
+          [event]="event"
+          [listIds]="displayedEventIds"
+          parentUrl="/events"
+        ></app-event-preview-card>
       </div>
     </div>
   </div>

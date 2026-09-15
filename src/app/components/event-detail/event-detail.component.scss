@@ -1,8 +1,27 @@
+.page-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.article-toolbar {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .article {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  min-height: 60vh;
 
   &-body {
     max-width: 480px;
@@ -41,8 +60,15 @@
   width: 100%;
 }
 
-.image-box {
+.image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
   margin-top: 20px;
+}
+
+.image-box {
+  margin-top: 0;
   max-width: 480px;
   max-height: 320px;
   display: flex;
@@ -129,4 +155,42 @@
 .event-status.ended {
   opacity: 0.8;
   color: #8a4b4b;
+}
+
+.remind-me {
+  margin: 8px 0 16px;
+}
+
+.remind-button {
+  min-width: 140px;
+  padding: 8px 16px;
+  border: 1px solid #0e5757;
+  border-radius: 6px;
+  background: #fff;
+  color: #0e5757;
+  font: inherit;
+  cursor: pointer;
+}
+
+.remind-button.on {
+  background: #0e5757;
+  color: #fff;
+}
+
+.remind-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.remind-hint {
+  font-size: 13px;
+  color: #0e5757;
+  opacity: 0.75;
+  margin: 8px 0 0;
+  max-width: 420px;
+}
+
+.remind-hint.error {
+  color: #8a4b4b;
+  opacity: 1;
 }

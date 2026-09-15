@@ -60,6 +60,10 @@ export class EventsComponent implements OnInit {
     return filterEventsByTags(this.events, this.selectedTagList);
   }
 
+  get displayedEventIds(): string[] {
+    return this.displayedEvents.map((event) => event.eventId);
+  }
+
   async ngOnInit() {
     this.articleService.setCurrentCategory('');
     this.restoreFilter();

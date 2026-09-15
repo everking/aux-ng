@@ -45,3 +45,11 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Capacitor / iOS
+/ios/App/Pods
+/ios/App/App/public
+/ios/App/App/CapacitorConfig.swift
+/ios/DerivedData
+*.xcuserstate
+xcuserdata/

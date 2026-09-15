@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ArticleService } from '../../services/article.service';
 import { RouterModule } from '@angular/router';
+import { BrowseListService } from '../../services/browse-list.service';
 import { EventService } from '../../services/event.service';
 import {
   BulletinEvent,
@@ -22,8 +23,21 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
-    private eventService: EventService
+    private eventService: EventService,
+    private browse: BrowseListService
   ) {}
+
+  rememberHappening(): void {
+    this.browse.remember(
+      'event',
+      this.happeningEvents.map((event) => event.eventId),
+      '/home'
+    );
+  }
+
+  rememberRosary(): void {
+    this.browse.remember('article', [this.todaysMysteries], '/home');
+  }
 
   eventDate(event: BulletinEvent): string {
     return formatDateRange(event.dateFrom, event.dateTo);

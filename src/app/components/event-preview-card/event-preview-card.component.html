@@ -1,5 +1,5 @@
 <div class="article-preview wiggle-item" *ngIf="event">
-  <a [routerLink]="['/event', event.eventId]">
+  <a [routerLink]="['/event', event.eventId]" (click)="rememberList()">
     <div class="article-preview-card-container">
       <div class="image-container">
         <img src="{{event.imageURI}}" alt="{{event.header}}">

@@ -1,5 +1,5 @@
 <div class="article-preview wiggle-item">
-  <a [routerLink]="['/article', article?.articleId]">
+  <a [routerLink]="['/article', article?.articleId]" (click)="rememberList()">
     <div class="article-preview-card-container">
         <div class="image-container">
           <img src="{{article?.imageURI}}" alt="Auxilium">

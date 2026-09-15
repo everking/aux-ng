@@ -19,11 +19,13 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="searching">Searching...</div>
+  <div class="search-loading" *ngIf="searching">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
   <div class="search-error" *ngIf="!searching && searchError">{{ searchError }}</div>
-  <ul>
+  <ul *ngIf="!searching">
     <li *ngFor="let result of results">
-      <a [routerLink]="resultLink(result)">{{ resultTitle(result) }}</a>
+      <a [routerLink]="resultLink(result)" (click)="rememberResults()">{{ resultTitle(result) }}</a>
       <div class="article-body">
         {{ resultSnippet(result) }}
       </div>

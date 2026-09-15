@@ -13,7 +13,11 @@
   <div class="article-list" [style.--maxArticlesPerRow]="maxArticlesPerRow">
     <ng-container *ngIf="subCategory?.articles?.length; else noArticles">
       <div class="article-list-article" *ngFor="let articleId of subCategory.articles; let i = index;">
-        <app-article-preview-card [articleId]="articleId"></app-article-preview-card>
+        <app-article-preview-card
+          [articleId]="articleId"
+          [listIds]="pageArticleIds"
+          [parentUrl]="parentUrl"
+        ></app-article-preview-card>
       </div>
     </ng-container>
     <ng-template #noArticles>

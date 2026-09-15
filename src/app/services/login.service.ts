@@ -119,6 +119,41 @@ export class LoginService {
   public isLoggedIn(): boolean {
     return (this.getIdToken() != null && this.getIdToken().length > 100);
   }
+
+  public getEmail(): string {
+    return this.getFirebaseLogin()?.email || '';
+  }
+
+  public logout(): void {
+    this.firebaseLogin = null;
+    this.idToken = '';
+    this.refreshToken = '';
+    localStorage.removeItem('firebaseLogin');
+  }
+
+  public async deleteAccount(): Promise<void> {
+    await this.refresh();
+    const idToken = this.getIdToken();
+    if (!idToken) {
+      throw Object.assign(new Error('Not signed in'), { code: 'NOT_SIGNED_IN' });
+    }
+
+    const response = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:delete?key=${API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken })
+      }
+    );
+    const body = await response.json();
+    if (body?.error) {
+      const code = body.error.message || 'DELETE_FAILED';
+      throw Object.assign(new Error(code), { code });
+    }
+    this.logout();
+  }
+
   public async sendEmailVerification(idToken: string) {
     const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`, {
       method: 'POST',
