@@ -1,7 +1,13 @@
 <div class="home">
   <div class="content">
-    <div class="rosary">
-      Pray the Rosary | <a [routerLink]="['/article', todaysMysteries]" (click)="rememberRosary()">{{ rosaryInfo }}</a>
+    <div class="daily-links">
+      <div class="rosary">
+        Pray the Rosary | <a [routerLink]="['/article', todaysMysteries]" (click)="rememberRosary()">{{ rosaryInfo }}</a>
+      </div>
+      <a *ngIf="gospel && gospelLink"
+        class="gospel"
+        [href]="gospelLink"
+        (click)="openGospel($event)">Gospel | {{ gospel }}</a>
     </div>
     <div class="happening" *ngIf="happeningEvents.length">
       <h3><a routerLink="/events">What's happening?</a></h3>

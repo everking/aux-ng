@@ -38,8 +38,26 @@
   text-align: center;
 }
 
+.daily-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin: 10px;
+  flex-wrap: wrap;
+}
+
 .rosary {
-  margin:10px;
+  margin: 0;
+}
+
+.gospel {
+  color: #0e5757;
+  white-space: nowrap;
+}
+
+.gospel:hover {
+  opacity: 0.8;
 }
 
 .happening {

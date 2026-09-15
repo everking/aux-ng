@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { EventService } from '../../services/event.service';
+import { ReadingsService } from '../../services/readings.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -19,6 +20,15 @@ describe('HomeComponent', () => {
           provide: EventService,
           useValue: {
             fetchEvents: () => Promise.resolve([])
+          }
+        },
+        {
+          provide: ReadingsService,
+          useValue: {
+            getTodaysGospel: () => Promise.resolve({
+              gospel: 'John 3:13-17',
+              usccbLink: 'https://bible.usccb.org/bible/readings/091426.cfm'
+            })
           }
         }
       ]
