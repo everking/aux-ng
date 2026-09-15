@@ -82,3 +82,75 @@ gcloud functions deploy generateEmbedding \
   --set-secrets="$SECRET_JOINED"
 
 echo "Deployed https://${REGION}-${PROJECT}.cloudfunctions.net/generateEmbedding"
+
+gcloud functions deploy registerPushToken \
+  --project="$PROJECT" \
+  --account="$ACCOUNT" \
+  --region="$REGION" \
+  --runtime=nodejs20 \
+  --trigger-http \
+  --allow-unauthenticated \
+  --entry-point=registerPushToken \
+  --source="$ROOT/functions" \
+  --memory=256MB \
+  --timeout=30s
+
+echo "Deployed https://${REGION}-${PROJECT}.cloudfunctions.net/registerPushToken"
+
+gcloud functions deploy registerEventReminder \
+  --project="$PROJECT" \
+  --account="$ACCOUNT" \
+  --region="$REGION" \
+  --runtime=nodejs20 \
+  --trigger-http \
+  --allow-unauthenticated \
+  --entry-point=registerEventReminder \
+  --source="$ROOT/functions" \
+  --memory=256MB \
+  --timeout=30s
+
+echo "Deployed https://${REGION}-${PROJECT}.cloudfunctions.net/registerEventReminder"
+
+gcloud functions deploy sendEventReminders \
+  --project="$PROJECT" \
+  --account="$ACCOUNT" \
+  --region="$REGION" \
+  --runtime=nodejs20 \
+  --trigger-http \
+  --allow-unauthenticated \
+  --entry-point=sendEventReminders \
+  --source="$ROOT/functions" \
+  --memory=256MB \
+  --timeout=60s
+
+echo "Deployed https://${REGION}-${PROJECT}.cloudfunctions.net/sendEventReminders"
+
+gcloud services enable cloudscheduler.googleapis.com \
+  --project="$PROJECT" \
+  --account="$ACCOUNT" \
+  --quiet
+
+SCHEDULER_URI="https://${REGION}-${PROJECT}.cloudfunctions.net/sendEventReminders"
+if gcloud scheduler jobs describe send-event-reminders \
+  --project="$PROJECT" \
+  --account="$ACCOUNT" \
+  --location="$REGION" >/dev/null 2>&1; then
+  gcloud scheduler jobs update http send-event-reminders \
+    --project="$PROJECT" \
+    --account="$ACCOUNT" \
+    --location="$REGION" \
+    --schedule="20 * * * *" \
+    --time-zone="America/Los_Angeles" \
+    --uri="$SCHEDULER_URI" \
+    --http-method=POST
+else
+  gcloud scheduler jobs create http send-event-reminders \
+    --project="$PROJECT" \
+    --account="$ACCOUNT" \
+    --location="$REGION" \
+    --schedule="20 * * * *" \
+    --time-zone="America/Los_Angeles" \
+    --uri="$SCHEDULER_URI" \
+    --http-method=POST
+fi
+echo "Scheduler send-event-reminders → $SCHEDULER_URI"

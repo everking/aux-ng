@@ -3,9 +3,9 @@
     <ng-container *ngIf="category as cat">      
       <ng-container *ngIf="cat.name">
         <h1>{{ cat.name }}</h1>
-        <div [innerHTML]="cat.summary"></div>
+        <div class="category-intro" [innerHTML]="cat.summary"></div>
       </ng-container>
     </ng-container>
-  <app-article-list [maxArticles]="15" [category]="pageId" [maxArticlesPerRow]="10"></app-article-list>
+  <app-article-list [maxArticles]="15" [category]="pageId" [maxArticlesPerRow]="3"></app-article-list>
   </div>
 </div>

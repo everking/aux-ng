@@ -1,9 +1,24 @@
-<ng-container *ngIf="article else loadingArticle">
-  <div class="article">
-    <div class="image-box">
-      <div class="clip-box">
-        <img class="banner-image" src="{{article.imageURI}}" alt="Auxilium">
+<div class="article" appSwipeBrowse [swipeDisabled]="loading" (swipeLeft)="goNext()" (swipeRight)="goPrev()">
+  <div class="article-toolbar" *ngIf="showBack">
+    <app-back-link [fallback]="backFallback"></app-back-link>
+  </div>
+  <div class="page-loading" *ngIf="loading">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+  <ng-container *ngIf="article">
+    <div class="image-frame">
+      <div class="image-box">
+        <div class="clip-box">
+          <img class="banner-image" src="{{article.imageURI}}" alt="Auxilium">
+        </div>
       </div>
+      <app-browse-pager
+        *ngIf="showBack"
+        [currentId]="articleId"
+        [busy]="loading"
+        (previous)="goPrev()"
+        (next)="goNext()"
+      ></app-browse-pager>
     </div>
     <app-search *ngIf="showSearch"></app-search>
     <div class="article-header-image-text">
@@ -26,10 +41,5 @@
     <span [title]="timestamp">
       {{ lastUpdated }}
     </span>
-  </div>
-</ng-container>
-<ng-template #loadingArticle>
-  <div class="article-body-loading">
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-template>
+  </ng-container>
+</div>

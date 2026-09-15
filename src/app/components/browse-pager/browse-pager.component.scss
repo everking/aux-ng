@@ -1,0 +1,51 @@
+.browse-pager {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.browse-arrow {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  opacity: 0.72;
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+}
+
+.browse-arrow:hover:not(:disabled) {
+  opacity: 1;
+}
+
+.browse-arrow.hidden,
+.browse-arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.browse-chevron {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 15px auto;
+  border-top: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+}
+
+.browse-arrow.prev .browse-chevron {
+  margin-left: 18px;
+  transform: rotate(-135deg);
+}
+
+.browse-arrow.next .browse-chevron {
+  margin-left: 12px;
+  transform: rotate(45deg);
+}

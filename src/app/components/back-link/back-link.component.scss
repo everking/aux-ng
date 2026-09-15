@@ -1,0 +1,39 @@
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 16px 8px 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #0e5757;
+  font: inherit;
+  font-size: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  opacity: 0.8;
+}
+
+.back-link-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.back-link-icon::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}

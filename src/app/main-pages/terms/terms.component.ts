@@ -10,7 +10,7 @@ import { ArticleService } from '../../services/article.service';
     styleUrl: './terms.component.css'
 })
 export class TermsComponent {
-  lastUpdated = 'March 23, 2025';
+  lastUpdated = 'September 14, 2026';
   constructor(private articleService: ArticleService) {
   }
   ngOnInit() {

@@ -1,6 +1,15 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .article-list-holder {
   width: 100%;
   min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .article-list {
@@ -11,10 +20,10 @@
   min-width: 0;
 
   &-article {
-    flex: 0 1 calc(100% / var(--maxArticlesPerRow));
+    flex: 0 1 250px;
     box-sizing: border-box;
     min-width: 0;
-    max-width: 100%;
+    max-width: 250px;
   }
 
   &-no-articles {
@@ -41,11 +50,11 @@ p {
 
 @media (max-width: 764px) {
   .category {
-    padding: 10px 4px 0;
+    padding: 10px 12px 0;
   }
 
   .article-list-article {
-    flex: 0 0 50%;
+    flex: 0 1 50%;
     max-width: 50%;
     min-width: 0;
   }

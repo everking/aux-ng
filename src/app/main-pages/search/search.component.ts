@@ -1,10 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { ArticleService } from '../../services/article.service';
+import { BrowseListService } from '../../services/browse-list.service';
 import { Article, ArticleState } from '../../interfaces/article';
 import { EventService } from '../../services/event.service';
 import { BulletinEvent } from '../../interfaces/bulletin-event';
@@ -31,6 +33,7 @@ export interface SearchHit {
     NgIf,
     FormsModule,
     MatGridListModule,
+    MatProgressSpinner,
     RouterLink
   ],
   templateUrl: './search.component.html',
@@ -53,7 +56,8 @@ export class SearchComponent {
     private articleService: ArticleService,
     private eventService: EventService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private browse: BrowseListService
   ) {}
 
   getPlaceholder() {
@@ -61,18 +65,26 @@ export class SearchComponent {
   }
 
   getIndexAndSearch() {
+    this.searching = true;
+    this.searchError = '';
     if (this.index.length > 0) {
       if (this.query) {
-        this.performSearch();
+        void this.performSearch();
+      } else {
+        this.searching = false;
       }
       return;
     }
     this.loadEmbeddingIndex().then(() => {
       if (this.query) {
-        this.performSearch();
+        void this.performSearch();
+      } else {
+        this.searching = false;
       }
     }).catch((error) => {
       console.error('Failed to load embedding index', error);
+      this.searchError = 'Search is temporarily unavailable.';
+      this.searching = false;
     });
   }
 
@@ -247,6 +259,13 @@ export class SearchComponent {
 
   resultLink(result: SearchHit): string[] {
     return result.kind === 'event' ? ['/event', result.id] : ['/article', result.id];
+  }
+
+  rememberResults(): void {
+    this.browse.set(
+      this.results.map((result) => ({ id: result.id, kind: result.kind })),
+      this.router.url || '/search'
+    );
   }
 
   resultTitle(result: SearchHit): string {

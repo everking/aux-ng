@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { ArticlePreviewCardComponent } from './article-preview-card.component';
 
 describe('ArticlePreviewCardComponent', () => {
@@ -8,7 +9,8 @@ describe('ArticlePreviewCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArticlePreviewCardComponent]
+      imports: [ArticlePreviewCardComponent],
+      providers: [provideRouter([]), provideHttpClient()]
     })
       .compileComponents();
 

@@ -1,0 +1,18 @@
+<div class="browse-pager" *ngIf="visible">
+  <button type="button"
+    class="browse-arrow prev"
+    [class.hidden]="!prevItem"
+    [disabled]="!prevItem || busy"
+    (click)="goPrev()"
+    aria-label="Previous">
+    <span class="browse-chevron" aria-hidden="true"></span>
+  </button>
+  <button type="button"
+    class="browse-arrow next"
+    [class.hidden]="!nextItem"
+    [disabled]="!nextItem || busy"
+    (click)="goNext()"
+    aria-label="Next">
+    <span class="browse-chevron" aria-hidden="true"></span>
+  </button>
+</div>

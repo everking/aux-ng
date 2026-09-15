@@ -1,8 +1,10 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { Subscription } from 'rxjs';
 import { LoginService } from '../../services/login.service';
 import { EventService } from '../../services/event.service';
+import { PushService } from '../../services/push.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
@@ -12,6 +14,10 @@ import {
   getEventStatus
 } from '../../interfaces/bulletin-event';
 import { ArticleService } from '../../services/article.service';
+import { BackLinkComponent } from '../back-link/back-link.component';
+import { BrowsePagerComponent } from '../browse-pager/browse-pager.component';
+import { SwipeBrowseDirective } from '../../directives/swipe-browse.directive';
+import { BrowseListService } from '../../services/browse-list.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -19,12 +25,15 @@ import { ArticleService } from '../../services/article.service';
     NgIf,
     NgFor,
     MatProgressSpinner,
-    RouterModule
+    RouterModule,
+    BackLinkComponent,
+    BrowsePagerComponent,
+    SwipeBrowseDirective
   ],
   templateUrl: './event-detail.component.html',
   styleUrl: './event-detail.component.scss'
 })
-export class EventDetailComponent implements OnInit, AfterViewChecked {
+export class EventDetailComponent implements OnInit, AfterViewChecked, OnDestroy {
   event: BulletinEvent | null = null;
   eventId = '';
   isLoggedIn = false;
@@ -36,6 +45,13 @@ export class EventDetailComponent implements OnInit, AfterViewChecked {
   status: EventStatus = 'upcoming';
   deleting = false;
   deleteMessage = '';
+  pushEnabled = false;
+  reminderOn = false;
+  reminderBusy = false;
+  reminderMessage = '';
+  loading = true;
+  private pushSub?: Subscription;
+  private routeSub?: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +61,9 @@ export class EventDetailComponent implements OnInit, AfterViewChecked {
     private elRef: ElementRef,
     private renderer: Renderer2,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private pushService: PushService,
+    private browse: BrowseListService
   ) {}
 
   ngAfterViewChecked() {
@@ -98,22 +116,107 @@ export class EventDetailComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  get canRemind(): boolean {
+    return this.pushEnabled && this.status !== 'ended';
+  }
+
+  get remindLabel(): string {
+    if (this.reminderOn) {
+      return 'Reminder on';
+    }
+    return 'Remind me';
+  }
+
+  get remindHint(): string {
+    if (this.status === 'ended') {
+      return '';
+    }
+    if (this.pushEnabled) {
+      return this.reminderOn
+        ? 'We will notify you the day before and the day of this event.'
+        : 'Get a notification the day before and the day of this event.';
+    }
+    if (this.pushService.isNative()) {
+      return 'Enable notifications in iOS Settings → Auxilium, then return here.';
+    }
+    return 'Reminders are available in the Auxilium iPhone app after you allow notifications.';
+  }
+
+  ngOnDestroy(): void {
+    this.pushSub?.unsubscribe();
+    this.routeSub?.unsubscribe();
+  }
+
+  goPrev(): void {
+    this.navigateNeighbor(-1);
+  }
+
+  goNext(): void {
+    this.navigateNeighbor(1);
+  }
+
+  private navigateNeighbor(direction: -1 | 1): void {
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
+    if (!this.browse.goNeighbor(this.eventId, direction)) {
+      this.loading = false;
+    }
+  }
+
+  async onRemindToggle(): Promise<void> {
+    if (!this.event || !this.canRemind || this.reminderBusy) {
+      return;
+    }
+    this.reminderBusy = true;
+    this.reminderMessage = '';
+    const next = !this.reminderOn;
+    const ok = await this.pushService.setReminder(this.event, next);
+    this.reminderBusy = false;
+    if (!ok) {
+      this.reminderMessage = next ? 'Could not set reminder.' : 'Could not remove reminder.';
+      return;
+    }
+    this.reminderOn = next;
+  }
+
   async ngOnInit() {
     this.articleService.setCurrentCategory('');
     this.isLoggedIn = this.loginService.isLoggedIn();
-    this.eventId = this.route.snapshot.paramMap.get('eventId') || '';
+    this.pushSub = this.pushService.enabled$.subscribe((enabled) => {
+      this.pushEnabled = enabled;
+    });
+    void this.pushService.enroll({ prompt: false });
+    this.routeSub = this.route.paramMap.subscribe((params) => {
+      const eventId = params.get('eventId') || '';
+      void this.loadEvent(eventId);
+    });
+  }
+
+  private async loadEvent(eventId: string): Promise<void> {
+    this.loading = true;
+    this.eventId = eventId;
     this.editLink = `/edit-event/${this.eventId}`;
-    this.event = await this.eventService.fetchEvent(this.eventId);
-    if (!this.event) {
-      this.notFound = true;
-      return;
-    }
-    this.dateRange = eventDateLabel(this.event);
-    this.status = getEventStatus(this.event);
-    if (this.event.body) {
-      this.safeBodyHtml = this.sanitizer.bypassSecurityTrustHtml(
-        this.convertYoutubeLinks(this.event.body)
-      );
+    this.notFound = false;
+    this.externalLinkCheck = false;
+    this.reminderMessage = '';
+    try {
+      const event = await this.eventService.fetchEvent(this.eventId);
+      this.event = event;
+      if (!this.event) {
+        this.notFound = true;
+        return;
+      }
+      this.dateRange = eventDateLabel(this.event);
+      this.status = getEventStatus(this.event);
+      this.reminderOn = this.pushService.hasReminder(this.event.eventId);
+      this.safeBodyHtml = this.event.body
+        ? this.sanitizer.bypassSecurityTrustHtml(this.convertYoutubeLinks(this.event.body))
+        : null;
+    } finally {
+      this.loading = false;
+      this.browse.doneNavigating();
     }
   }
 

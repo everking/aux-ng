@@ -1,5 +1,54 @@
 <div class="login-main">
-  <div class="login-container">
+  <div class="login-container" *ngIf="isLoggedIn">
+    <h1>Account</h1>
+    <p class="account-email">Signed in as {{ accountEmail }}</p>
+    <button class="login-button" mat-raised-button color="primary" type="button" (click)="onLogout()">
+      Log out
+    </button>
+
+    <div class="push-signup">
+      <h2>Notifications</h2>
+      <p *ngIf="pushEnabled">You are signed up for notifications.</p>
+      <p *ngIf="!pushEnabled && !isNativePush">
+        Notifications are available in the Auxilium iPhone app after you allow them.
+      </p>
+      <p *ngIf="!pushEnabled && isNativePush">
+        Get alerts for events you choose with Remind me.
+      </p>
+      <button *ngIf="canEnablePush"
+        class="login-button push-button"
+        mat-raised-button
+        color="primary"
+        type="button"
+        [disabled]="pushBusy"
+        (click)="onEnablePush()">
+        {{ pushBusy ? 'Enabling...' : 'Sign up for notifications' }}
+      </button>
+      <p class="push-status" *ngIf="pushMessage">{{ pushMessage }}</p>
+    </div>
+
+    <div class="delete-account">
+      <h2>Delete account</h2>
+      <p>This permanently deletes your Auxilium login. Events or articles you published may remain on Auxilium.</p>
+      <button *ngIf="!confirmingDelete" class="delete-button" mat-stroked-button color="warn" type="button" (click)="startDelete()">
+        Delete account
+      </button>
+      <div *ngIf="confirmingDelete" class="delete-confirm">
+        <p>This cannot be undone.</p>
+        <mat-form-field *ngIf="needsReauth" appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [formControl]="loginForm.controls.password" placeholder="Enter your password">
+        </mat-form-field>
+        <button class="delete-button" mat-raised-button color="warn" type="button" (click)="onDeleteAccount()">
+          Delete my account
+        </button>
+        <button mat-button type="button" (click)="cancelDelete()">Cancel</button>
+      </div>
+    </div>
+    <span [class]="messageClass"><p>{{loginMessage}}</p></span>
+  </div>
+
+  <div class="login-container" *ngIf="!isLoggedIn">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>

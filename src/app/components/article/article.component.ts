@@ -7,6 +7,10 @@ import { LoginService } from '../../services/login.service';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SearchComponent } from '../search/search.component';
+import { BackLinkComponent } from '../back-link/back-link.component';
+import { BrowsePagerComponent } from '../browse-pager/browse-pager.component';
+import { SwipeBrowseDirective } from '../../directives/swipe-browse.directive';
+import { BrowseListService } from '../../services/browse-list.service';
 
 @Component({
   selector: 'app-article',
@@ -15,7 +19,10 @@ import { SearchComponent } from '../search/search.component';
     NgFor,
     MatProgressSpinner,
     RouterModule,
-    SearchComponent
+    SearchComponent,
+    BackLinkComponent,
+    BrowsePagerComponent,
+    SwipeBrowseDirective
   ],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss'
@@ -34,6 +41,8 @@ export class ArticleComponent implements OnInit {
   timestamp: string = '';
   previewToggleText: string = 'Preview';
   showSearch: boolean = false;
+  showBack = false;
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +51,8 @@ export class ArticleComponent implements OnInit {
     private elRef: ElementRef,
     private renderer: Renderer2,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private browse: BrowseListService
   ) {
   }
 
@@ -117,27 +127,67 @@ export class ArticleComponent implements OnInit {
 
   async ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
-    this.articleId = this.route.snapshot.paramMap.get('articleId') || this.route.snapshot.data['articleId'] || '';
     this.state = this.route.snapshot.data['state'] || ArticleState.ACTIVE;
     this.showSearch =  this.route.snapshot.data['showSearch'] || false;
     this.isPreview = this.state === ArticleState.PREVIEW;
     this.previewToggleText = this.isPreview ? 'Live' : 'Preview';
-    this.editLink = `/edit-article/${this.articleId}`;
-    this.article = await this.articleService.getArticle(this.articleId, this.state);
-    if (this.article?.body) {
-      this.safeBodyHtml = this.sanitizer.bypassSecurityTrustHtml(
-        this.convertYoutubeLinks(this.article.body)
-      );
-    }
-    this.timestamp = this.article?.meta.lastUpdated || '';
-    this.lastUpdated = this.getUserFriendlyLastUpdated(this.article?.meta.lastUpdated) || '';
-
-    this.route.params.subscribe(params => {
-      if (params['articleId']) {
-        this.articleId = params['articleId'];
-      }
+    this.route.paramMap.subscribe((params) => {
+      const articleId = params.get('articleId') || this.route.snapshot.data['articleId'] || '';
+      void this.loadArticle(articleId);
     });
-    this.articleService.setCurrentCategory(this.article?.meta.category || "");
+  }
+
+  goPrev(): void {
+    this.navigateNeighbor(-1);
+  }
+
+  goNext(): void {
+    this.navigateNeighbor(1);
+  }
+
+  private navigateNeighbor(direction: -1 | 1): void {
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
+    if (!this.browse.goNeighbor(this.articleId, direction)) {
+      this.loading = false;
+    }
+  }
+
+  private async loadArticle(articleId: string): Promise<void> {
+    this.loading = true;
+    this.articleId = articleId;
+    this.showBack = !this.showSearch && this.articleId !== 'resources';
+    this.editLink = `/edit-article/${this.articleId}`;
+    this.externalLinkCheck = false;
+    try {
+      this.article = await this.articleService.getArticle(this.articleId, this.state);
+      if (this.article?.body) {
+        this.safeBodyHtml = this.sanitizer.bypassSecurityTrustHtml(
+          this.convertYoutubeLinks(this.article.body)
+        );
+      } else {
+        this.safeBodyHtml = null;
+      }
+      this.timestamp = this.article?.meta.lastUpdated || '';
+      this.lastUpdated = this.getUserFriendlyLastUpdated(this.article?.meta.lastUpdated) || '';
+      this.articleService.setCurrentCategory(this.article?.meta.category || "");
+    } finally {
+      this.loading = false;
+      this.browse.doneNavigating();
+    }
+  }
+
+  get backFallback(): string {
+    const category = this.article?.meta?.category;
+    if (category === 'high-school') {
+      return '/school';
+    }
+    if (category && category !== 'events') {
+      return `/${category}`;
+    }
+    return '/home';
   }
 
   convertYoutubeLinks(html: string): string {

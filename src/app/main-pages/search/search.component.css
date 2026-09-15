@@ -67,6 +67,12 @@
   cursor: pointer;
 }
 
+.search-loading {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+
 .search-error {
   color: #8a4b4b;
   margin: 12px 0;
