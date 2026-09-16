@@ -25,6 +25,16 @@ if [[ "$(node -p "process.versions.node.split('.')[0]")" -lt 22 ]]; then
 fi
 
 echo "Node $(node -v)"
+
+PLIST_SRC="$ROOT/secrets/GoogleService-Info.plist"
+PLIST_DST="$ROOT/ios/App/App/GoogleService-Info.plist"
+if [[ -f "$PLIST_SRC" ]]; then
+  cp "$PLIST_SRC" "$PLIST_DST"
+elif [[ ! -f "$PLIST_DST" ]]; then
+  echo "Missing secrets/GoogleService-Info.plist (download it from Firebase for com.auxilium.guide)." >&2
+  exit 1
+fi
+
 npx ng build --configuration development
 npx cap sync ios
 

@@ -50,6 +50,11 @@ Thumbs.db
 /ios/App/Pods
 /ios/App/App/public
 /ios/App/App/CapacitorConfig.swift
+/ios/App/App/GoogleService-Info.plist
 /ios/DerivedData
 *.xcuserstate
 xcuserdata/
+
+# Firebase / Apple credentials (keep local copies here)
+/secrets/*
+!/secrets/README.md
